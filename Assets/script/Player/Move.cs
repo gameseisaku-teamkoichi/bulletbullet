@@ -8,6 +8,8 @@ public class Move : MonoBehaviour
     public Vector3 Velocity;
     private const float Speed = 3.0f;
     private const float applySpeed = 0.2f;
+    private float h;
+    private float v;
     public CameraMove refCamera;
 
     // Use this for initialization
@@ -22,17 +24,11 @@ public class Move : MonoBehaviour
 
         Velocity = Vector3.zero;
 
-        if (Input.GetKey(KeyCode.W))
-            Velocity.z += 1;
-        if (Input.GetKey(KeyCode.A))
-            Velocity.x -= 1;
-        if (Input.GetKey(KeyCode.S))
-            Velocity.z -= 1;
-        if (Input.GetKey(KeyCode.D))
-            Velocity.x += 1;
-       
-        Velocity = Velocity.normalized * Speed * Time.deltaTime;
 
+        Velocity.z = Input.GetAxis("Vertical");
+        Velocity.x += Input.GetAxis("Horizontal");
+
+        Velocity = Velocity.normalized * Speed * Time.deltaTime;
 
         if (Velocity.magnitude > 0)
         {
