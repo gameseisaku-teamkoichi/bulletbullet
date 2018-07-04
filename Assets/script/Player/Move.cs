@@ -24,8 +24,7 @@ public class Move : MonoBehaviour
 
         Velocity = Vector3.zero;
 
-
-        Velocity.z = Input.GetAxis("Vertical");
+        Velocity.z += Input.GetAxis("Vertical");
         Velocity.x += Input.GetAxis("Horizontal");
 
         Velocity = Velocity.normalized * Speed * Time.deltaTime;

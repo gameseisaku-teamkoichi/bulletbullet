@@ -1,0 +1,14 @@
+InputManager
+
+名前　　　メインボタン　サブボダン
+                 getbutton          GetAxis
+ Horizontal   w,s                左スティックY
+ Vertical       a,d  　　　　 左スティックX
+ X                マウスの動き 右スティックX
+ Y                マウスの動き 右スティックY
+Fire             マウス右クリ ボダンRT
+
+                                        getbutton
+sukillY        　q                ボタンY
+sukillX        　e                ボタンX
+sukillB        　f ,enter       ボタンB
