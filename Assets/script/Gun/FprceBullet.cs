@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class FprceBullet : MonoBehaviour
 {
     public GameObject bulletPrefab;
+
     [SerializeField]
     private Texture2D cursor;
 
@@ -15,11 +17,10 @@ public class FprceBullet : MonoBehaviour
     private float Axis;
     private bool FireFlag = false;
 
-    private float bulletPower = 1000f;
+    private float bulletPower = 2000f;
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
         Cursor.SetCursor(cursor, new Vector2(cursor.width / 2, cursor.height / 2), CursorMode.ForceSoftware);
     }
 
@@ -30,6 +31,7 @@ public class FprceBullet : MonoBehaviour
             return;
         }
 
+        Cursor.lockState = CursorLockMode.Locked;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         transform.rotation = Quaternion.LookRotation(ray.direction);
 

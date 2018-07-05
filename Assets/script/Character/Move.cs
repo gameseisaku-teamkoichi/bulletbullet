@@ -7,7 +7,6 @@ public class Move : MonoBehaviour
 
     public Vector3 Velocity;
     private const float Speed = 8.0f;//キャラの速度
-    private const float applySpeed = 0.1f;//振り向く速度
 
     public CameraMove refCamera;
 
@@ -32,10 +31,10 @@ public class Move : MonoBehaviour
 
         Velocity = Velocity.normalized * Speed * Time.deltaTime;
 
+        transform.rotation = refCamera.hRotation;
+
         if (Velocity.magnitude > 0)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation,Quaternion.LookRotation(refCamera.hRotation * Velocity),applySpeed);
-
             transform.position += refCamera.hRotation * Velocity;
         }
 
