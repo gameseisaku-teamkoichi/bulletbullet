@@ -6,8 +6,8 @@ public class Move : MonoBehaviour
 {
 
     public Vector3 Velocity;
-    private const float Speed = 3.0f;
-    private const float applySpeed = 0.2f;
+    private const float Speed = 5.0f;
+    private const float applySpeed = 0.1f;
     private float h;
     private float v;
     public CameraMove refCamera;

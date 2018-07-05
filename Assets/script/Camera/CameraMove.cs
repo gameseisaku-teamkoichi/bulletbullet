@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class CameraMove : MonoBehaviour
 {
-    private float turnSpeed = 5.0f;
+    private float turnSpeed = 3.0f;
     public Transform Player;
 
-    private float distance = 3.0f;
+    private float distance = 7.0f;
     private Quaternion vRotation;
     public Quaternion hRotation;
 
     // Use this for initialization
     void Start()
     {
-        vRotation = Quaternion.Euler(5, 0, 0);
+        vRotation = Quaternion.Euler(10, 0, 0);
         hRotation = Quaternion.identity;
         transform.rotation = hRotation * vRotation;
 
