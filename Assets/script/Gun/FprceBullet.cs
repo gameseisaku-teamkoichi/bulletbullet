@@ -5,23 +5,31 @@ using UnityEngine;
 public class FprceBullet : MonoBehaviour
 {
     public GameObject bulletPrefab;
+    [SerializeField]
+    private Texture2D cursor;
 
     public Transform muzzle;
 
     private const int vale = 0;
-
     private float OldAxis;
     private float Axis;
+    private bool FireFlag = false;
+
     private float bulletPower = 1000f;
 
-    private bool FireFlag = false;
     void Start()
     {
-
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.SetCursor(cursor, new Vector2(cursor.width / 2, cursor.height / 2), CursorMode.ForceSoftware);
     }
 
     void Update()
     {
+        if (Time.timeScale == 0)
+        {
+            return;
+        }
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         transform.rotation = Quaternion.LookRotation(ray.direction);
 

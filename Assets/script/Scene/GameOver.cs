@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(ChangeScene))]
 
 public class GameOver : MonoBehaviour {
+
+
     public ChangeScene changeScene { get { return this.changescene ?? (this.changescene = GetComponent<ChangeScene>()); } }
     ChangeScene changescene;
 
@@ -24,8 +26,12 @@ public class GameOver : MonoBehaviour {
 	void Update () {
 
         //NowTime += Time.deltaTime;
-
-        if(NowTime>=TimeLimit)
+        if (Time.timeScale == 0)
+        {
+            return;
+        }
+       
+        if (NowTime>=TimeLimit)
             changeScene.SceneChange();
     }
 }

@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PauseScript : MonoBehaviour {
 
+    [SerializeField]
     private GameObject ObjrctPause;
 
     private GameObject Pause;
 
-    void Update () {
-        if (Input.GetKeyDown("Pause"))
+    void Update()
+    {
+        if (Input.GetButtonDown("Pause"))
         {
             if (Pause == null)
             {
@@ -23,4 +26,6 @@ public class PauseScript : MonoBehaviour {
             }
         }
     }
+
+
 }

@@ -6,10 +6,9 @@ public class Move : MonoBehaviour
 {
 
     public Vector3 Velocity;
-    private const float Speed = 5.0f;
-    private const float applySpeed = 0.1f;
-    private float h;
-    private float v;
+    private const float Speed = 8.0f;//キャラの速度
+    private const float applySpeed = 0.1f;//振り向く速度
+
     public CameraMove refCamera;
 
     // Use this for initialization
@@ -19,8 +18,12 @@ public class Move : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void CharaMove()
     {
+        if (Time.timeScale == 0)
+        {
+            return;
+        }
 
         Velocity = Vector3.zero;
 
