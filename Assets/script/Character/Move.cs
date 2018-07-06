@@ -8,7 +8,7 @@ public class Move : MonoBehaviour
     public Vector3 Velocity;
     private const float Speed = 8.0f;//キャラの速度
 
-    public CameraMove refCamera;
+    public CameraMove Camera;
 
     // Use this for initialization
     void Start()
@@ -31,11 +31,11 @@ public class Move : MonoBehaviour
 
         Velocity = Velocity.normalized * Speed * Time.deltaTime;
 
-        transform.rotation = refCamera.hRotation;
+        transform.rotation = Camera.hRotation;
 
         if (Velocity.magnitude > 0)
         {
-            transform.position += refCamera.hRotation * Velocity;
+            transform.position += Camera.hRotation * Velocity;
         }
 
     }
