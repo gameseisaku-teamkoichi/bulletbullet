@@ -18,7 +18,8 @@ public class CharacterMainProcess : MonoBehaviour
 
     #endregion
 
-
+    bool a;
+    bool old;
     // Use this for initialization
     void Start()
     {
@@ -36,7 +37,11 @@ public class CharacterMainProcess : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         CharacterMove.CharaMove();
 
-        if (Input.GetButton("SkillB"))
+        a= Input.GetButton("SkillB");
+        if(a)
+        if (a!=old)
             CharacterWarp.Warp(ray);
+
+        old = a;
     }
 }

@@ -35,12 +35,12 @@ public class AreaWarp : MonoBehaviour
         floating4
     }
     StageName stageName;
-
+    StageName OldstageName;
     public void Warp(Ray ray)
     {
         position = transform.position;
 
-        if (Physics.Raycast(ray, out hit, 1000))
+        if (Physics.Raycast(ray, out hit, 10000))
         {
             TargetObje = hit.collider.gameObject;
 
@@ -51,9 +51,13 @@ public class AreaWarp : MonoBehaviour
             TargetObje = null;
         }
 
-        if (OldTargetObje != TargetObje)
+        if (OldstageName != stageName)
         {
-            OldTargetObje = TargetObje;
+            Debug.Log(OldstageName);
+            Debug.Log(stageName);
+            
+            OldstageName = stageName;
+
             switch (stageName)
             {
                 case StageName.floor:
