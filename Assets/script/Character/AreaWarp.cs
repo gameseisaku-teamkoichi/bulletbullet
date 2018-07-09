@@ -5,10 +5,6 @@ using System;
 
 public class AreaWarp : MonoBehaviour
 {
-    public GameObject Floor;
-    public GameObject Floor2;
-    public GameObject Floor3;
-    public GameObject Floor4;
     public GameObject floating;
     public GameObject floating2;
     public GameObject floating3;
@@ -18,7 +14,6 @@ public class AreaWarp : MonoBehaviour
     private Vector3 position;
 
     private GameObject TargetObje;
-    private GameObject OldTargetObje;
     RaycastHit hit;
 
     // Update is called once per frame
@@ -35,6 +30,7 @@ public class AreaWarp : MonoBehaviour
         floating4
     }
     StageName stageName;
+    StageName OldStageName;
 
     public void Warp(Ray ray)
     {
@@ -51,36 +47,28 @@ public class AreaWarp : MonoBehaviour
             TargetObje = null;
         }
 
-        if (OldTargetObje != TargetObje)
+        if (OldStageName != stageName)
         {
-            OldTargetObje = TargetObje;
+            OldStageName = stageName;
             switch (stageName)
             {
-                case StageName.floor:
-                    transform.position = Floor.transform.position;
-                    break;
-                case StageName.floor2:
-                    transform.position = Floor2.transform.position;
-                    break;
-                case StageName.floor3:
-                    transform.position = Floor3.transform.position;
-                    break;
-                case StageName.floor4:
-                    transform.position = Floor4.transform.position;
-                    break;
                 case StageName.floating:
-                    transform.position = floating.transform.position;
+                   position = floating.transform.position;
                     break;
                 case StageName.floating2:
-                    transform.position = floating2.transform.position;
+                    position = floating2.transform.position;
                     break;
                 case StageName.floating3:
-                    transform.position = floating3.transform.position;
+                    position = floating3.transform.position;
                     break;
                 case StageName.floating4:
-                    transform.position = floating4.transform.position;
+                    position = floating4.transform.position;
+                    break;
+                default:
+                    position = hit.point;
                     break;
             }
+            transform.position = position;
         }
     }
 }

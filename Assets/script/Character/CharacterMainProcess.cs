@@ -18,7 +18,8 @@ public class CharacterMainProcess : MonoBehaviour
 
     #endregion
 
-
+   public GameObject Gun;
+    RaycastHit hit;
     // Use this for initialization
     void Start()
     {
@@ -33,10 +34,15 @@ public class CharacterMainProcess : MonoBehaviour
             return;
         }
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+       // Ray raay= Camera.main.ScreenPointToRay(Input.mousePosition)
+       //Debug.DrawLine(ray.origin, ray.direction * 100, Color.red, 3, false);
+
         CharacterMove.CharaMove();
 
         if (Input.GetButton("SkillB"))
+        {
+            Ray ray = new Ray(Gun.transform.position, Gun.transform.forward);
             CharacterWarp.Warp(ray);
+        }
     }
 }
