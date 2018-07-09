@@ -38,15 +38,17 @@ public class CameraMove : MonoBehaviour
 
         input = Input.GetAxis("Y");
 
-        if(Input.GetButton("Reset"))
+        if (Input.GetButton("Reset"))
         {
             vRotation = Quaternion.identity;
             hRotation = Quaternion.identity;
         }
-        MaxFlag = vRotation.x > MaxRange.x && input < 0.0f;
+
+        //カメラの移動上限を超えている && 上限の反対方向にカメラを移動しようとしている
+        MaxFlag = MaxRange.x < vRotation.x && input < 0.0f;
         MiniFlag = vRotation.x < -MaxRange.x && input > 0.0f;
 
-        if (vRotation.x < MaxRange.x && vRotation.x > -MaxRange.x)
+        if (vRotation.x < MaxRange.x && -MaxRange.x < vRotation.x)
         {
             vRotation *= Quaternion.Euler(input * turnSpeed, 0, 0);
         }

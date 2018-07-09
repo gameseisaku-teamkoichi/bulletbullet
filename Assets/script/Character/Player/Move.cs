@@ -36,11 +36,13 @@ public class Move : MonoBehaviour
         Velocity = Velocity.normalized * Speed * Time.deltaTime;
 
         Position += Camera.hRotation * Velocity;
+        
+        //rayを地面の方向に飛ばす
         Ray ray = new Ray(Position + new Vector3(0, 1, 0), RayDirection);
         Debug.DrawLine(ray.origin, ray.direction * 100, Color.red, 3, false);
 
 
-        if (Physics.Raycast(ray, out hit, 1000) && Velocity.magnitude > 0)
+        if (Velocity.magnitude > 0)
         {
             transform.position = Position;
         }

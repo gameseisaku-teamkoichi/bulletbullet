@@ -12,26 +12,13 @@ public class GameOver : MonoBehaviour {
 
     const int NowScene = 3;
 
-    private const float TimeLimit=10.0f;
-    private float NowTime;
-
-
 	// Use this for initialization
 	void Start () {
-        NowTime = 0;
         changeScene.Initialize(NowScene);
     }
 	
 	// Update is called once per frame
-	void Update () {
-
-        //NowTime += Time.deltaTime;
-        if (Time.timeScale == 0)
-        {
-            return;
-        }
-       
-        if (NowTime>=TimeLimit)
+	public void IsGameOver() {
             changeScene.SceneChange();
     }
 }

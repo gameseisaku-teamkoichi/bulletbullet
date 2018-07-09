@@ -5,8 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Move))]
 [RequireComponent(typeof(AreaWarp))]
 
-
-
 public class CharacterMainProcess : MonoBehaviour
 {
     #region
@@ -16,7 +14,9 @@ public class CharacterMainProcess : MonoBehaviour
     public AreaWarp CharacterWarp { get { return this.areaWarp ?? (this.areaWarp = GetComponent<AreaWarp>()); } }
     AreaWarp areaWarp;
     #endregion
+
     public GameObject Gun;
+
 
     // Use this for initialization
     void Start()
@@ -31,10 +31,11 @@ public class CharacterMainProcess : MonoBehaviour
         {
             return;
         }
-        
+
+        //rayを銃口の向いてるほうにまっすぐ飛ばす
         Ray ray = new Ray(Gun.transform.position, Gun.transform.forward);
 
-        // Ray raay= Camera.main.ScreenPointToRay(Input.mousePosition)
+        //Ray raay= Camera.main.ScreenPointToRay(Input.mousePosition)
         //Debug.DrawLine(ray.origin, ray.direction * 100, Color.red, 3, false);
 
         CharacterMove.CharaMove();

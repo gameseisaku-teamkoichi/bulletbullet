@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StageState : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+namespace Bullet.Stage
+{
+    public enum StageName
+    {
+        floor,
+        floor2,
+        floor3,
+        floor4,
+        floating,
+        floating2,
+        floating3,
+        floating4,
+        Disabled
+    }
 }

@@ -22,6 +22,7 @@ public class ForceBullet : MonoBehaviour
 
     void Start()
     {
+        //カーソル画像の大きさ
         Cursor.SetCursor(cursor, new Vector2(cursor.width / 2, cursor.height / 2), CursorMode.ForceSoftware);
     }
 
@@ -34,6 +35,7 @@ public class ForceBullet : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
 
+        //rayをカメラの中心からマウスの場所に飛ばす
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         transform.rotation = Quaternion.LookRotation(ray.direction);
 
@@ -48,6 +50,7 @@ public class ForceBullet : MonoBehaviour
         OldAxis = Axis;
     }
 
+    //入力処理 1回押すと1発球が出る
     private bool FireJudge(float oldAxis, float axis)
     {
         bool flag = false;
@@ -60,7 +63,9 @@ public class ForceBullet : MonoBehaviour
 
     private void Fire()
     {
+        //Rigitbodyを使って球を飛ばす
         var bulletInstance = GameObject.Instantiate(bulletPrefab, muzzle.position, muzzle.rotation) as GameObject;
         bulletInstance.GetComponent<Rigidbody>().AddForce(bulletInstance.transform.forward * bulletPower);
+        Destroy(bulletInstance, 5.0f);
     }
 }
