@@ -5,10 +5,6 @@ using System;
 
 public class AreaWarp : MonoBehaviour
 {
-    public GameObject Floor;
-    public GameObject Floor2;
-    public GameObject Floor3;
-    public GameObject Floor4;
     public GameObject floating;
     public GameObject floating2;
     public GameObject floating3;
@@ -18,7 +14,6 @@ public class AreaWarp : MonoBehaviour
     private Vector3 position;
 
     private GameObject TargetObje;
-    private GameObject OldTargetObje;
     RaycastHit hit;
 
     // Update is called once per frame
@@ -35,17 +30,13 @@ public class AreaWarp : MonoBehaviour
         floating4
     }
     StageName stageName;
-<<<<<<< HEAD
-    StageName OldstageName;
-=======
     StageName OldStageName;
 
->>>>>>> dev
     public void Warp(Ray ray)
     {
         position = transform.position;
 
-        if (Physics.Raycast(ray, out hit, 10000))
+        if (Physics.Raycast(ray, out hit, 1000))
         {
             TargetObje = hit.collider.gameObject;
 
@@ -56,19 +47,9 @@ public class AreaWarp : MonoBehaviour
             TargetObje = null;
         }
 
-<<<<<<< HEAD
-        if (OldstageName != stageName)
-        {
-            Debug.Log(OldstageName);
-            Debug.Log(stageName);
-            
-            OldstageName = stageName;
-
-=======
         if (OldStageName != stageName)
         {
             OldStageName = stageName;
->>>>>>> dev
             switch (stageName)
             {
                 case StageName.floating:
