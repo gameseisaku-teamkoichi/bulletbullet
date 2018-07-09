@@ -12,3 +12,5 @@ Fire             マウス右クリ ボダンRT
 sukillY        　q                ボタンY
 sukillX        　e                ボタンX
 sukillB        　f ,enter       ボタンB
+
+

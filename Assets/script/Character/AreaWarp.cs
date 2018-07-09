@@ -35,7 +35,12 @@ public class AreaWarp : MonoBehaviour
         floating4
     }
     StageName stageName;
+<<<<<<< HEAD
     StageName OldstageName;
+=======
+    StageName OldStageName;
+
+>>>>>>> dev
     public void Warp(Ray ray)
     {
         position = transform.position;
@@ -51,6 +56,7 @@ public class AreaWarp : MonoBehaviour
             TargetObje = null;
         }
 
+<<<<<<< HEAD
         if (OldstageName != stageName)
         {
             Debug.Log(OldstageName);
@@ -58,33 +64,30 @@ public class AreaWarp : MonoBehaviour
             
             OldstageName = stageName;
 
+=======
+        if (OldStageName != stageName)
+        {
+            OldStageName = stageName;
+>>>>>>> dev
             switch (stageName)
             {
-                case StageName.floor:
-                    transform.position = Floor.transform.position;
-                    break;
-                case StageName.floor2:
-                    transform.position = Floor2.transform.position;
-                    break;
-                case StageName.floor3:
-                    transform.position = Floor3.transform.position;
-                    break;
-                case StageName.floor4:
-                    transform.position = Floor4.transform.position;
-                    break;
                 case StageName.floating:
-                    transform.position = floating.transform.position;
+                   position = floating.transform.position;
                     break;
                 case StageName.floating2:
-                    transform.position = floating2.transform.position;
+                    position = floating2.transform.position;
                     break;
                 case StageName.floating3:
-                    transform.position = floating3.transform.position;
+                    position = floating3.transform.position;
                     break;
                 case StageName.floating4:
-                    transform.position = floating4.transform.position;
+                    position = floating4.transform.position;
+                    break;
+                default:
+                    position = hit.point;
                     break;
             }
+            transform.position = position;
         }
     }
 }
