@@ -15,11 +15,9 @@ public class CharacterMainProcess : MonoBehaviour
 
     public AreaWarp CharacterWarp { get { return this.areaWarp ?? (this.areaWarp = GetComponent<AreaWarp>()); } }
     AreaWarp areaWarp;
-
     #endregion
+    public GameObject Gun;
 
-   public GameObject Gun;
-    RaycastHit hit;
     // Use this for initialization
     void Start()
     {
@@ -33,15 +31,16 @@ public class CharacterMainProcess : MonoBehaviour
         {
             return;
         }
+        
+        Ray ray = new Ray(Gun.transform.position, Gun.transform.forward);
 
-       // Ray raay= Camera.main.ScreenPointToRay(Input.mousePosition)
-       //Debug.DrawLine(ray.origin, ray.direction * 100, Color.red, 3, false);
+        // Ray raay= Camera.main.ScreenPointToRay(Input.mousePosition)
+        //Debug.DrawLine(ray.origin, ray.direction * 100, Color.red, 3, false);
 
         CharacterMove.CharaMove();
 
         if (Input.GetButton("SkillB"))
         {
-            Ray ray = new Ray(Gun.transform.position, Gun.transform.forward);
             CharacterWarp.Warp(ray);
         }
     }

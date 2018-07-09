@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
+    public Vector3 Velocity;//移動
+    private Vector3 RayDirection;//rayの方向
+    private Vector3 Position;//キャラの移動後のポジション
 
-    public Vector3 Velocity;
     private const float Speed = 8.0f;//キャラの速度
 
     public CameraMove Camera;
 
+    RaycastHit hit;
     // Use this for initialization
     void Start()
     {
-
+        RayDirection = new Vector3(0, -1, 0);
     }
 
     // Update is called once per frame
@@ -24,19 +27,24 @@ public class Move : MonoBehaviour
             return;
         }
 
-        Velocity = Vector3.zero;
+        Position = transform.position;
 
+        Velocity = Vector3.zero;
         Velocity.z += Input.GetAxis("Vertical");
         Velocity.x += Input.GetAxis("Horizontal");
 
         Velocity = Velocity.normalized * Speed * Time.deltaTime;
 
-        transform.rotation = Camera.hRotation;
+        Position += Camera.hRotation * Velocity;
+        Ray ray = new Ray(Position + new Vector3(0, 1, 0), RayDirection);
+        Debug.DrawLine(ray.origin, ray.direction * 100, Color.red, 3, false);
 
-        if (Velocity.magnitude > 0)
+
+        if (Physics.Raycast(ray, out hit, 1000) && Velocity.magnitude > 0)
         {
-            transform.position += Camera.hRotation * Velocity;
+            transform.position = Position;
         }
 
+        transform.rotation = Camera.hRotation;
     }
 }

@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 10564460}
   - component: {fileID: 10564459}
   - component: {fileID: 10564458}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Floating2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -792,7 +792,7 @@ GameObject:
   - component: {fileID: 499300866}
   - component: {fileID: 499300865}
   - component: {fileID: 499300864}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Floating2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1593,7 +1593,7 @@ GameObject:
   - component: {fileID: 913479991}
   - component: {fileID: 913479990}
   - component: {fileID: 913479989}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Floating3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1860,7 +1860,7 @@ GameObject:
   - component: {fileID: 1142617423}
   - component: {fileID: 1142617422}
   - component: {fileID: 1142617421}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Floating4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1974,12 +1974,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1197460057}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f9d3af94365bf94bbfedb20481eb9e0, type: 3}
+  m_Script: {fileID: 11500000, guid: f43ccb0078ef9f345a1ad67f5e31d758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 1750103860611136, guid: 29db26fd0a650d64999ee5aa02baeb18,
-    type: 2}
   cursor: {fileID: 2800000, guid: 7a589934f22b98848b2140d33334bb8a, type: 3}
+  bulletPrefab: {fileID: 1283857525467942, guid: 417df37a3f1912e46afbc37e4540b0dd,
+    type: 2}
   muzzle: {fileID: 589921484}
 --- !u!23 &1197460060
 MeshRenderer:
@@ -2480,7 +2480,7 @@ GameObject:
   - component: {fileID: 1727932046}
   - component: {fileID: 1727932045}
   - component: {fileID: 1727932044}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Floating
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2565,7 +2565,7 @@ GameObject:
   - component: {fileID: 1767688697}
   - component: {fileID: 1767688696}
   - component: {fileID: 1767688695}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Floating
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2650,7 +2650,7 @@ GameObject:
   - component: {fileID: 1787685368}
   - component: {fileID: 1787685367}
   - component: {fileID: 1787685366}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Floating4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2820,7 +2820,7 @@ GameObject:
   - component: {fileID: 1920702538}
   - component: {fileID: 1920702537}
   - component: {fileID: 1920702536}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Floating3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

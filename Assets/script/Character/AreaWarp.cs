@@ -68,6 +68,7 @@ public class AreaWarp : MonoBehaviour
                     position = hit.point;
                     break;
             }
+
             transform.position = position;
         }
     }
