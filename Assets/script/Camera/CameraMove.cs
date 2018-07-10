@@ -6,8 +6,12 @@ public class CameraMove : MonoBehaviour
 {
     private const float ConstDistance = 5.0f;//不変対象とカメラの距離。デフォルトの距離
     private float Distance = 5.0f;//可変の対象とカメラの距離
-    private float turnSpeed = 3.0f;//回転速度
-    private float input = 0.0f;
+    private float MoveSpeed = 3.0f;//回転速度
+
+    private float MiniDistance = 1.5f;//
+    private float ObjectDis;
+
+    private float input = 0.0f;//コントローラーの入力
 
     public Transform Player;//注視する対象
 
@@ -16,10 +20,13 @@ public class CameraMove : MonoBehaviour
     public Quaternion hRotation;//x
 
     private Vector3 value = new Vector3(0.0f, 3.0f, 0.0f);//カメラの位置の微調整
+    private Vector3 Behind = new Vector3(0.0f, 0.0f, -1.0f);//キャラクターの後ろの方向
+    private Vector3 Position;
 
-    public bool MaxFlag = false;
+    public bool MaxFlag = false;//カメラが移動の上限下限にいるかどうか
     public bool MiniFlag = false;
 
+    private RaycastHit hit;
     // Use this for initialization
     void Start()
     {
@@ -36,13 +43,13 @@ public class CameraMove : MonoBehaviour
             return;
         }
 
-        input = Input.GetAxis("Y");
-
         if (Input.GetButton("Reset"))
         {
             vRotation = Quaternion.identity;
             hRotation = Quaternion.identity;
         }
+
+        input = Input.GetAxis("Y");
 
         //カメラの移動上限を超えている && 上限の反対方向にカメラを移動しようとしている
         MaxFlag = MaxRange.x < vRotation.x && input < 0.0f;
@@ -50,16 +57,39 @@ public class CameraMove : MonoBehaviour
 
         if (vRotation.x < MaxRange.x && -MaxRange.x < vRotation.x)
         {
-            vRotation *= Quaternion.Euler(input * turnSpeed, 0, 0);
+            vRotation *= Quaternion.Euler(input * MoveSpeed, 0, 0);
         }
         else if (MaxFlag || MiniFlag)
         {
-            vRotation *= Quaternion.Euler(input * turnSpeed, 0, 0);
+            vRotation *= Quaternion.Euler(input * MoveSpeed, 0, 0);
         }
-
-        hRotation *= Quaternion.Euler(0, Input.GetAxis("X") * turnSpeed, 0);
+        hRotation *= Quaternion.Euler(0, Input.GetAxis("X") * MoveSpeed, 0);
 
         transform.rotation = hRotation * vRotation;
         transform.position = Player.position + value - transform.rotation * Vector3.forward * Distance;
+
+        Debug.DrawLine(Player.transform.position, transform.position, Color.red, 3, false);
+
+
+        //if (Physics.Linecast(Player.transform.position, transform.position, out hit))
+        //{
+        //    Distance -= MoveSpeed * Time.deltaTime;
+        //    if (Distance < MiniDistance)
+        //    {
+        //        Distance = 1.0f;
+        //    }
+        //}
+        //else
+        //{
+
+        //    if (Distance <= ConstDistance - 0.5f)
+        //    {
+        //        Distance += MoveSpeed * Time.deltaTime;
+        //    }
+        //    else
+        //    {
+        //        Distance = ConstDistance;
+        //    }
+        //}
     }
 }

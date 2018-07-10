@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
+    public GameObject Player;
+
     public Vector3 Velocity;//移動
     private Vector3 RayDirection;//rayの方向
-    private Vector3 Position;//キャラの移動後のポジション
+    private Vector3 GameObjPos;//Playerキャラクターのポジション
 
     private const float Speed = 8.0f;//キャラの速度
+
+    private bool    IsMove;
 
     public CameraMove Camera;
 
@@ -27,7 +31,7 @@ public class Move : MonoBehaviour
             return;
         }
 
-        Position = transform.position;
+        GameObjPos = Player.transform.position;
 
         Velocity = Vector3.zero;
         Velocity.z += Input.GetAxis("Vertical");
@@ -35,18 +39,29 @@ public class Move : MonoBehaviour
 
         Velocity = Velocity.normalized * Speed * Time.deltaTime;
 
-        Position += Camera.hRotation * Velocity;
-        
-        //rayを地面の方向に飛ばす
-        Ray ray = new Ray(Position + new Vector3(0, 1, 0), RayDirection);
-        Debug.DrawLine(ray.origin, ray.direction * 100, Color.red, 3, false);
-
+        GameObjPos += Camera.hRotation * Velocity;
 
         if (Velocity.magnitude > 0)
         {
-            transform.position = Position;
+            //rayを動いた先の地面の方向に飛ばす
+            Ray ray = new Ray(GameObjPos + new Vector3(0, 1, 0), RayDirection);
+            //Debug.DrawLine(ray.origin, ray.direction * 100, Color.red, 3, false);
+
+            IsMove = Physics.Raycast(ray, out hit, 1000);
         }
 
-        transform.rotation = Camera.hRotation;
+        //動いた後のrayが当たっていたらそれを反映
+        if (IsMove)
+        {   //GameObjPosを代入はｘ
+            transform.position += Camera.hRotation * Velocity;
+        }
+        else
+        {
+            GameObjPos -= Camera.hRotation * Velocity;
+        }
+
+       transform.rotation = Camera.hRotation;
+
+        IsMove = false;
     }
 }
