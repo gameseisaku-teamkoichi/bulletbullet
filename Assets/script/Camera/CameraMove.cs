@@ -68,28 +68,16 @@ public class CameraMove : MonoBehaviour
         transform.rotation = hRotation * vRotation;
         transform.position = Player.position + value - transform.rotation * Vector3.forward * Distance;
 
-        Debug.DrawLine(Player.transform.position, transform.position, Color.red, 3, false);
+        //   Debug.DrawLine(Player.transform.position, transform.position, Color.red, 3, false);
 
 
-        //if (Physics.Linecast(Player.transform.position, transform.position, out hit))
-        //{
-        //    Distance -= MoveSpeed * Time.deltaTime;
-        //    if (Distance < MiniDistance)
-        //    {
-        //        Distance = 1.0f;
-        //    }
-        //}
-        //else
-        //{
+        if (Physics.Linecast(Player.transform.position, transform.position, out hit))
+        {
+          
+        }
+        else
+        {
 
-        //    if (Distance <= ConstDistance - 0.5f)
-        //    {
-        //        Distance += MoveSpeed * Time.deltaTime;
-        //    }
-        //    else
-        //    {
-        //        Distance = ConstDistance;
-        //    }
-        //}
+        }
     }
 }
