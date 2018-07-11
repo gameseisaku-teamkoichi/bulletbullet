@@ -6,6 +6,7 @@ namespace Bullet.Stage
 {
     public enum StageName
     {
+        Disabled,
         floor,
         floor2,
         floor3,
@@ -13,7 +14,6 @@ namespace Bullet.Stage
         floating,
         floating2,
         floating3,
-        floating4,
-        Disabled
+        floating4
     }
 }

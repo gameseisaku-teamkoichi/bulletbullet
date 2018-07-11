@@ -16,7 +16,6 @@ public class CharacterMainProcess : MonoBehaviour
     #endregion
 
     public GameObject Gun;
-    public GameObject Player;
 
     // Use this for initialization
     void Start()
@@ -32,7 +31,7 @@ public class CharacterMainProcess : MonoBehaviour
             return;
         }
 
-        //rayを銃口の向いてるほうにまっすぐ飛ばす
+        //rayを銃口の向いてるほうに銃口からまっすぐ飛ばす
         Ray ray = new Ray(Gun.transform.position, Gun.transform.forward);
 
         CharacterMove.CharaMove();

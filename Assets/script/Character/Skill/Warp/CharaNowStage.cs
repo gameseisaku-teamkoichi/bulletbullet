@@ -26,28 +26,6 @@ public class CharaNowStage : MonoBehaviour
 
     void Start()
     {
-        EnemyCount = Enum.GetNames(typeof(CharaNum)).Length;
-     
-        for (int i=0; i<EnemyCount;i++)
-        {
-            charaNum = (CharaNum)Enum.ToObject(typeof(CharaNum), i);
-
-            switch (charaNum)
-            {
-                case CharaNum.Enemy1:
-                    Enemy1Stage = StageName.Disabled;
-                    break;
-                case CharaNum.Enemy2:
-                    Enemy2Stage = StageName.Disabled;
-                    break;
-                case CharaNum.Enemy3:
-                    Enemy3Stage = StageName.Disabled;
-                    break;
-                case CharaNum.Enemy4:
-                    Enemy4Stage = StageName.Disabled;
-                    break;
-            };
-        }
     }
 
     public void GetStage(StageName stageName, int Num)

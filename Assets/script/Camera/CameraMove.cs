@@ -45,7 +45,7 @@ public class CameraMove : MonoBehaviour
 
         if (Input.GetButton("Reset"))
         {
-            vRotation = Quaternion.identity;
+            vRotation = Quaternion.Euler(10, 0, 0);
             hRotation = Quaternion.identity;
         }
 
@@ -63,12 +63,12 @@ public class CameraMove : MonoBehaviour
         {
             vRotation *= Quaternion.Euler(input * MoveSpeed, 0, 0);
         }
-        hRotation *= Quaternion.Euler(0, Input.GetAxis("X") * MoveSpeed, 0);
+        hRotation *= Quaternion.Euler(0, Input.GetAxis("X") * MoveSpeed,0);
 
         transform.rotation = hRotation * vRotation;
         transform.position = Player.position + value - transform.rotation * Vector3.forward * Distance;
 
-        //   Debug.DrawLine(Player.transform.position, transform.position, Color.red, 3, false);
+        // Debug.DrawLine(Player.transform.position, transform.position, Color.red, 3, false);
 
 
         if (Physics.Linecast(Player.transform.position, transform.position, out hit))
