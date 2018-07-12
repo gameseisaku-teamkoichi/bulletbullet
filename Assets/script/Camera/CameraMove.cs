@@ -6,7 +6,7 @@ public class CameraMove : MonoBehaviour
 {
     private const float ConstDistance = 5.0f;//不変対象とカメラの距離。デフォルトの距離
     private float Distance = 5.0f;//可変の対象とカメラの距離
-    private float MoveSpeed = 3.0f;//回転速度
+    private float MoveSpeed = 3.0f;//速度
 
     private float MiniDistance = 1.5f;//
     private float ObjectDis;
@@ -20,8 +20,9 @@ public class CameraMove : MonoBehaviour
     public Quaternion hRotation;//x
 
     private Vector3 value = new Vector3(0.0f, 3.0f, 0.0f);//カメラの位置の微調整
-    private Vector3 Behind = new Vector3(0.0f, 0.0f, -1.0f);//キャラクターの後ろの方向
-    private Vector3 Position;
+
+    private Vector3 Position;//カメラの移動適用前のポジション
+    private Quaternion Rotation;//カメラの移動適用前のローテーション
 
     public bool MaxFlag = false;//カメラが移動の上限下限にいるかどうか
     public bool MiniFlag = false;
@@ -63,21 +64,20 @@ public class CameraMove : MonoBehaviour
         {
             vRotation *= Quaternion.Euler(input * MoveSpeed, 0, 0);
         }
-        hRotation *= Quaternion.Euler(0, Input.GetAxis("X") * MoveSpeed,0);
+        hRotation *= Quaternion.Euler(0, Input.GetAxis("X") * MoveSpeed, 0);
 
         transform.rotation = hRotation * vRotation;
-        transform.position = Player.position + value - transform.rotation * Vector3.forward * Distance;
+        Position = Player.position + value - transform.rotation * Vector3.forward * Distance;
 
-        // Debug.DrawLine(Player.transform.position, transform.position, Color.red, 3, false);
+        //Debug.DrawLine(Player.position + new Vector3(0, 2, 0), Position, Color.red, 3, false);
 
-
-        if (Physics.Linecast(Player.transform.position, transform.position, out hit))
-        {
-          
-        }
-        else
-        {
-
-        }
+        //if (Physics.Linecast(Player.transform.position, Position, out hit))
+        //{
+        //    transform.position = Position;
+        //}
+        //else
+        //{
+        //    transform.position = Position;
+        //}
     }
 }
