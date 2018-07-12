@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Bullet.Stage;
-
+using BulletBullet.SceneGlobalVariables.Stage;
 
 public class AreaWarp : MonoBehaviour
 {
@@ -19,9 +19,6 @@ public class AreaWarp : MonoBehaviour
 
     private GameObject TargetObje;//Rayが当たったオブジェクト
 
-    private GameObject EnemyStage;
-    CharaNowStage enemyStage;
-
     RaycastHit hit;
 
     StageName stageName;
@@ -33,8 +30,7 @@ public class AreaWarp : MonoBehaviour
 
     void Start()
     {
-        EnemyStage = GameObject.Find("EnemyStage");
-        enemyStage = EnemyStage.GetComponent<CharaNowStage>();
+      
     }
 
     public void Warp(Ray ray)
@@ -54,7 +50,7 @@ public class AreaWarp : MonoBehaviour
         }
 
         //移動先にenemyがいるかどうか
-        WarpFlag = enemyStage.GetComponent<CharaNowStage>().JudgeWarp(stageName);
+        WarpFlag = SceneGlobalVariables.Instance.charaNowStage.JudgeWarp(stageName);
 
 
         if (OldStageName != stageName && WarpFlag)

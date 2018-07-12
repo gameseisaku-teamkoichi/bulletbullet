@@ -4,7 +4,6 @@ using UnityEngine;
 
 [RequireComponent(typeof(GameOver))]
 [RequireComponent(typeof(PauseScript))]
-[RequireComponent(typeof(CharaNowStage))]
 
 public class MainGameManager : MonoBehaviour
 {
@@ -14,9 +13,6 @@ public class MainGameManager : MonoBehaviour
 
     public PauseScript Pause { get { return this.pauseScript ?? (this.pauseScript = GetComponent<PauseScript>()); } }
     PauseScript pauseScript;
-
-    public CharaNowStage EnemyStage { get { return this.charaNowStage ?? (this.charaNowStage = GetComponent<CharaNowStage>()); } }
-    CharaNowStage charaNowStage;
     #endregion
 
     private GameObject PauseObject;

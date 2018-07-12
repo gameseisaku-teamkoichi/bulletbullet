@@ -15,15 +15,17 @@ public class ChangeScene : MonoBehaviour {
         Result,
         Invalid
     }
-
     SceneState sceneState;
 
-    public void Initialize(int Index)
+    private int SceneIndex;
+    
+    public void GetNowScene()
     {
-        sceneState = (SceneState)Enum.ToObject(typeof(SceneState), Index);
+        SceneIndex= SceneManager.GetActiveScene().buildIndex;
+        sceneState = (SceneState)Enum.ToObject(typeof(SceneState), SceneIndex);
     }
 
-    public void SceneChange()
+    public void Change()
     {
         switch (sceneState)
         {

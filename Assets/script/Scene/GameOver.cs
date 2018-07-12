@@ -6,19 +6,16 @@ using UnityEngine;
 
 public class GameOver : MonoBehaviour {
 
+    public ChangeScene SeceChenge { get { return this.chengeSece ?? (this.chengeSece = GetComponent<ChangeScene>()); } }
+    ChangeScene chengeSece;
 
-    public ChangeScene changeScene { get { return this.changescene ?? (this.changescene = GetComponent<ChangeScene>()); } }
-    ChangeScene changescene;
-
-    const int NowScene = 3;
-
-	// Use this for initialization
-	void Start () {
-        changeScene.Initialize(NowScene);
+    // Use this for initialization
+    void Start () {
+        SeceChenge.GetNowScene();
     }
 	
 	// Update is called once per frame
 	public void IsGameOver() {
-            changeScene.SceneChange();
+        SeceChenge.Change();
     }
 }
