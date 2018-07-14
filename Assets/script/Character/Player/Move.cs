@@ -1,12 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using BulletBullet.SceneGlobalVariables.Stage;
 
 public class Move : MonoBehaviour
 {
     public Vector3 Velocity;//移動
-    private Vector3 RayDirection;//rayの方向
+
     public Vector3 TraGetPosition;//この数値だけ変更して動いた先に地面があるか判定するのに使用
     private Quaternion TraGetRotation;
     private Vector3 value = new Vector3(1.0f, 3.0f, 0.0f);//カメラの位置の微調整
@@ -20,13 +19,12 @@ public class Move : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        RayDirection = new Vector3(0, -1, 0);
+
     }
 
     // Update is called once per frame
     public void CharaMove()
     {
-        SceneGlobalVariables.Instance.stopGameTime.StopGame();
 
         TraGetPosition = transform.position;
 
@@ -41,27 +39,17 @@ public class Move : MonoBehaviour
             TraGetRotation = Quaternion.LookRotation(Camera.StickMove.hRotation * Velocity);
             transform.rotation = Quaternion.Slerp(transform.rotation, TraGetRotation, Time.deltaTime * RotationSpeed);
 
-            transform.position += Camera.StickMove.hRotation * Velocity;
+            TraGetPosition += Camera.StickMove.hRotation * Velocity;
         }
 
-
-        //Player.rotation = Camera.hRotation;//回転する中心はplayaer
-
         //rayを動いた先の地面の方向に飛ばす
-        //Ray ray = new Ray(GameObjPos + new Vector3(0, 1, 0), RayDirection);
+        Ray ray = new Ray(TraGetPosition + Vector3.up, Vector3.down);
 
-        //if (Physics.Raycast(ray, out hit, 1000))
-        //{
-        //    if (Velocity.magnitude > 0)
-        //    {       //GameObjPosを代入はｘ
-        //        transform.position += Velocity;
-        //    }
-        //}
-        //else
-        //{
-        //    //元の位置に戻す
-        //    GameObjPos -= Velocity;
-        //}
+        if (Physics.Raycast(ray, out hit, 1000))
+        {
 
+            transform.position = TraGetPosition;
+
+        }
     }
 }
