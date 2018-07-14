@@ -1,82 +1,72 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BulletBullet.SceneGlobalVariables.Stage;
+
+[RequireComponent(typeof(InputStickMove))]
 
 public class CameraMove : MonoBehaviour
 {
+    public InputStickMove StickMove { get { return this.inputStickMove ?? (this.inputStickMove = GetComponent<InputStickMove>()); } }
+    InputStickMove inputStickMove;
+
+ 
+    public Quaternion vRotation;//y
+
     private const float ConstDistance = 5.0f;//不変対象とカメラの距離。デフォルトの距離
     private float Distance = 5.0f;//可変の対象とカメラの距離
     private float MoveSpeed = 3.0f;//速度
 
-    private float MiniDistance = 1.5f;//
-    private float ObjectDis;
-
-    private float input = 0.0f;//コントローラーの入力
-
     public Transform Player;//注視する対象
 
-    private Quaternion MaxRange;//カメラの動ける範囲
-    public Quaternion vRotation;//y
-    public Quaternion hRotation;//x
-
-    private Vector3 value = new Vector3(0.0f, 3.0f, 0.0f);//カメラの位置の微調整
-
+    private Vector3 value = new Vector3(0.0f, 3.5f, 0.0f);//カメラの位置の微調整
     private Vector3 Position;//カメラの移動適用前のポジション
     private Quaternion Rotation;//カメラの移動適用前のローテーション
 
-    public bool MaxFlag = false;//カメラが移動の上限下限にいるかどうか
-    public bool MiniFlag = false;
+    private bool HitFlag = false;//前フレーム壁に当たったかどうか
 
     private RaycastHit hit;
     // Use this for initialization
     void Start()
     {
-        MaxRange = Quaternion.Euler(90, 0, 0);
-        vRotation = Quaternion.Euler(10, 0, 0);
-        hRotation = Quaternion.identity;
+
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
-        if (Time.timeScale == 0)
-        {
-            return;
-        }
+        SceneGlobalVariables.Instance.stopGameTime.StopGame();
 
+        //かめらを初期値に戻す
         if (Input.GetButton("Reset"))
         {
-            vRotation = Quaternion.Euler(10, 0, 0);
-            hRotation = Quaternion.identity;
+            StickMove.CameraPosReset();
         }
 
-        input = Input.GetAxis("Y");
 
-        //カメラの移動上限を超えている && 上限の反対方向にカメラを移動しようとしている
-        MaxFlag = MaxRange.x < vRotation.x && input < 0.0f;
-        MiniFlag = vRotation.x < -MaxRange.x && input > 0.0f;
+        //スティックでカメラの移動
+        StickMove.StickMove();
 
-        if (vRotation.x < MaxRange.x && -MaxRange.x < vRotation.x)
-        {
-            vRotation *= Quaternion.Euler(input * MoveSpeed, 0, 0);
-        }
-        else if (MaxFlag || MiniFlag)
-        {
-            vRotation *= Quaternion.Euler(input * MoveSpeed, 0, 0);
-        }
-        hRotation *= Quaternion.Euler(0, Input.GetAxis("X") * MoveSpeed, 0);
-
-        transform.rotation = hRotation * vRotation;
-        Position = Player.position + value - transform.rotation * Vector3.forward * Distance;
+        transform.position = Player.position + value - transform.rotation * Vector3.forward * Distance;
 
         //Debug.DrawLine(Player.position + new Vector3(0, 2, 0), Position, Color.red, 3, false);
 
-        //if (Physics.Linecast(Player.transform.position, Position, out hit))
+        //if (Physics.Linecast(Player.position, transform.position, out hit))
         //{
-        //    transform.position = Position;
+
+        //    Distance -= MoveSpeed * Time.deltaTime;
+        //    transform.position = Player.position + value - transform.rotation * Vector3.forward * Distance;
         //}
         //else
         //{
+        //    if (Distance < ConstDistance)
+        //    {
+        //        Distance += MoveSpeed * Time.deltaTime;
+        //    }
+        //    else
+        //    {
+        //        Distance = ConstDistance;
+        //    }
         //    transform.position = Position;
         //}
     }

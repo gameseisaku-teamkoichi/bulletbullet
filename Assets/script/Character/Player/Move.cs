@@ -1,18 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BulletBullet.SceneGlobalVariables.Stage;
 
 public class Move : MonoBehaviour
 {
-    public GameObject Player;
-
     public Vector3 Velocity;//移動
     private Vector3 RayDirection;//rayの方向
-    private Vector3 GameObjPos;//Playerキャラクターのポジション
+    public Vector3 TraGetPosition;//この数値だけ変更して動いた先に地面があるか判定するのに使用
+    private Quaternion TraGetRotation;
+    private Vector3 value = new Vector3(1.0f, 3.0f, 0.0f);//カメラの位置の微調整
 
-    private const float Speed = 8.0f;//キャラの速度
-
-    private bool IsMove;
+    private const float MoveSpeed = 8.0f;//キャラの移動速度
+    private const float RotationSpeed = 7.0f;//キャラの速度
 
     public CameraMove Camera;
 
@@ -26,40 +26,42 @@ public class Move : MonoBehaviour
     // Update is called once per frame
     public void CharaMove()
     {
-        if (Time.timeScale == 0)
-        {
-            return;
-        }
+        SceneGlobalVariables.Instance.stopGameTime.StopGame();
 
-        GameObjPos = Player.transform.position;
+        TraGetPosition = transform.position;
 
         Velocity = Vector3.zero;
         Velocity.z += Input.GetAxis("Vertical");
         Velocity.x += Input.GetAxis("Horizontal");
 
-        Velocity = Velocity.normalized * Speed * Time.deltaTime;
+        Velocity = Velocity.normalized * MoveSpeed * Time.deltaTime;
 
-        GameObjPos += Camera.hRotation * Velocity;
-        Player.transform.rotation = Camera.hRotation;//回転する中心はplayaer
+        if (Velocity.magnitude > 0.1f)
+        {
+            TraGetRotation = Quaternion.LookRotation(Camera.StickMove.hRotation * Velocity);
+            transform.rotation = Quaternion.Slerp(transform.rotation, TraGetRotation, Time.deltaTime * RotationSpeed);
+
+            transform.position += Camera.StickMove.hRotation * Velocity;
+        }
+
+
+        //Player.rotation = Camera.hRotation;//回転する中心はplayaer
 
         //rayを動いた先の地面の方向に飛ばす
-        Ray ray = new Ray(GameObjPos + new Vector3(0, 1, 0), RayDirection);
-        IsMove = Physics.Raycast(ray, out hit, 1000);
+        //Ray ray = new Ray(GameObjPos + new Vector3(0, 1, 0), RayDirection);
 
-        //動いた後のrayが当たっていたらそれを反映
-        if (IsMove)
-        {
-            if (Velocity.magnitude > 0)
-            {       //GameObjPosを代入はｘ
-                transform.position += Camera.hRotation * Velocity;
-            }
-        }
-        else
-        {
-            //元の位置に戻す
-            GameObjPos -= Camera.hRotation * Velocity;
-        }
+        //if (Physics.Raycast(ray, out hit, 1000))
+        //{
+        //    if (Velocity.magnitude > 0)
+        //    {       //GameObjPosを代入はｘ
+        //        transform.position += Velocity;
+        //    }
+        //}
+        //else
+        //{
+        //    //元の位置に戻す
+        //    GameObjPos -= Velocity;
+        //}
 
-        IsMove = false;
     }
 }

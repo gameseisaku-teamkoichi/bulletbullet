@@ -7,6 +7,7 @@ namespace BulletBullet.SceneGlobalVariables.Stage
     public class SceneGlobalVariables : MonoBehaviour
     {
         public CharaNowStage charaNowStage;
+        public StopGameTime stopGameTime;
 
         private static SceneGlobalVariables instance;
 

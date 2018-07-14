@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BulletBullet.SceneGlobalVariables.Stage;
 
 [RequireComponent(typeof(Move))]
 [RequireComponent(typeof(AreaWarp))]
@@ -26,10 +27,7 @@ public class CharacterMainProcess : MonoBehaviour
     void Update()
     {
 
-        if (Time.timeScale == 0)
-        {
-            return;
-        }
+        SceneGlobalVariables.Instance.stopGameTime.StopGame();
 
         //rayを銃口の向いてるほうに銃口からまっすぐ飛ばす
         Ray ray = new Ray(Gun.transform.position, Gun.transform.forward);
