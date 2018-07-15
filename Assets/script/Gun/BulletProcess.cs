@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BulletProcess : MonoBehaviour {
 
-    int num;
     void OnTriggerEnter()
     {
     }

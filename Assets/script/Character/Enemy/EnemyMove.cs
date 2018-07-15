@@ -12,9 +12,9 @@ public class EnemyMove : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-
+        //ステージの初期化
         stageName = StageName.floating;
-        SceneGlobalVariables.Instance.charaNowStage.GetStage(stageName, EnemyNum);
+        SceneGlobalVariables.Instance.charaNowStage.SetStage(stageName, EnemyNum);
 
     }
 	

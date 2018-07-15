@@ -44,7 +44,7 @@ public class Move : MonoBehaviour
 
         //rayを動いた先の地面の方向に飛ばす
         Ray ray = new Ray(TraGetPosition + Vector3.up, Vector3.down);
-
+        //Rayが当たっていれば動ける
         if (Physics.Raycast(ray, out hit, 1000))
         {
 

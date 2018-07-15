@@ -6,6 +6,7 @@ public class InputStickMove : MonoBehaviour {
 
     private Quaternion MaxRange;//カメラの動ける範囲
     private Quaternion MiniRange;
+
     public Quaternion vRotation;//y
     public Quaternion hRotation;//x
 

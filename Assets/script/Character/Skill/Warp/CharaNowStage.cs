@@ -22,13 +22,9 @@ public class CharaNowStage : MonoBehaviour
     CharaNum charaNum;
 
     private bool WarpFlag;
-    private int EnemyCount;
 
-    void Start()
-    {
-    }
-
-    public void GetStage(StageName stageName, int Num)
+    //敵キャラクターの今いるステージ
+    public void SetStage(StageName stageName, int Num)
     {
         charaNum = (CharaNum)Enum.ToObject(typeof(CharaNum), Num);
 
@@ -48,6 +44,8 @@ public class CharaNowStage : MonoBehaviour
                 break;
         };
     }
+
+    //ワープスキルを使った先に誰かいるか
     public bool JudgeWarp(StageName stageName)
     {
         WarpFlag = true;
@@ -72,6 +70,7 @@ public class CharaNowStage : MonoBehaviour
         return WarpFlag;
     }
 
+    //死んだ敵のステージをリセット
     public void StageReset(int Num)
     {
         charaNum = (CharaNum)Enum.ToObject(typeof(CharaNum), Num);

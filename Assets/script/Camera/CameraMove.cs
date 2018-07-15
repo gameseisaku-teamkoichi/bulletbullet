@@ -49,6 +49,7 @@ public class CameraMove : MonoBehaviour
 
         Position = Player.position + value - transform.rotation * Vector3.forward * Distance;
 
+        //カメラが壁に当たっているかどうか
         CheckObj.Check(Position, Player.position);
 
     }

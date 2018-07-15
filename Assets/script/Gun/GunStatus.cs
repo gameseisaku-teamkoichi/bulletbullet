@@ -5,7 +5,7 @@ using System;
 
 public class GunStatus : MonoBehaviour {
 
-    public GameObject Gun;//銃のオブジェクト
+    private GameObject Gun;//銃のオブジェクト
     private int BulletPower;//弾の速さ
     private int BulletCount;//跳弾回数
 
@@ -15,17 +15,15 @@ public class GunStatus : MonoBehaviour {
         Second,
         Third
     }
-
-    private GanName ganName;
-    private GanName GetName;
+    private GanName Name;
 
     public void SetEquip(GameObject weapon)
     {
         Gun = weapon;
 
-        GetName = (GanName)Enum.Parse(typeof(GanName), Gun.name, true);
+        Name = (GanName)Enum.Parse(typeof(GanName), Gun.name, true);
 
-        switch (GetName)
+        switch (Name)
         {
             case GanName.Fast:
                 BulletPower = 1;

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using BulletBullet.SceneGlobalVariables.Stage;
 
 public class ForceBullet : MonoBehaviour
 {
@@ -28,10 +28,7 @@ public class ForceBullet : MonoBehaviour
 
     void Update()
     {
-        if (Time.timeScale == 0)
-        {
-            return;
-        }
+        SceneGlobalVariables.Instance.stopGameTime.StopGame();
 
         Cursor.lockState = CursorLockMode.Locked;
 

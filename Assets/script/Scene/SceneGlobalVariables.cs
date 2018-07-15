@@ -26,7 +26,6 @@ namespace BulletBullet.SceneGlobalVariables.Stage
             {
                 Destroy(gameObject);
             }
-
         }
     }
 }
