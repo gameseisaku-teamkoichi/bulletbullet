@@ -84,6 +84,7 @@ public class AreaWarp : MonoBehaviour
                     break;
             }
 
+            SceneGlobalVariables.Instance.charaNowStage.SetStage(stageName,0);
             transform.position = position;
         }
     }

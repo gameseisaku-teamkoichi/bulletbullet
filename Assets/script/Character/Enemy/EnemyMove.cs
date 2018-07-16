@@ -4,22 +4,31 @@ using UnityEngine;
 using Bullet.Stage;
 using BulletBullet.SceneGlobalVariables.Stage;
 
-public class EnemyMove : MonoBehaviour {
+[RequireComponent(typeof(EnemyStatus))]
 
-    StageName stageName;
+public class EnemyMove : MonoBehaviour
+{
+    public EnemyStatus Status { get { return this.enemyStatus ?? (this.enemyStatus = GetComponent<EnemyStatus>()); } }
+    EnemyStatus enemyStatus;
 
-    private int EnemyNum = 1;//キャラクター番号
-
+   private bool createFlag=true;
     // Use this for initialization
-    void Start () {
-        //ステージの初期化
-        stageName = StageName.floating;
-        SceneGlobalVariables.Instance.charaNowStage.SetStage(stageName, EnemyNum);
+    void Start()
+    {
+        Status.Initialize();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
 
     }
-	
-	// Update is called once per frame
-	void Update () {
-        
+
+    private void OnTriggerEnter()
+    {
+        Status.Reset();
+        SceneGlobalVariables.Instance.enemyCreateFlag.SetCreateFlag(createFlag);
+        Destroy(gameObject);
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Bullet.CharaNum;
+using Bullet.Stage;
 using BulletBullet.SceneGlobalVariables.Stage;
 
 [RequireComponent(typeof(Move))]
@@ -18,9 +20,17 @@ public class CharacterMainProcess : MonoBehaviour
 
     public GameObject Gun;
 
+
+    CharaNum charaNum;
+    StageName stageName;
+
+
     // Use this for initialization
     void Start()
     {
+        charaNum = CharaNum.Player;
+        stageName = StageName.floor;
+        SceneGlobalVariables.Instance.charaNowStage.SetStage(stageName,charaNum);
     }
 
     // Update is called once per frame

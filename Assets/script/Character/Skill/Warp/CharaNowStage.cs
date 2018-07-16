@@ -3,46 +3,70 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Bullet.Stage;//StageName
+using Bullet.CharaNum;
 
 public class CharaNowStage : MonoBehaviour
 {
-
+    public StageName PlayerStage;
     public StageName Enemy1Stage;
     public StageName Enemy2Stage;
     public StageName Enemy3Stage;
     public StageName Enemy4Stage;
 
-    enum CharaNum
-    {
-        Enemy1,
-        Enemy2,
-        Enemy3,
-        Enemy4
-    }
     CharaNum charaNum;
 
     private bool WarpFlag;
 
-    //敵キャラクターの今いるステージ
-    public void SetStage(StageName stageName, int Num)
+    void Start()
     {
-        charaNum = (CharaNum)Enum.ToObject(typeof(CharaNum), Num);
+        PlayerStage = StageName.floor;
+        SetStage(PlayerStage, 0);
+    }
 
+    //キャラクターの今いるステージ
+    public void SetStage(StageName stageName, CharaNum charaNum)
+    {
         switch (charaNum)
         {
-            case CharaNum.Enemy1:
+            case CharaNum.Player:
+                PlayerStage = stageName;
+                break;
+            case CharaNum.FastEnemy:
                 Enemy1Stage = stageName;
                 break;
-            case CharaNum.Enemy2:
+            case CharaNum.SecondEnemy:
                 Enemy2Stage = stageName;
                 break;
-            case CharaNum.Enemy3:
+            case CharaNum.ThirdEnemy:
                 Enemy3Stage = stageName;
                 break;
-            case CharaNum.Enemy4:
+            case CharaNum.FourthEnemy:
                 Enemy4Stage = stageName;
                 break;
         };
+    }
+
+    //死んだ敵のステージをリセット
+    public void StageReset(CharaNum charaNum)
+    {
+        switch (charaNum)
+        {
+            case CharaNum.Player:
+                PlayerStage = StageName.Disabled;
+                break;
+            case CharaNum.FastEnemy:
+                Enemy1Stage = StageName.Disabled;
+                break;
+            case CharaNum.SecondEnemy:
+                Enemy2Stage = StageName.Disabled;
+                break;
+            case CharaNum.ThirdEnemy:
+                Enemy3Stage = StageName.Disabled;
+                break;
+            case CharaNum.FourthEnemy:
+                Enemy4Stage = StageName.Disabled;
+                break;
+        }
     }
 
     //ワープスキルを使った先に誰かいるか
@@ -50,7 +74,11 @@ public class CharaNowStage : MonoBehaviour
     {
         WarpFlag = true;
 
-        if (Enemy1Stage == stageName)
+        if (PlayerStage == stageName)
+        {
+            WarpFlag = false;
+        }
+        else if (Enemy1Stage == stageName)
         {
             WarpFlag = false;
         }
@@ -68,26 +96,5 @@ public class CharaNowStage : MonoBehaviour
         }
 
         return WarpFlag;
-    }
-
-    //死んだ敵のステージをリセット
-    public void StageReset(int Num)
-    {
-        charaNum = (CharaNum)Enum.ToObject(typeof(CharaNum), Num);
-        switch (charaNum)
-        {
-            case CharaNum.Enemy1:
-                Enemy1Stage = StageName.Disabled;
-                break;
-            case CharaNum.Enemy2:
-                Enemy2Stage = StageName.Disabled;
-                break;
-            case CharaNum.Enemy3:
-                Enemy3Stage = StageName.Disabled;
-                break;
-            case CharaNum.Enemy4:
-                Enemy4Stage = StageName.Disabled;
-                break;
-        };
     }
 }

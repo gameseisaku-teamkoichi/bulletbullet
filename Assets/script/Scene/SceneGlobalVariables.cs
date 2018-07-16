@@ -8,6 +8,8 @@ namespace BulletBullet.SceneGlobalVariables.Stage
     {
         public CharaNowStage charaNowStage;
         public StopGameTime stopGameTime;
+        public EnemyNumberSelect enemyNumberSelect;
+        public EnemyCreateFlag enemyCreateFlag;
 
         private static SceneGlobalVariables instance;
 
