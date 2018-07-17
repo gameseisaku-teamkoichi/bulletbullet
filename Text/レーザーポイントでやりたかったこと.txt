@@ -1,0 +1,167 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class LaserPoint : MonoBehaviour
+{
+    //ポインターが何回反射する
+    private int reflectionNumber;
+
+    //反射するrayを作るのに必要な各要素
+    private List<GameObject> hitobject;
+    private List<Vector3> position;
+    private List<Vector3> normal;
+    private List<Vector3> direction;
+    private List<Vector3> reflect_direction;
+    private List<float> rad;
+    private List<float> deg;
+
+    //文の下の方でインスタンス化しているためそのインスタンス化した数値を入れるためのコピー
+    private List<Vector3> copyDirection;
+    private List<float> copyMagnitude;
+
+
+    //判定処理をしたくないレイヤーを無視するためのレイヤーマスク
+    public LayerMask mask;
+
+    // Use this for initialization
+    void Start()
+    {
+        //反射回数を設定
+        reflectionNumber = 4;
+
+        mask = -1;
+
+        hitobject = new List<GameObject>(reflectionNumber);
+        position = new List<Vector3>(reflectionNumber);
+        normal = new List<Vector3>(reflectionNumber);
+        direction = new List<Vector3>(reflectionNumber);
+        reflect_direction = new List<Vector3>(reflectionNumber);
+        rad = new List<float>(reflectionNumber);
+        deg = new List<float>(reflectionNumber);
+
+        copyDirection = new List<Vector3>(reflectionNumber - 1);
+        copyMagnitude = new List<float>(reflectionNumber - 1);
+
+    }
+
+    public void Point(Ray ray)
+    {
+        //あたったものの情報が入るRaycastHitを準備
+        RaycastHit[] hit = new RaycastHit[reflectionNumber];
+
+        for (int i = 0; i < reflectionNumber; i++)
+        {
+            bool isHit = Physics.Raycast(ray, out hit[0], 10000.0f, mask);
+
+            //あたっているなら
+            if (isHit == true)
+            {
+                //あたったゲームオブジェクトを取得
+                hitobject[i] = hit[i].collider.gameObject;
+
+                //マテリアルカラー変更
+                //hitobject.GetComponent().material.color = Color.green;
+
+                //あたったオブジェクト削除
+                //Destroy(hitobject);
+
+                //レイがあたった座標
+                position[i] = hit[i].point;
+
+                //レイがあたった当たり判定オブジェクトの面の法線
+                normal[i] = hit[i].normal;
+
+
+                //レイの方向ベクトル
+                if (i == 0)
+                    direction[i] = ray.direction;
+                else
+                {
+                    direction[i] = copyDirection[i - 1];
+                }
+
+                //反射ベクトル（反射方向を示すベクトル）
+                reflect_direction[i] = 2 * normal[i] * Vector3.Dot(normal[i], -direction[i]) + direction[i];
+
+                //レイと反射ベクトルのなす角度(ラジアン）
+                if (i == 0)
+                    rad[i] = Mathf.Acos(Vector3.Dot(-ray.direction, reflect_direction[i]) / ray.direction.magnitude * reflect_direction[i].magnitude);
+                else
+                {
+                    rad[i] = Mathf.Acos(Vector3.Dot(-copyDirection[i - 1], reflect_direction[i]) / copyMagnitude[i - 1] * reflect_direction[i].magnitude);
+                }
+
+                //ラジアンを度に変換
+                deg[i] = rad[i] * Mathf.Rad2Deg;
+
+                //反射角度が90度以上だったら・・・
+                //if(deg>90)
+                //{  
+                //}
+
+                ////////////// デバッグ用 ////////////////
+
+                //（デバッグ用）角度を表示
+                Debug.Log(deg[i]);
+
+                switch (i)
+                {
+                    case 3:
+                        //（デバッグ用）新しい反射用レイを作成する（4回目の反射）
+                        Ray reflect_ray4 = new Ray(position[3], reflect_direction[3]);
+
+                        Debug.DrawLine(reflect_ray4.origin, reflect_ray4.origin + reflect_ray4.direction * 100, Color.blue, 0);
+                        break;
+                    case 2:
+                        //（デバッグ用）新しい反射用レイを作成する（3回目の反射）
+                        Ray reflect_ray3 = new Ray(position[2], reflect_direction[2]);
+                        
+                        Debug.DrawLine(reflect_ray3.origin, reflect_ray3.origin + reflect_ray3.direction * 100, Color.green, 0);
+
+                        copyDirection[2] = reflect_ray3.direction;
+                        copyMagnitude[2] = reflect_ray3.direction.magnitude;
+
+                        Physics.Raycast(reflect_ray3, out hit[3], 10000.0f, mask);
+                        break;
+                    case 1:
+                        //（デバッグ用）新しい反射用レイを作成する（2回目の反射）
+                        Ray reflect_ray2 = new Ray(position[1], reflect_direction[1]);
+                        
+                        Debug.DrawLine(reflect_ray2.origin, reflect_ray2.origin + reflect_ray2.direction * 100, Color.yellow, 0);
+
+                        copyDirection[1] = reflect_ray2.direction;
+                        copyMagnitude[1] = reflect_ray2.direction.magnitude;
+
+                        Physics.Raycast(reflect_ray2, out hit[2], 10000.0f, mask);
+                        break;
+                    case 0:
+                        //（デバッグ用）新しい反射用レイを作成する（1回目の反射）
+                        Ray reflect_ray1 = new Ray(position[0], reflect_direction[0]);
+                        
+                        Debug.DrawLine(reflect_ray1.origin, reflect_ray1.origin + reflect_ray1.direction * 100, Color.blue, 0);
+
+                        copyDirection[0] = reflect_ray1.direction;
+                        copyMagnitude[0] = reflect_ray1.direction.magnitude;
+
+                        Physics.Raycast(reflect_ray1, out hit[1], 10000.0f, mask);
+                        break;
+                }
+
+            }
+            else
+            {
+                return;
+            }
+           
+
+            
+        }
+        ////////////// デバッグ用 ////////////////
+
+        //（デバッグ用）発射レイを表示
+        Debug.DrawLine(ray.origin, ray.origin + ray.direction * 100, Color.red, 0);
+
+    }
+}
+
