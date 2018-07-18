@@ -9,7 +9,7 @@ using System;
 public class EnemyStatus : MonoBehaviour
 {
 
-    CharaNum charaNum;
+    CharaNum charaNume;
     StageName stageName;
 
     //ステージのオブジェクト
@@ -23,21 +23,21 @@ public class EnemyStatus : MonoBehaviour
     private GameObject floating4;
 
     private bool Flag = false;
-    private int StageNam = 0;
+    private int IntStageName = 0;
 
 
     public void Initialize()
     {
-        charaNum = SceneGlobalVariables.Instance.enemyNumberSelect.SelectNum();
+        charaNume = SceneGlobalVariables.Instance.enemyNumberSelect.SelectNum();
 
         floor = GameObject.Find("floor");
         floor2 = GameObject.Find("floor2");
         floor3 = GameObject.Find("floor3");
         floor4 = GameObject.Find("floor4");
-        floating = GameObject.Find("floating");
-        floating2 = GameObject.Find("floating2");
-        floating3 = GameObject.Find("floating3");
-        floating4 = GameObject.Find("floating4");
+        floating = GameObject.Find("Floatingfloor");
+        floating2 = GameObject.Find("Floatingfloor2");
+        floating3 = GameObject.Find("Floatingfloor3");
+        floating4 = GameObject.Find("Floatingfloor4");
         SetStage();
     }
 
@@ -45,13 +45,12 @@ public class EnemyStatus : MonoBehaviour
     {
         while (!Flag)
         {
-            StageNam++;
-
-            stageName = (StageName)Enum.ToObject(typeof(StageName), StageNam);
+            IntStageName = UnityEngine.Random.Range(1, 9);
+            stageName = (StageName)Enum.ToObject(typeof(StageName), IntStageName);
             Flag = SceneGlobalVariables.Instance.charaNowStage.JudgeWarp(stageName);
         }
 
-        SceneGlobalVariables.Instance.charaNowStage.SetStage(stageName, charaNum);
+        SceneGlobalVariables.Instance.charaNowStage.SetStage(stageName, charaNume);
 
 
         switch (stageName)
@@ -59,7 +58,6 @@ public class EnemyStatus : MonoBehaviour
             case StageName.floor:
                 transform.position = floor.transform.position;
                 break;
-
             case StageName.floor2:
                 transform.position = floor2.transform.position;
                 break;
@@ -88,6 +86,6 @@ public class EnemyStatus : MonoBehaviour
     public void Reset()
     {
 
-        SceneGlobalVariables.Instance.charaNowStage.StageReset(charaNum);
+        SceneGlobalVariables.Instance.charaNowStage.StageReset(charaNume);
     }
 }

@@ -16,7 +16,7 @@ public class InputStickMove : MonoBehaviour {
 
     private float InputStickY = 0.0f;//コントローラーの入力
     private float InputStickX = 0.0f;
-    private float MoveSpeed = 3.0f;//速度
+    private float MoveSpeed = 5.0f;//速度
 
     void Start()
     {

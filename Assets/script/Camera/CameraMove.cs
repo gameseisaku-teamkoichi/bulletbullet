@@ -5,6 +5,7 @@ using BulletBullet.SceneGlobalVariables.Stage;
 
 [RequireComponent(typeof(InputStickMove))]
 [RequireComponent(typeof(CheckObstacles))]
+
 public class CameraMove : MonoBehaviour
 {
     public InputStickMove StickMove { get { return this.inputStickMove ?? (this.inputStickMove = GetComponent<InputStickMove>()); } }
@@ -31,7 +32,7 @@ public class CameraMove : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        //ここで呼ばないとなんかバグる
+        //ここで呼ばないとバグる
         if (Time.timeScale == 0)
         {
             return;

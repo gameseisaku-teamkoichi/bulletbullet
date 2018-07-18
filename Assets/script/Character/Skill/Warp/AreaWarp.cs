@@ -17,6 +17,8 @@ public class AreaWarp : MonoBehaviour
     public GameObject floating3;
     public GameObject floating4;
 
+    //targetの方を向く
+    public GameObject Target;
     private GameObject TargetObje;//Rayが当たったオブジェクト
 
     RaycastHit hit;
@@ -28,9 +30,10 @@ public class AreaWarp : MonoBehaviour
 
     private bool WarpFlag;
 
+    Vector3 _RotAxis = Vector3.up;
     void Start()
     {
-      
+
     }
 
     public void Warp(Ray ray)
@@ -84,8 +87,14 @@ public class AreaWarp : MonoBehaviour
                     break;
             }
 
-            SceneGlobalVariables.Instance.charaNowStage.SetStage(stageName,0);
+            SceneGlobalVariables.Instance.charaNowStage.SetStage(stageName, 0);
             transform.position = position;
+
+            //キャラを真ん中のオブジェクトに向ける
+            Vector3 direction = (Target.transform.position - this.transform.position).normalized;
+            Vector3 xAxis = Vector3.Cross(_RotAxis, direction).normalized;
+            Vector3 zAxis = Vector3.Cross(xAxis, _RotAxis).normalized;
+            this.transform.rotation = Quaternion.LookRotation(zAxis, _RotAxis);
         }
     }
 }

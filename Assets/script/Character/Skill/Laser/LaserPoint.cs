@@ -54,23 +54,18 @@ public class LaserPoint : MonoBehaviour
             //{  
             //}
 
-            ////////////// デバッグ用 ////////////////
-
-            //（デバッグ用）角度を表示
-            Debug.Log(deg);
-
             //（デバッグ用）新しい反射用レイを作成する
             Ray reflect_ray = new Ray(position, reflect_direction);
 
             //（デバッグ用）レイを画面に表示する
-            Debug.DrawLine(reflect_ray.origin, reflect_ray.origin + reflect_ray.direction * 100, Color.blue, 0);
+            Debug.DrawLine(reflect_ray.origin, reflect_ray.origin + reflect_ray.direction *hit.distance, Color.blue, 0);
 
         }
 
         ////////////// デバッグ用 ////////////////
 
         //（デバッグ用）発射レイを表示
-        Debug.DrawLine(ray.origin, ray.origin + ray.direction * 100, Color.red, 0);
+        Debug.DrawLine(ray.origin, ray.origin + ray.direction * hit.distance, Color.red, 0);
 
     }
 }
