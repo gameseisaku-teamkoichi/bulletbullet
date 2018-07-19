@@ -23,9 +23,7 @@ public class CharacterMainProcess : MonoBehaviour
     #endregion
 
     public GameObject Gun;
-
-    bool flag = false;
-
+    
     CharaNum charaNum;
     StageName stageName;
     Ray ray;
@@ -52,11 +50,6 @@ public class CharacterMainProcess : MonoBehaviour
         if (Input.GetButton("SkillB"))
         {
             CharacterWarp.Warp(ray);
-        }
-
-        if (Input.GetButton("SkillY"))
-        {
-            flag = true;
         }
     }
 }
