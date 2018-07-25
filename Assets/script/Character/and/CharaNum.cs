@@ -10,7 +10,7 @@ namespace Bullet.CharaNum
         FastEnemy,
         SecondEnemy,
         ThirdEnemy,
-        FourthEnemy
+        FourthEnemy,
     }
 
 }

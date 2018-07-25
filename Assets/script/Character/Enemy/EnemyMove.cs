@@ -3,32 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using Bullet.Stage;
 using BulletBullet.SceneGlobalVariables.Stage;
-
-[RequireComponent(typeof(EnemyStatus))]
+using Bullet.CharaNum;
+using System;
 
 public class EnemyMove : MonoBehaviour
 {
-    public EnemyStatus Status { get { return this.enemyStatus ?? (this.enemyStatus = GetComponent<EnemyStatus>()); } }
-    EnemyStatus enemyStatus;
 
-   private bool createFlag=true;
-    // Use this for initialization
-    void Start()
+    CharaNum charaNum;
+    StageName stageName;
+
+    Vector3 position;
+
+    public Vector3 Initialize(int MyNumber)
     {
-        Status.Initialize();
-    }
+        stageName = SceneGlobalVariables.Instance.characterStatus.GetStageName(MyNumber);
 
-    // Update is called once per frame
-    void Update()
-    {
-
-
-    }
-
-    private void OnTriggerEnter()
-    {
-        Status.Reset();
-        SceneGlobalVariables.Instance.enemyCreateFlag.SetCreateFlag(createFlag);
-        Destroy(gameObject);
+        return SceneGlobalVariables.Instance.charaNowStage.SetPosition(stageName);
     }
 }

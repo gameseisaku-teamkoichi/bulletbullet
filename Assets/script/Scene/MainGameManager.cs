@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BulletBullet.SceneGlobalVariables.Stage;
 
 [RequireComponent(typeof(GameOver))]
 [RequireComponent(typeof(PauseScript))]
-[RequireComponent(typeof(CreateEnemy))]
 
 public class MainGameManager : MonoBehaviour
 {
@@ -15,8 +15,6 @@ public class MainGameManager : MonoBehaviour
     public PauseScript Pause { get { return this.pauseScript ?? (this.pauseScript = GetComponent<PauseScript>()); } }
     PauseScript pauseScript;
 
-    public CreateEnemy Create { get { return this.createEnemy ?? (this.createEnemy = GetComponent<CreateEnemy>()); } }
-    CreateEnemy createEnemy;
     #endregion
 
     private GameObject PauseObject;
@@ -28,7 +26,7 @@ public class MainGameManager : MonoBehaviour
     void Start()
     {
         NowTime = 0;
-        Create.Initialize();
+        SceneGlobalVariables.Instance.characterSpawn.Initialize();
     }
 
     // Update is called once per frame
@@ -46,7 +44,7 @@ public class MainGameManager : MonoBehaviour
             return;
         }
 
-        Create.Create();
+
 
         if (NowTime >= TimeLimit)
         {

@@ -55,46 +55,14 @@ public class AreaWarp : MonoBehaviour
         //移動先にenemyがいるかどうか
         WarpFlag = SceneGlobalVariables.Instance.charaNowStage.JudgeWarp(stageName);
 
+        transform.position = SceneGlobalVariables.Instance.charaNowStage.SetPosition(stageName);
+        SceneGlobalVariables.Instance.characterStatus.SetStageName(0, stageName);
 
-        if (OldStageName != stageName && WarpFlag)
-        {
-            OldStageName = stageName;
-            switch (stageName)
-            {
-                case StageName.floor:
-                    position = floor.transform.position;
-                    break;
-                case StageName.floor2:
-                    position = floor2.transform.position;
-                    break;
-                case StageName.floor3:
-                    position = floor3.transform.position;
-                    break;
-                case StageName.floor4:
-                    position = floor4.transform.position;
-                    break;
-                case StageName.floating:
-                    position = floating.transform.position;
-                    break;
-                case StageName.floating2:
-                    position = floating2.transform.position;
-                    break;
-                case StageName.floating3:
-                    position = floating3.transform.position;
-                    break;
-                case StageName.floating4:
-                    position = floating4.transform.position;
-                    break;
-            }
-
-            SceneGlobalVariables.Instance.charaNowStage.SetStage(stageName, 0);
-            transform.position = position;
-
-            //キャラを真ん中のオブジェクトに向ける
-            Vector3 direction = (Target.transform.position - this.transform.position).normalized;
-            Vector3 xAxis = Vector3.Cross(_RotAxis, direction).normalized;
-            Vector3 zAxis = Vector3.Cross(xAxis, _RotAxis).normalized;
-            this.transform.rotation = Quaternion.LookRotation(zAxis, _RotAxis);
-        }
+        //キャラを真ん中のオブジェクトに向ける
+        Vector3 direction = (Target.transform.position - this.transform.position).normalized;
+        Vector3 xAxis = Vector3.Cross(_RotAxis, direction).normalized;
+        Vector3 zAxis = Vector3.Cross(xAxis, _RotAxis).normalized;
+        this.transform.rotation = Quaternion.LookRotation(zAxis, _RotAxis);
     }
 }
+

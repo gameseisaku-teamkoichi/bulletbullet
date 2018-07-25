@@ -33,7 +33,6 @@ public class CharacterMainProcess : MonoBehaviour
     {
         charaNum = CharaNum.Player;
         stageName = StageName.floor;
-        SceneGlobalVariables.Instance.charaNowStage.SetStage(stageName, charaNum);
     }
 
     // Update is called once per frame

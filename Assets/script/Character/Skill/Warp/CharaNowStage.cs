@@ -4,67 +4,56 @@ using UnityEngine;
 using System;
 using Bullet.Stage;//StageName
 using Bullet.CharaNum;
+using BulletBullet.SceneGlobalVariables.Stage;
 
 public class CharaNowStage : MonoBehaviour
 {
-    public StageName PlayerStage;
-    public StageName Enemy1Stage;
-    public StageName Enemy2Stage;
-    public StageName Enemy3Stage;
-    public StageName Enemy4Stage;
+    public GameObject floor;
+    public GameObject floor2;
+    public GameObject floor3;
+    public GameObject floor4;
+    public GameObject floating;
+    public GameObject floating2;
+    public GameObject floating3;
+    public GameObject floating4;
+
+
+    private StageName Player;
+    private StageName FastEnemy;
+    private StageName SecondEnemy;
+    private StageName ThirdEnemy;
+    private StageName FourthEnemy;
 
     CharaNum charaNum;
 
+    private Vector3 Position;
     private bool WarpFlag;
 
+    private int CharaCount;
     void Start()
     {
-        PlayerStage = StageName.floor;
-        SetStage(PlayerStage, 0);
+        CharaCount = SceneGlobalVariables.Instance.characterStatus.GetCharaCount();
     }
 
-    //キャラクターの今いるステージ
-    public void SetStage(StageName stageName, CharaNum charaNum)
+    //死んだきゃらのステージをリセット
+    public void StageReset(int charaNum)
     {
         switch (charaNum)
         {
-            case CharaNum.Player:
-                PlayerStage = stageName;
+            case 0:
+                SceneGlobalVariables.Instance.characterStatus.SetStageName(charaNum, StageName.Disabled);
                 break;
-            case CharaNum.FastEnemy:
-                Enemy1Stage = stageName;
+            case 1:
+                SceneGlobalVariables.Instance.characterStatus.SetStageName(charaNum, StageName.Disabled);
                 break;
-            case CharaNum.SecondEnemy:
-                Enemy2Stage = stageName;
+            case 2:
+                SceneGlobalVariables.Instance.characterStatus.SetStageName(charaNum, StageName.Disabled);
                 break;
-            case CharaNum.ThirdEnemy:
-                Enemy3Stage = stageName;
+            case 3:
+                SceneGlobalVariables.Instance.characterStatus.SetStageName(charaNum, StageName.Disabled);
                 break;
-            case CharaNum.FourthEnemy:
-                Enemy4Stage = stageName;
-                break;
-        };
-    }
-
-    //死んだ敵のステージをリセット
-    public void StageReset(CharaNum charaNum)
-    {
-        switch (charaNum)
-        {
-            case CharaNum.Player:
-                PlayerStage = StageName.Disabled;
-                break;
-            case CharaNum.FastEnemy:
-                Enemy1Stage = StageName.Disabled;
-                break;
-            case CharaNum.SecondEnemy:
-                Enemy2Stage = StageName.Disabled;
-                break;
-            case CharaNum.ThirdEnemy:
-                Enemy3Stage = StageName.Disabled;
-                break;
-            case CharaNum.FourthEnemy:
-                Enemy4Stage = StageName.Disabled;
+            case 4:
+                SceneGlobalVariables.Instance.characterStatus.SetStageName(charaNum, StageName.Disabled);
                 break;
         }
     }
@@ -72,29 +61,90 @@ public class CharaNowStage : MonoBehaviour
     //ワープスキルを使った先に誰かいるか
     public bool JudgeWarp(StageName stageName)
     {
+        SetStatus();
         WarpFlag = true;
 
-        if (PlayerStage == stageName)
+        if (Player == stageName)
         {
             WarpFlag = false;
         }
-        else if (Enemy1Stage == stageName)
+        else if (FastEnemy == stageName)
         {
             WarpFlag = false;
         }
-        else if (Enemy2Stage == stageName)
+        else if (SecondEnemy == stageName)
         {
             WarpFlag = false;
         }
-        else if (Enemy3Stage == stageName)
+        else if (ThirdEnemy == stageName)
         {
             WarpFlag = false;
         }
-        else if (Enemy4Stage == stageName)
+        else if (FourthEnemy == stageName)
         {
             WarpFlag = false;
         }
 
         return WarpFlag;
+    }
+
+    //実際に動かす
+    public Vector3 SetPosition(StageName stageName)
+    {
+        switch (stageName)
+        {
+            case StageName.floor:
+                Position = floor.transform.position;
+                break;
+            case StageName.floor2:
+                Position = floor2.transform.position;
+                break;
+            case StageName.floor3:
+                Position = floor3.transform.position;
+                break;
+            case StageName.floor4:
+                Position = floor4.transform.position;
+                break;
+            case StageName.floating:
+                Position = floating.transform.position;
+                break;
+            case StageName.floating2:
+                Position = floating2.transform.position;
+                break;
+            case StageName.floating3:
+                Position = floating3.transform.position;
+                break;
+            case StageName.floating4:
+                Position = floating4.transform.position;
+                break;
+        }
+
+        return Position;
+    }
+
+    private void SetStatus()
+    {
+
+        for (int i = 0; i < CharaCount; i++)
+        {
+            switch (i)
+            {
+                case 0:
+                    Player = SceneGlobalVariables.Instance.characterStatus.GetStageName(i);
+                    break;
+                case 1:
+                    FastEnemy = SceneGlobalVariables.Instance.characterStatus.GetStageName(i);
+                    break;
+                case 2:
+                    SecondEnemy = SceneGlobalVariables.Instance.characterStatus.GetStageName(i);
+                    break;
+                case 3:
+                    SecondEnemy = SceneGlobalVariables.Instance.characterStatus.GetStageName(i);
+                    break;
+                case 4:
+                    SecondEnemy = SceneGlobalVariables.Instance.characterStatus.GetStageName(i);
+                    break;
+            }
+        }
     }
 }
