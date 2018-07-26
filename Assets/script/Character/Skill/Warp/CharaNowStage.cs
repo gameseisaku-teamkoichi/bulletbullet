@@ -17,13 +17,6 @@ public class CharaNowStage : MonoBehaviour
     public GameObject floating3;
     public GameObject floating4;
 
-
-    private StageName Player;
-    private StageName FastEnemy;
-    private StageName SecondEnemy;
-    private StageName ThirdEnemy;
-    private StageName FourthEnemy;
-
     CharaNum charaNum;
 
     private Vector3 Position;
@@ -35,56 +28,18 @@ public class CharaNowStage : MonoBehaviour
         CharaCount = SceneGlobalVariables.Instance.characterStatus.GetCharaCount();
     }
 
-    //死んだきゃらのステージをリセット
-    public void StageReset(int charaNum)
-    {
-        switch (charaNum)
-        {
-            case 0:
-                SceneGlobalVariables.Instance.characterStatus.SetStageName(charaNum, StageName.Disabled);
-                break;
-            case 1:
-                SceneGlobalVariables.Instance.characterStatus.SetStageName(charaNum, StageName.Disabled);
-                break;
-            case 2:
-                SceneGlobalVariables.Instance.characterStatus.SetStageName(charaNum, StageName.Disabled);
-                break;
-            case 3:
-                SceneGlobalVariables.Instance.characterStatus.SetStageName(charaNum, StageName.Disabled);
-                break;
-            case 4:
-                SceneGlobalVariables.Instance.characterStatus.SetStageName(charaNum, StageName.Disabled);
-                break;
-        }
-    }
-
     //ワープスキルを使った先に誰かいるか
     public bool JudgeWarp(StageName stageName)
     {
-        SetStatus();
         WarpFlag = true;
-
-        if (Player == stageName)
+        for (int i = 0; i < CharaCount; i++)
         {
-            WarpFlag = false;
+            if (SceneGlobalVariables.Instance.characterStatus.GetStageName(i) == stageName)
+            {
+                WarpFlag = false;
+                return WarpFlag;
+            }
         }
-        else if (FastEnemy == stageName)
-        {
-            WarpFlag = false;
-        }
-        else if (SecondEnemy == stageName)
-        {
-            WarpFlag = false;
-        }
-        else if (ThirdEnemy == stageName)
-        {
-            WarpFlag = false;
-        }
-        else if (FourthEnemy == stageName)
-        {
-            WarpFlag = false;
-        }
-
         return WarpFlag;
     }
 
@@ -120,31 +75,5 @@ public class CharaNowStage : MonoBehaviour
         }
 
         return Position;
-    }
-
-    private void SetStatus()
-    {
-
-        for (int i = 0; i < CharaCount; i++)
-        {
-            switch (i)
-            {
-                case 0:
-                    Player = SceneGlobalVariables.Instance.characterStatus.GetStageName(i);
-                    break;
-                case 1:
-                    FastEnemy = SceneGlobalVariables.Instance.characterStatus.GetStageName(i);
-                    break;
-                case 2:
-                    SecondEnemy = SceneGlobalVariables.Instance.characterStatus.GetStageName(i);
-                    break;
-                case 3:
-                    SecondEnemy = SceneGlobalVariables.Instance.characterStatus.GetStageName(i);
-                    break;
-                case 4:
-                    SecondEnemy = SceneGlobalVariables.Instance.characterStatus.GetStageName(i);
-                    break;
-            }
-        }
     }
 }

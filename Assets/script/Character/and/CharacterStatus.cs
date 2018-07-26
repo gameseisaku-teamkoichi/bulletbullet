@@ -24,7 +24,8 @@ public class CharacterStatus : MonoBehaviour
     public enum CharaStatus
     {
         Live,
-        die
+        die,
+        Spawn
     }
     private CharaStatus[] Status = new CharaStatus[CharacterCount];
     public CharaStatus GetStatus(int num)

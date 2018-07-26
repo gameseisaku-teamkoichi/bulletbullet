@@ -23,16 +23,20 @@ public class CharacterMainProcess : MonoBehaviour
     #endregion
 
     public GameObject Gun;
-    
+    public GameObject Targets;
+
     CharaNum charaNum;
     StageName stageName;
     Ray ray;
-
+    private int MyNumber;
     // Use this for initialization
     void Start()
     {
-        charaNum = CharaNum.Player;
-        stageName = StageName.floor;
+        MyNumber = 0;
+        SceneGlobalVariables.Instance.characterStatus.SetStatus(MyNumber, CharacterStatus.CharaStatus.Live);
+
+        stageName = SceneGlobalVariables.Instance.characterStatus.GetStageName(MyNumber);
+        transform.position = SceneGlobalVariables.Instance.charaNowStage.SetPosition(stageName);
     }
 
     // Update is called once per frame
@@ -50,6 +54,13 @@ public class CharacterMainProcess : MonoBehaviour
         {
             CharacterWarp.Warp(ray);
         }
+    }
+
+    private void OnTriggerEnter()
+    {
+        SceneGlobalVariables.Instance.characterStatus.SetStatus(0, CharacterStatus.CharaStatus.die);
+        SceneGlobalVariables.Instance.characterStatus.SetStageName(0, StageName.Disabled);
+        Destroy(gameObject);
     }
 }
 

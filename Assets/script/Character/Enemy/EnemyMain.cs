@@ -17,6 +17,7 @@ public class EnemyMain : MonoBehaviour
     private bool GetNumFlag=false;
     StageName stageName;
     CharacterStatus.CharaStatus charaStatus;
+
     // Use this for initialization
     void Start()
     {
@@ -25,8 +26,7 @@ public class EnemyMain : MonoBehaviour
         for (int i = 1; i < CharaCount; i++)
         {
             charaStatus = SceneGlobalVariables.Instance.characterStatus.GetStatus(i);
-            Debug.Log(charaStatus);
-            if (charaStatus == CharacterStatus.CharaStatus.die)
+            if (charaStatus == CharacterStatus.CharaStatus.Spawn)
             {
                 MyNumber = i;
                 SceneGlobalVariables.Instance.characterStatus.SetStatus(MyNumber, CharacterStatus.CharaStatus.Live);
@@ -48,6 +48,7 @@ public class EnemyMain : MonoBehaviour
     private void OnTriggerEnter()
     {
         SceneGlobalVariables.Instance.characterStatus.SetStatus(MyNumber, CharacterStatus.CharaStatus.die);
+        SceneGlobalVariables.Instance.characterStatus.SetStageName(MyNumber,StageName.Disabled);
         Destroy(gameObject);
     }
 }

@@ -7,16 +7,6 @@ using BulletBullet.SceneGlobalVariables.Stage;
 
 public class AreaWarp : MonoBehaviour
 {
-    //ワープする先のオブジェクト
-    public GameObject floor;
-    public GameObject floor2;
-    public GameObject floor3;
-    public GameObject floor4;
-    public GameObject floating;
-    public GameObject floating2;
-    public GameObject floating3;
-    public GameObject floating4;
-
     //targetの方を向く
     public GameObject Target;
     private GameObject TargetObje;//Rayが当たったオブジェクト
@@ -55,14 +45,17 @@ public class AreaWarp : MonoBehaviour
         //移動先にenemyがいるかどうか
         WarpFlag = SceneGlobalVariables.Instance.charaNowStage.JudgeWarp(stageName);
 
-        transform.position = SceneGlobalVariables.Instance.charaNowStage.SetPosition(stageName);
-        SceneGlobalVariables.Instance.characterStatus.SetStageName(0, stageName);
+        if (WarpFlag)
+        {
+            transform.position = SceneGlobalVariables.Instance.charaNowStage.SetPosition(stageName);
+            SceneGlobalVariables.Instance.characterStatus.SetStageName(0, stageName);
 
-        //キャラを真ん中のオブジェクトに向ける
-        Vector3 direction = (Target.transform.position - this.transform.position).normalized;
-        Vector3 xAxis = Vector3.Cross(_RotAxis, direction).normalized;
-        Vector3 zAxis = Vector3.Cross(xAxis, _RotAxis).normalized;
-        this.transform.rotation = Quaternion.LookRotation(zAxis, _RotAxis);
+            //キャラを真ん中のオブジェクトに向ける
+            Vector3 direction = (Target.transform.position - this.transform.position).normalized;
+            Vector3 xAxis = Vector3.Cross(_RotAxis, direction).normalized;
+            Vector3 zAxis = Vector3.Cross(xAxis, _RotAxis).normalized;
+            this.transform.rotation = Quaternion.LookRotation(zAxis, _RotAxis);
+        }
     }
 }
 

@@ -50,5 +50,7 @@ public class MainGameManager : MonoBehaviour
         {
             End.IsGameOver();
         }
+
+        SceneGlobalVariables.Instance.characterSpawn.Spawn();
     }
 }
