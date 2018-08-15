@@ -16,7 +16,7 @@ public class CharaNowStage : MonoBehaviour
     public GameObject floating2;
     public GameObject floating3;
     public GameObject floating4;
-
+    public GameObject DedArea;
     CharaNum charaNum;
 
     private Vector3 Position;
@@ -74,6 +74,12 @@ public class CharaNowStage : MonoBehaviour
                 break;
         }
 
+        return Position;
+    }
+    
+    public Vector3 SetDedPosition()
+    {
+        Position = DedArea.transform.position;
         return Position;
     }
 }

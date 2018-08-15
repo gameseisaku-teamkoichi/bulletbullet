@@ -69,6 +69,4 @@ public class CharacterStatus : MonoBehaviour
     {
         charaNum[num] = Charanum;
     }
-
-    private bool flag=false;
 }

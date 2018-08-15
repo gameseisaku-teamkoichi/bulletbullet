@@ -14,7 +14,7 @@ public class EnemyMain : MonoBehaviour
     private int CharaCount;
     private int MyNumber;
 
-    private bool GetNumFlag=false;
+    private bool GetNumFlag = false;
     StageName stageName;
     CharacterStatus.CharaStatus charaStatus;
 
@@ -32,7 +32,7 @@ public class EnemyMain : MonoBehaviour
                 SceneGlobalVariables.Instance.characterStatus.SetStatus(MyNumber, CharacterStatus.CharaStatus.Live);
 
                 stageName = SceneGlobalVariables.Instance.characterStatus.GetStageName(MyNumber);
-                transform.position=SceneGlobalVariables.Instance.charaNowStage.SetPosition(stageName);
+                transform.position = SceneGlobalVariables.Instance.charaNowStage.SetPosition(stageName);
                 break;
             }
         }
@@ -47,8 +47,17 @@ public class EnemyMain : MonoBehaviour
 
     private void OnTriggerEnter()
     {
+        transform.position = SceneGlobalVariables.Instance.charaNowStage.SetDedPosition();
+
         SceneGlobalVariables.Instance.characterStatus.SetStatus(MyNumber, CharacterStatus.CharaStatus.die);
-        SceneGlobalVariables.Instance.characterStatus.SetStageName(MyNumber,StageName.Disabled);
-        Destroy(gameObject);
+        SceneGlobalVariables.Instance.characterStatus.SetStageName(MyNumber, StageName.Disabled);
+
+        StartCoroutine(SceneGlobalVariables.Instance.characterSpawn.Spawn(MyNumber, () =>
+        {
+            stageName = SceneGlobalVariables.Instance.characterStatus.GetStageName(MyNumber);
+            transform.position = SceneGlobalVariables.Instance.charaNowStage.SetPosition(stageName);
+            SceneGlobalVariables.Instance.characterStatus.SetStatus(MyNumber, CharacterStatus.CharaStatus.Live);
+
+        }));
     }
 }

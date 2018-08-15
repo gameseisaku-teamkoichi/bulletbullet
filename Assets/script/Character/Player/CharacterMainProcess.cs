@@ -58,9 +58,18 @@ public class CharacterMainProcess : MonoBehaviour
 
     private void OnTriggerEnter()
     {
+        transform.position=SceneGlobalVariables.Instance.charaNowStage.SetDedPosition();
+
         SceneGlobalVariables.Instance.characterStatus.SetStatus(0, CharacterStatus.CharaStatus.die);
         SceneGlobalVariables.Instance.characterStatus.SetStageName(0, StageName.Disabled);
-        Destroy(gameObject);
+
+      StartCoroutine(SceneGlobalVariables.Instance.characterSpawn.Spawn(MyNumber,()=>
+      {
+          stageName = SceneGlobalVariables.Instance.characterStatus.GetStageName(MyNumber);
+          transform.position = SceneGlobalVariables.Instance.charaNowStage.SetPosition(stageName);
+          SceneGlobalVariables.Instance.characterStatus.SetStatus(MyNumber, CharacterStatus.CharaStatus.Live);
+
+      }));
     }
 }
 

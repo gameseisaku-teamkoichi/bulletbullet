@@ -13,21 +13,17 @@ public class CharacterSpawn : MonoBehaviour
     public GameObject Player;
 
     private const float ResponseTime = 5.0f;//リスポーン時間
-    private float[] NowTime;
 
     private int CharaCount;
     private int[] Stage = new int[5] { 1, 2, 4, 7, 8 };//初期スポーン位置
     private int StageNum;
 
     private bool SetStageFlag;
-    CharacterStatus.CharaStatus[] Status;
-
+    private Vector3 Position;
     // Use this for initialization
     public void Initialize()
     {
         CharaCount = SceneGlobalVariables.Instance.characterStatus.GetCharaCount();
-        NowTime = new float[CharaCount];
-        Status = new CharacterStatus.CharaStatus[CharaCount];
 
         //プレイヤーステータス初期化
         SceneGlobalVariables.Instance.characterStatus.SetcharaNum(0, CharaNum.Player);
@@ -49,28 +45,12 @@ public class CharacterSpawn : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void Spawn()
+    public IEnumerator Spawn(int num , Action action)
     {
-        for (int i = 0; i < CharaCount; i++)
-        {
-            Status[i] = SceneGlobalVariables.Instance.characterStatus.GetStatus(i);
-            if (Status[i] == CharacterStatus.CharaStatus.die)
-            {
-                NowTime[i] += Time.deltaTime;
-                Debug.Log(NowTime[i]);
-            }
+        yield return new WaitForSeconds(ResponseTime);
+        SelectStage(num);
 
-            if (NowTime[i] > ResponseTime)
-            {
-                NowTime[i] = 0;
-                SelectStage(i);
-
-                if (i == 0)
-                    Instantiate(Player);
-                else
-                    Instantiate(Enemy);
-            }
-        }
+        action();
     }
 
     private void SelectStage(int num)

@@ -53,18 +53,16 @@ public class MainGameManager : MonoBehaviour
             End.IsGameOver();
         }
 
-        SceneGlobalVariables.Instance.characterSpawn.Spawn();
+        //if (SceneGlobalVariables.Instance.characterStatus.GetStatus(0) == CharacterStatus.CharaStatus.die)
+        //{
+        //    SubUi.ChengeStatus(SubUi.Status.active);
+        //    OldPlayerStatus = CharacterStatus.CharaStatus.die;
+        //}
 
-        if (SceneGlobalVariables.Instance.characterStatus.GetStatus(0) == CharacterStatus.CharaStatus.die)
-        {
-            SubUi.ChengeStatus(SubUi.Status.active);
-            OldPlayerStatus = CharacterStatus.CharaStatus.die;
-        }
-
-        if (OldPlayerStatus == CharacterStatus.CharaStatus.die && SceneGlobalVariables.Instance.characterStatus.GetStatus(0) == CharacterStatus.CharaStatus.Live)
-        {
-            SubUi.ChengeStatus(SubUi.Status.notactive);
-            OldPlayerStatus = CharacterStatus.CharaStatus.Live;
-        }
+        //if (OldPlayerStatus == CharacterStatus.CharaStatus.die && SceneGlobalVariables.Instance.characterStatus.GetStatus(0) == CharacterStatus.CharaStatus.Live)
+        //{
+        //    SubUi.ChengeStatus(SubUi.Status.notactive);
+        //    OldPlayerStatus = CharacterStatus.CharaStatus.Live;
+        //}
     }
 }
