@@ -15,9 +15,11 @@ public class MainGameManager : MonoBehaviour
     public PauseScript Pause { get { return this.pauseScript ?? (this.pauseScript = GetComponent<PauseScript>()); } }
     PauseScript pauseScript;
 
+    public SubUi SubUi { get { return this.subUi ?? (this.subUi = GetComponent<SubUi>()); } }
+    SubUi subUi;
     #endregion
 
-    private GameObject PauseObject;
+    CharacterStatus.CharaStatus OldPlayerStatus;
 
     private const float TimeLimit = 10.0f;//制限時間
     private float NowTime;
@@ -52,5 +54,17 @@ public class MainGameManager : MonoBehaviour
         }
 
         SceneGlobalVariables.Instance.characterSpawn.Spawn();
+
+        if (SceneGlobalVariables.Instance.characterStatus.GetStatus(0) == CharacterStatus.CharaStatus.die)
+        {
+            SubUi.ChengeStatus(SubUi.Status.active);
+            OldPlayerStatus = CharacterStatus.CharaStatus.die;
+        }
+
+        if (OldPlayerStatus == CharacterStatus.CharaStatus.die && SceneGlobalVariables.Instance.characterStatus.GetStatus(0) == CharacterStatus.CharaStatus.Live)
+        {
+            SubUi.ChengeStatus(SubUi.Status.notactive);
+            OldPlayerStatus = CharacterStatus.CharaStatus.Live;
+        }
     }
 }
