@@ -12,16 +12,16 @@ public class SubUi : MonoBehaviour
         notactive
     }
 
-    public GameObject dedUI;
+    public GameObject SubCamera;
     public void ChengeStatus(Status UIstatus)
     {
         switch (UIstatus)
         {
             case Status.active:
-                dedUI.SetActive(true);
+                SubCamera.SetActive(true);
                 break;
             case Status.notactive:
-                dedUI.SetActive(false);
+                SubCamera.SetActive(false);
                 break;
         }
     }

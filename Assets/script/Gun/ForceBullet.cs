@@ -28,7 +28,10 @@ public class ForceBullet : MonoBehaviour
 
     void Update()
     {
-        SceneGlobalVariables.Instance.stopGameTime.StopGame();
+        if (Time.timeScale == 0)
+        {
+            return;
+        }
 
         Cursor.lockState = CursorLockMode.Locked;
 

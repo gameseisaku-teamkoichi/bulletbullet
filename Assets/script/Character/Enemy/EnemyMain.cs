@@ -36,6 +36,7 @@ public class EnemyMain : MonoBehaviour
                 break;
             }
         }
+        SceneGlobalVariables.Instance.characterStatus.SetPosition(MyNumber, transform.position);
     }
 
     // Update is called once per frame
@@ -57,6 +58,7 @@ public class EnemyMain : MonoBehaviour
             stageName = SceneGlobalVariables.Instance.characterStatus.GetStageName(MyNumber);
             transform.position = SceneGlobalVariables.Instance.charaNowStage.SetPosition(stageName);
             SceneGlobalVariables.Instance.characterStatus.SetStatus(MyNumber, CharacterStatus.CharaStatus.Live);
+            SceneGlobalVariables.Instance.characterStatus.SetPosition(MyNumber, transform.position);
 
         }));
     }

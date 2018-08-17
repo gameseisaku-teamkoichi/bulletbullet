@@ -29,6 +29,7 @@ public class MainGameManager : MonoBehaviour
     {
         NowTime = 0;
         SceneGlobalVariables.Instance.characterSpawn.Initialize();
+        OldPlayerStatus = CharacterStatus.CharaStatus.die;
     }
 
     // Update is called once per frame
@@ -53,16 +54,16 @@ public class MainGameManager : MonoBehaviour
             End.IsGameOver();
         }
 
-        //if (SceneGlobalVariables.Instance.characterStatus.GetStatus(0) == CharacterStatus.CharaStatus.die)
-        //{
-        //    SubUi.ChengeStatus(SubUi.Status.active);
-        //    OldPlayerStatus = CharacterStatus.CharaStatus.die;
-        //}
+        if (SceneGlobalVariables.Instance.characterStatus.GetStatus(0) == CharacterStatus.CharaStatus.die)
+        {
+            SubUi.ChengeStatus(SubUi.Status.active);
+            OldPlayerStatus = CharacterStatus.CharaStatus.die;
+        }
 
-        //if (OldPlayerStatus == CharacterStatus.CharaStatus.die && SceneGlobalVariables.Instance.characterStatus.GetStatus(0) == CharacterStatus.CharaStatus.Live)
-        //{
-        //    SubUi.ChengeStatus(SubUi.Status.notactive);
-        //    OldPlayerStatus = CharacterStatus.CharaStatus.Live;
-        //}
+        if (OldPlayerStatus == CharacterStatus.CharaStatus.die && SceneGlobalVariables.Instance.characterStatus.GetStatus(0) == CharacterStatus.CharaStatus.Live)
+        {
+            SubUi.ChengeStatus(SubUi.Status.notactive);
+            OldPlayerStatus = CharacterStatus.CharaStatus.Live;
+        }
     }
 }
