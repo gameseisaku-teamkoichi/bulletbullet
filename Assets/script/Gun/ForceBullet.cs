@@ -13,7 +13,7 @@ public class ForceBullet : MonoBehaviour
 
     public Transform muzzle;
 
-    private const int vale = 0;
+    private const int value = 0;
     private float Axis;
     private float OldAxis=0.0f;
     private bool FireFlag = false;
@@ -55,7 +55,7 @@ public class ForceBullet : MonoBehaviour
     {
         bool flag = false;
 
-        if (oldAxis == vale && axis < vale)
+        if (oldAxis == value && axis < value)
             flag = true;
 
         return flag;

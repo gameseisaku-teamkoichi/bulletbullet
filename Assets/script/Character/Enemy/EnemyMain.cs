@@ -49,7 +49,7 @@ public class EnemyMain : MonoBehaviour
     private void OnTriggerEnter()
     {
         transform.position = SceneGlobalVariables.Instance.charaNowStage.SetDedPosition();
-
+        SceneGlobalVariables.Instance.characterStatus.SetPosition(MyNumber, transform.position);
         SceneGlobalVariables.Instance.characterStatus.SetStatus(MyNumber, CharacterStatus.CharaStatus.die);
         SceneGlobalVariables.Instance.characterStatus.SetStageName(MyNumber, StageName.Disabled);
 

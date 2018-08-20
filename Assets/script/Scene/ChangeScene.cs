@@ -1,52 +1,50 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 using UnityEngine.SceneManagement;
 using System;
 
 public class ChangeScene : MonoBehaviour {
 
-    enum SceneState
+   public enum SceneState
     {
         title=0,
+        CharaSelect,
         Tutorial,
         NextTutorial,
         Main,
         Result,
         Invalid
     }
-    SceneState sceneState;
 
-    private int SceneIndex;
-    
-    public void GetNowScene()
-    {
-        SceneIndex= SceneManager.GetActiveScene().buildIndex;
-        sceneState = (SceneState)Enum.ToObject(typeof(SceneState), SceneIndex);
-    }
-
-    public void Change()
+    public void Change(SceneState sceneState)
     {
         switch (sceneState)
         {
-            case SceneState.title:
-                SceneManager.LoadScene("Tutorial");
 
+            case SceneState.title:
+                SceneManager.LoadScene("title");
                 break;
+
+            case SceneState.CharaSelect:
+                SceneManager.LoadScene("CharaSelect");
+                break;
+
             case SceneState.Tutorial:
-                SceneManager.LoadScene("NextTutorial");
+                SceneManager.LoadScene("Tutorial");
                 break;
 
             case SceneState.NextTutorial:
-                SceneManager.LoadScene("MainGame");
+                SceneManager.LoadScene("NextTutorial");
                 break;
 
             case SceneState.Main:
-                SceneManager.LoadScene("Result");
+                SceneManager.LoadScene("MainGame");
                 break;
 
             case SceneState.Result:
-                SceneManager.LoadScene("Title");
+                SceneManager.LoadScene("Result");
                 break;
         }
     }

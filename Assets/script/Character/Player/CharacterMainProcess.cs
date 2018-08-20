@@ -61,7 +61,7 @@ public class CharacterMainProcess : MonoBehaviour
     private void OnTriggerEnter()
     {
         transform.position=SceneGlobalVariables.Instance.charaNowStage.SetDedPosition();
-
+        SceneGlobalVariables.Instance.characterStatus.SetPosition(MyNumber, transform.position);
         SceneGlobalVariables.Instance.characterStatus.SetStatus(0, CharacterStatus.CharaStatus.die);
         SceneGlobalVariables.Instance.characterStatus.SetStageName(0, StageName.Disabled);
 
