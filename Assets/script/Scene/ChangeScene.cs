@@ -49,6 +49,5 @@ public class ChangeScene : MonoBehaviour {
                 SceneManager.LoadScene("Title");
                 break;
         }
-
     }
 }

@@ -59,7 +59,7 @@ public class CharacterSpawn : MonoBehaviour
         while (!SetStageFlag)
         {
             StageNum = UnityEngine.Random.Range(1, 9);
-            Debug.Log(StageNum);
+
             SetStageFlag = SceneGlobalVariables.Instance.charaNowStage.JudgeWarp((StageName)Enum.ToObject(typeof(StageName), StageNum));
         }
 

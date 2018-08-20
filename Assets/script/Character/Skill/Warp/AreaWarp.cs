@@ -7,8 +7,6 @@ using BulletBullet.SceneGlobalVariables.Stage;
 
 public class AreaWarp : MonoBehaviour
 {
-    //targetの方を向く
-    public GameObject Target;
     private GameObject TargetObje;//Rayが当たったオブジェクト
 
     RaycastHit hit;
@@ -50,11 +48,6 @@ public class AreaWarp : MonoBehaviour
             transform.position = SceneGlobalVariables.Instance.charaNowStage.SetPosition(stageName);
             SceneGlobalVariables.Instance.characterStatus.SetStageName(0, stageName);
 
-            //キャラを真ん中のオブジェクトに向ける
-            Vector3 direction = (Target.transform.position - this.transform.position).normalized;
-            Vector3 xAxis = Vector3.Cross(_RotAxis, direction).normalized;
-            Vector3 zAxis = Vector3.Cross(xAxis, _RotAxis).normalized;
-            this.transform.rotation = Quaternion.LookRotation(zAxis, _RotAxis);
         }
     }
 }
