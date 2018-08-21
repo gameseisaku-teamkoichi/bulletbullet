@@ -66,6 +66,5 @@ public class ForceBullet : MonoBehaviour
         //Rigitbodyを使って球を飛ばす
         var bulletInstance = GameObject.Instantiate(bulletPrefab, muzzle.position, muzzle.rotation) as GameObject;
         bulletInstance.GetComponent<Rigidbody>().AddForce(bulletInstance.transform.forward * bulletPower);
-        Destroy(bulletInstance, 5.0f);
     }
 }

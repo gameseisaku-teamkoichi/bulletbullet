@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class BulletProcess : MonoBehaviour {
 
-    void OnTriggerEnter()
+    private int count;
+    void OnCollisionEnter(Collision collision)
     {
+        count++;
+        if (count >= 5)
+            Destroy(gameObject);
     }
 
 }

@@ -9,7 +9,6 @@ public class Move : MonoBehaviour
 
     public Vector3 TraGetPosition;//この数値だけ変更して動いた先に地面があるか判定するのに使用
     private Quaternion TraGetRotation;
-    private Vector3 value = new Vector3(1.0f, 3.0f, 0.0f);//カメラの位置の微調整
 
     private const float MoveSpeed = 8.0f;//キャラの移動速度
     private const float RotationSpeed = 7.0f;//キャラの速度

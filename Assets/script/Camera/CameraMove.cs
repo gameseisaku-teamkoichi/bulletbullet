@@ -22,11 +22,9 @@ public class CameraMove : MonoBehaviour
     private Vector3 Position;//カメラの移動適用前のポジション
     private Quaternion Rotation;//カメラの移動適用前のローテーション
 
-    private Vector3 Position2;
     // Use this for initialization
     void Start()
     {
-        Position2 = transform.localPosition;
     }
 
     // Update is called once per frame

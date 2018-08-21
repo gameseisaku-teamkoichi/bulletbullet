@@ -5,19 +5,19 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(ChangeScene))]
 
-public class Title : MonoBehaviour {
+public class Result : MonoBehaviour {
 
     public ChangeScene SeceChenge { get { return this.chengeSece ?? (this.chengeSece = GetComponent<ChangeScene>()); } }
     ChangeScene chengeSece;
 
-    public Text start;
-    public Text Tutorial;
+    public Text Retry;
+    public Text CharaSelect;
     public Text Exit;
 
     private enum SelectMenu
-    {
-        start,
-        Tutorial,
+    { 
+        Retry,
+        CharaSelect,
         Exit
     }
 
@@ -27,48 +27,48 @@ public class Title : MonoBehaviour {
     private float input;
     private float value = 0.00f;
 
-	// Update is called once per frame
-	void Update () {
+    void Update()
+    {
 
         input = Input.GetAxis("Horizontal");
 
         if (input < -value && OldInput == value)
         {
-            if (SelectMenu.start != Menu)
+            if (SelectMenu.Retry != Menu)
                 Menu--;
         }
         else if (input > value && OldInput == value)
         {
-            if (SelectMenu.Exit  != Menu)
+            if (SelectMenu.Exit != Menu)
                 Menu++;
         }
 
         switch (Menu)
         {
-            case SelectMenu.start:
-                start.color = new Color(255f / 255f, 0f / 255f, 0f / 255f);
-                Tutorial.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
+            case SelectMenu.Retry:
+                Retry.color = new Color(255f / 255f, 0f / 255f, 0f / 255f);
+                CharaSelect.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
                 break;
-            case SelectMenu.Tutorial:
-                Tutorial.color = new Color(255f / 255f, 0f / 255f, 0f / 255f);
-                start.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
+            case SelectMenu.CharaSelect:
+                CharaSelect.color = new Color(255f / 255f, 0f / 255f, 0f / 255f);
+                Retry.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
                 Exit.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
                 break;
             case SelectMenu.Exit:
                 Exit.color = new Color(255f / 255f, 0f / 255f, 0f / 255f);
-                Tutorial.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
+                CharaSelect.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
                 break;
         }
 
         if (Input.GetButtonDown("SkillB"))
         {
-            switch(Menu)
+            switch (Menu)
             {
-                case SelectMenu.start:
-                    SeceChenge.Change(ChangeScene.SceneState.CharaSelect);
+                case SelectMenu.Retry:
+                    SeceChenge.Change(ChangeScene.SceneState.Main);
                     break;
-                case SelectMenu.Tutorial:
-                    //SeceChenge.Change(ChangeScene.SceneState.Tutorial);
+                case SelectMenu.CharaSelect:
+                    SeceChenge.Change(ChangeScene.SceneState.CharaSelect);
                     break;
                 case SelectMenu.Exit:
                     break;

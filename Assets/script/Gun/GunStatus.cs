@@ -9,6 +9,7 @@ public class GunStatus : MonoBehaviour {
     private int BulletPower;//弾の速さ
     private int BulletCount;//跳弾回数
 
+    private int GunNum;
     enum GanName
     {
         Fast,
@@ -17,28 +18,9 @@ public class GunStatus : MonoBehaviour {
     }
     private GanName Name;
 
-    public void SetEquip(GameObject weapon)
+    public void SetEquip()
     {
-        Gun = weapon;
-
-        Name = (GanName)Enum.Parse(typeof(GanName), Gun.name, true);
-
-        switch (Name)
-        {
-            case GanName.Fast:
-                BulletPower = 1;
-                BulletCount = 1;
-                break;
-
-            case GanName.Second:
-                BulletPower = 1;
-                BulletCount = 1;
-                break;
-
-            case GanName.Third:
-                BulletPower = 1;
-                BulletCount = 1;
-                break;
-        }
+        GunNum = Select.GetNum();
+        Name = (GanName)Enum.ToObject(typeof(GanName), GunNum);
     }
 }

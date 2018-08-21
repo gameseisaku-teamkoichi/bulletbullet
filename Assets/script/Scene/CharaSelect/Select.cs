@@ -28,6 +28,8 @@ public class Select : MonoBehaviour
 
     private Character character;
 
+    public static int num;
+
     private float OldInput;
     private float input;
     private float value = 0.00f;
@@ -80,8 +82,14 @@ public class Select : MonoBehaviour
         {
             ChangeScene changeSece = gameObject.GetComponent<ChangeScene>();
             changeSece.Change(ChangeScene.SceneState.Main);
+            num = (int)character;
         }
 
         OldInput = input;
+    }
+
+    public static int GetNum()
+    {
+        return num;
     }
 }

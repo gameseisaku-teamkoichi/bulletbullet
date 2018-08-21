@@ -14,11 +14,7 @@ public class AreaWarp : MonoBehaviour
     StageName stageName;
     StageName OldStageName;
 
-    private Vector3 position;
-
     private bool WarpFlag;
-
-    Vector3 _RotAxis = Vector3.up;
     void Start()
     {
 
@@ -26,7 +22,6 @@ public class AreaWarp : MonoBehaviour
 
     public void Warp(Ray ray)
     {
-        position = transform.position;
 
         //rayが当たっていたらそのobjを保持しする
         if (Physics.Raycast(ray, out hit, 1000))

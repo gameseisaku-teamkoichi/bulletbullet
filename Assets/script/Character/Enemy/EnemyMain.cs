@@ -14,7 +14,6 @@ public class EnemyMain : MonoBehaviour
     private int CharaCount;
     private int MyNumber;
 
-    private bool GetNumFlag = false;
     StageName stageName;
     CharacterStatus.CharaStatus charaStatus;
 
