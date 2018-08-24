@@ -41,8 +41,25 @@ public class EnemyMain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        enemyMove.enemyMove();
 
+    }
 
+    private void OnCollisionEnter()
+    {
+        transform.position = SceneGlobalVariables.Instance.charaNowStage.SetDedPosition();
+        SceneGlobalVariables.Instance.characterStatus.SetPosition(MyNumber, transform.position);
+        SceneGlobalVariables.Instance.characterStatus.SetStatus(MyNumber, CharacterStatus.CharaStatus.die);
+        SceneGlobalVariables.Instance.characterStatus.SetStageName(MyNumber, StageName.Disabled);
+
+        StartCoroutine(SceneGlobalVariables.Instance.characterSpawn.Spawn(MyNumber, () =>
+        {
+            stageName = SceneGlobalVariables.Instance.characterStatus.GetStageName(MyNumber);
+            transform.position = SceneGlobalVariables.Instance.charaNowStage.SetPosition(stageName);
+            SceneGlobalVariables.Instance.characterStatus.SetStatus(MyNumber, CharacterStatus.CharaStatus.Live);
+            SceneGlobalVariables.Instance.characterStatus.SetPosition(MyNumber, transform.position);
+
+        }));
     }
 
     private void OnTriggerEnter()
