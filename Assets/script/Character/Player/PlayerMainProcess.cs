@@ -9,7 +9,7 @@ using BulletBullet.SceneGlobalVariables.Stage;
 [RequireComponent(typeof(AreaWarp))]
 [RequireComponent(typeof(LaserPoint))]
 
-public class CharacterMainProcess : MonoBehaviour
+public class PlayerMainProcess : MonoBehaviour
 {
     #region
     public Move CharacterMove { get { return this.move ?? (this.move = GetComponent<Move>()); } }

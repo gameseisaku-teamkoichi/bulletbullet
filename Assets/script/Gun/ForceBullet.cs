@@ -18,7 +18,7 @@ public class ForceBullet : MonoBehaviour
     private float OldAxis=0.0f;
     private bool FireFlag = false;
 
-    private float bulletPower = 3000f;
+    private float bulletPower = 3000f;//弾の速さ
 
     void Start()
     {
@@ -42,7 +42,7 @@ public class ForceBullet : MonoBehaviour
         Axis = Input.GetAxis("Fire");
         FireFlag = FireJudge(OldAxis, Axis);
 
-        if (Input.GetButtonDown("Fire") || FireFlag)
+        if (FireFlag)
         {
             Fire();
         }
