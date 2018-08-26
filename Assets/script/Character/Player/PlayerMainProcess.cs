@@ -71,6 +71,7 @@ public class PlayerMainProcess : MonoBehaviour
           transform.position = SceneGlobalVariables.Instance.charaNowStage.SetPosition(stageName);
           SceneGlobalVariables.Instance.characterStatus.SetStatus(MyNumber, CharacterStatus.CharaStatus.Live);
           SceneGlobalVariables.Instance.characterStatus.SetPosition(MyNumber, transform.position);
+          SceneGlobalVariables.Instance.gunStatus.ResetBulletsNum();
       }));
     }
 }

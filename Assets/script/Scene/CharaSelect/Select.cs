@@ -36,7 +36,7 @@ public class Select : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-           pos = FastChara.transform.position;
+        pos = FastChara.transform.position;
         Waitpos = SecondChara.transform.position;
         character = Character.Fast;
     }
@@ -48,10 +48,10 @@ public class Select : MonoBehaviour
 
         if (input < -value && OldInput == value)
         {
-            if(Character.Fast!=character)
-            character--;
+            if (Character.Fast != character)
+                character--;
         }
-        else if (input > value && OldInput==value)
+        else if (input > value && OldInput == value)
         {
             if (Character.Third != character)
                 character++;

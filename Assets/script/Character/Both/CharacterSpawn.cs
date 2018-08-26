@@ -20,7 +20,16 @@ public class CharacterSpawn : MonoBehaviour
 
     private bool SetStageFlag;
     private Vector3 Position;
-    // Use this for initialization
+
+    enum GanName
+    {
+        Fast,
+        Second,
+        Third
+    }
+    private GanName Name;
+    private int num;
+
     public void Initialize()
     {
         CharaCount = SceneGlobalVariables.Instance.characterStatus.GetCharaCount();
@@ -30,6 +39,20 @@ public class CharacterSpawn : MonoBehaviour
         SceneGlobalVariables.Instance.characterStatus.SetStageName(0, (StageName)Enum.ToObject(typeof(StageName), Stage[0]));
         SceneGlobalVariables.Instance.characterStatus.SetStatus(0, CharacterStatus.CharaStatus.Live);
         Instantiate(Player);
+
+        //num=Select.GetNum();
+        //Name = (GanName)Enum.ToObject(typeof(GanName), name);
+        //switch (Name)
+        //{
+        //    case GanName.Fast:
+        //        break;
+        //    case GanName.Second:
+        //        break;
+        //    case GanName.Third:
+        //        break;
+        //    default:
+        //        break;
+        //}
 
         //enemyすてーたす初期化
         for (int i = 1; i < CharaCount; i++)

@@ -10,9 +10,9 @@ namespace BulletBullet.SceneGlobalVariables.Stage
         public StopGameTime stopGameTime;
         public CharacterStatus characterStatus;
         public CharacterSpawn characterSpawn;
-        public BulletStatus bulletStatus;
-        private static SceneGlobalVariables instance;
+        public GunStatus gunStatus;
 
+        private static SceneGlobalVariables instance;
         public static SceneGlobalVariables Instance
         {
             get { return instance; }

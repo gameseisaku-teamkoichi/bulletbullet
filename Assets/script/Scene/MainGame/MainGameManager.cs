@@ -5,6 +5,7 @@ using BulletBullet.SceneGlobalVariables.Stage;
 
 [RequireComponent(typeof(GameOver))]
 [RequireComponent(typeof(PauseScript))]
+[RequireComponent(typeof(SubUi))]
 
 public class MainGameManager : MonoBehaviour
 {

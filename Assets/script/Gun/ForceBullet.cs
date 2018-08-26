@@ -15,15 +15,17 @@ public class ForceBullet : MonoBehaviour
 
     private const int value = 0;
     private float Axis;
-    private float OldAxis=0.0f;
+    private float OldAxis = 0.0f;
     private bool FireFlag = false;
 
-    private float bulletPower = 3000f;//弾の速さ
+    private float bulletPower;//弾の速さ
+    private int ActiveBullet;
 
     void Start()
     {
         //カーソル画像の大きさ
         Cursor.SetCursor(cursor, new Vector2(cursor.width / 2, cursor.height / 2), CursorMode.ForceSoftware);
+        bulletPower = SceneGlobalVariables.Instance.gunStatus.GetBulletPower();
     }
 
     void Update()
@@ -45,6 +47,7 @@ public class ForceBullet : MonoBehaviour
         if (FireFlag)
         {
             Fire();
+            SceneGlobalVariables.Instance.gunStatus.SetBulletsNum(1);
         }
 
         OldAxis = Axis;
@@ -54,8 +57,8 @@ public class ForceBullet : MonoBehaviour
     private bool FireJudge(float oldAxis, float axis)
     {
         bool flag = false;
-
-        if (oldAxis == value && axis < value)
+        ActiveBullet = SceneGlobalVariables.Instance.gunStatus.GetActiveBullet();
+        if (oldAxis == value && axis < value && ActiveBullet > 0)
             flag = true;
 
         return flag;
