@@ -43,6 +43,8 @@ public class EnemyMain : MonoBehaviour
     {
         enemyMove.enemyMove();
 
+        SceneGlobalVariables.Instance.characterStatus.SetPosition(MyNumber, transform.position);
+
     }
 
     private void OnCollisionEnter()
