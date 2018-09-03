@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class StopGameTime : MonoBehaviour {
 
-	public void StopGame()
+    [SerializeField]
+    private GameObject pauseUIPrefab;
+
+    private GameObject pauseUIInstance;
+
+    public void StopGame()
     {
         if (Time.timeScale == 0)
         {
             return;
         }
+
     }
 }

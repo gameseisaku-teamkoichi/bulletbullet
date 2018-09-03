@@ -9,7 +9,6 @@ public class GunStatus : MonoBehaviour {
     private int BulletCount;//跳弾できる回数
     private int MaxBullet;//マックスの球数
     private int BulletsNum;//打った球数
-
     private int num;
     enum GanName
     {
@@ -77,6 +76,11 @@ public class GunStatus : MonoBehaviour {
     {
         BulletsNum += num;
     }
+    public void Reloading()
+    {
+        BulletsNum = 0;
+    }
+
     public void ResetBulletsNum()
     {
         BulletsNum = 0;

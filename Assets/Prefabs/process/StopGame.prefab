@@ -51,3 +51,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ba9bda647fc1614b9f3218f8cb2755f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseUIPrefab: {fileID: 1402299178457830, guid: 5995963bfc73bfc499dcec8b28593057,
+    type: 2}

@@ -17,8 +17,6 @@ public class BulletProcess : MonoBehaviour {
         count++;
         if (count > MaxCount)
         {   
-            //打った球を-1して打ってないことにする
-            SceneGlobalVariables.Instance.gunStatus.SetBulletsNum(-1);
             Destroy(gameObject);
         }
     }
