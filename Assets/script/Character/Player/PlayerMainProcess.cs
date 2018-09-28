@@ -28,9 +28,10 @@ public class PlayerMainProcess : MonoBehaviour
     CharaNum charaNum;
     StageName stageName;
     Ray ray;
-    private int MyNumber;
+    public int MyNumber;
+
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         MyNumber = 0;
         SceneGlobalVariables.Instance.characterStatus.SetStatus(MyNumber, CharacterStatus.CharaStatus.Live);

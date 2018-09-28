@@ -12,7 +12,7 @@ public class EnemyMainProcess : MonoBehaviour
     EnemyMove move;
 
     private int CharaCount;
-    private int MyNumber;
+    public int MyNumber;
 
     StageName stageName;
     CharacterStatus.CharaStatus charaStatus;

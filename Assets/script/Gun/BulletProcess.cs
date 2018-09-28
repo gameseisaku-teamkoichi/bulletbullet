@@ -7,6 +7,13 @@ public class BulletProcess : MonoBehaviour {
 
     private int count;
     private int MaxCount;
+    private int myNumber;
+
+    public int MyNumber
+    {
+        set { myNumber = value; }
+    }
+
     void Start()
     {
         MaxCount = SceneGlobalVariables.Instance.gunStatus.GetBulletCount();

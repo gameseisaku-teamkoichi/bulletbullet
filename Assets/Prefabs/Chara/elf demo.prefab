@@ -3208,6 +3208,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 0}
   m_StaticBatchInfo:
@@ -3242,6 +3243,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 0}
   m_StaticBatchInfo:
@@ -3317,6 +3319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 772ec4e77aae01e4ebcfede3b5c89fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MyNumber: 0
 --- !u!114 &114931394773047052
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3341,6 +3344,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 7009fb944aeec7341bf8f30acf32d486, type: 2}
   m_StaticBatchInfo:
@@ -3388,6 +3392,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 8d426517a790d9844a891e3631e90a4a, type: 2}
   m_StaticBatchInfo:
@@ -3435,6 +3440,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 82bfd846cc72e2c4ea47c8a9467d174e, type: 2}
   m_StaticBatchInfo:
@@ -3526,6 +3532,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 5a150d818d9f99c4fbcdc31b90fd40f0, type: 2}
   m_StaticBatchInfo:
@@ -3573,6 +3580,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 4ef873592ec0e7442b15726c65a3e260, type: 2}
   m_StaticBatchInfo:
@@ -3670,6 +3678,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 34ee6dbd964bd4c44b9737522d71d2ae, type: 2}
   m_StaticBatchInfo:

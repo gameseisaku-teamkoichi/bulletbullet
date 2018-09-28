@@ -5,11 +5,12 @@ using BulletBullet.SceneGlobalVariables.Stage;
 
 public class ForceBullet : MonoBehaviour
 {
-
     [SerializeField]
     private Texture2D cursor;
-    public GameObject bulletPrefab;
-    public Transform muzzle;
+    [SerializeField]
+    private GameObject bulletPrefab;
+    [SerializeField]
+    private Transform muzzle;
 
     private const int value = 0;
     private float Axis;
@@ -19,14 +20,32 @@ public class ForceBullet : MonoBehaviour
     private bool Reloadflag = false;
 
     private float bulletPower;//弾の速さ
-    private int ActiveBullet;
+    private int ActiveBullet;//弾の段数
 
     private float ReloadTime = 1.0f;
+
+    private GameObject root;
+    private int MyNumber=1;
+ 
     void Start()
     {
         //カーソル画像の大きさ
         Cursor.SetCursor(cursor, new Vector2(cursor.width / 2, cursor.height / 2), CursorMode.ForceSoftware);
         bulletPower = SceneGlobalVariables.Instance.gunStatus.GetBulletPower();
+
+        GameObject parentObject = transform.root.gameObject;
+
+        
+        if(parentObject.name== "Player(Clone)")
+        {
+            PlayerMainProcess playerMainProcess = parentObject.GetComponent<PlayerMainProcess>();
+            MyNumber = playerMainProcess.MyNumber;
+        }
+        else
+        {
+            EnemyMainProcess enemyMainProcess = parentObject.GetComponent<EnemyMainProcess>();
+            MyNumber = enemyMainProcess.MyNumber;
+        }
     }
 
     void Update()
@@ -78,6 +97,8 @@ public class ForceBullet : MonoBehaviour
     {
         //Rigitbodyを使って球を飛ばす
         var bulletInstance = GameObject.Instantiate(bulletPrefab, muzzle.position, muzzle.rotation) as GameObject;
+        BulletProcess bulletProcess = bulletInstance.GetComponent<BulletProcess>();
+        bulletProcess.MyNumber = MyNumber;
         bulletInstance.GetComponent<Rigidbody>().AddForce(bulletInstance.transform.forward * bulletPower);
     }
 
