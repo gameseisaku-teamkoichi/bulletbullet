@@ -32,7 +32,8 @@ public class MainGameManager : MonoBehaviour
 
     // Use this for initialization
     void Start()
-    {        //カーソル画像の大きさ
+    {  
+        //カーソル画像の大きさ
         Cursor.SetCursor(cursor, new Vector2(cursor.width / 2, cursor.height / 2), CursorMode.ForceSoftware);
 
         NowTime = 0;
@@ -58,6 +59,7 @@ public class MainGameManager : MonoBehaviour
 
         if (NowTime >= TimeLimit)
         {
+
             End.IsGameOver();
         }
 

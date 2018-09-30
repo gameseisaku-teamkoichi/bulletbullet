@@ -1216,6 +1216,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d62beefddeb1a04284f6199fd93b119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  subCamera: {fileID: 1275323730}
+  cursor: {fileID: 2800000, guid: 7a589934f22b98848b2140d33334bb8a, type: 3}
 --- !u!114 &524038090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2997,6 +2999,7 @@ GameObject:
   - component: {fileID: 1275323729}
   - component: {fileID: 1275323732}
   - component: {fileID: 1275323731}
+  - component: {fileID: 1275323730}
   m_Layer: 2
   m_Name: SubCamera
   m_TagString: Untagged
@@ -3018,6 +3021,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 25, y: 0, z: 0}
+--- !u!114 &1275323730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1275323728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f6bd9a3865d1384fa160ada210b91af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!124 &1275323731
 Behaviour:
   m_ObjectHideFlags: 0
