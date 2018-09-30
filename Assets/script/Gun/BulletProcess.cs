@@ -11,6 +11,7 @@ public class BulletProcess : MonoBehaviour {
 
     public int MyNumber
     {
+        get { return myNumber;}
         set { myNumber = value; }
     }
 

@@ -29,7 +29,7 @@ public class PlayerMainProcess : MonoBehaviour
     StageName stageName;
     Ray ray;
     public int MyNumber;
-
+    private int Hit;
     // Use this for initialization
     void Awake()
     {
@@ -59,14 +59,18 @@ public class PlayerMainProcess : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter()
+    private void OnTriggerEnter(Collider collider)
     {
+       Hit=collider.gameObject.GetComponent<BulletProcess>().MyNumber;
+       SceneGlobalVariables.Instance.characterStatus.AttackChara = Hit;
+
         transform.position=SceneGlobalVariables.Instance.charaNowStage.SetDedPosition();
         SceneGlobalVariables.Instance.characterStatus.SetPosition(MyNumber, transform.position);
         SceneGlobalVariables.Instance.characterStatus.SetStatus(0, CharacterStatus.CharaStatus.die);
         SceneGlobalVariables.Instance.characterStatus.SetStageName(0, StageName.Disabled);
 
-      StartCoroutine(SceneGlobalVariables.Instance.characterSpawn.Spawn(MyNumber,()=>
+
+        StartCoroutine(SceneGlobalVariables.Instance.characterSpawn.Spawn(MyNumber,()=>
       {
           stageName = SceneGlobalVariables.Instance.characterStatus.GetStageName(MyNumber);
           transform.position = SceneGlobalVariables.Instance.charaNowStage.SetPosition(stageName);

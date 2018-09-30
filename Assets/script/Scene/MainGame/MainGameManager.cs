@@ -20,6 +20,11 @@ public class MainGameManager : MonoBehaviour
     SubUi subUi;
     #endregion
 
+    public SubCamera subCamera;
+
+    [SerializeField]
+    private Texture2D cursor;
+
     CharacterStatus.CharaStatus OldPlayerStatus;
 
     private const float TimeLimit = 10.0f;//制限時間
@@ -27,7 +32,9 @@ public class MainGameManager : MonoBehaviour
 
     // Use this for initialization
     void Start()
-    {
+    {        //カーソル画像の大きさ
+        Cursor.SetCursor(cursor, new Vector2(cursor.width / 2, cursor.height / 2), CursorMode.ForceSoftware);
+
         NowTime = 0;
         SceneGlobalVariables.Instance.characterSpawn.Initialize();
         OldPlayerStatus = CharacterStatus.CharaStatus.die;
@@ -41,14 +48,13 @@ public class MainGameManager : MonoBehaviour
         if (Input.GetButtonDown("Pause"))
         {
             Pause.DrowPause();
+            Cursor.SetCursor(cursor, new Vector2(cursor.width / 2, cursor.height / 2), CursorMode.Auto);
         }
 
         if (Time.timeScale == 0)
         {
             return;
         }
-
-
 
         if (NowTime >= TimeLimit)
         {
@@ -57,14 +63,23 @@ public class MainGameManager : MonoBehaviour
 
         if (SceneGlobalVariables.Instance.characterStatus.GetStatus(0) == CharacterStatus.CharaStatus.die)
         {
+            subCamera.Initialize();
             SubUi.ChengeStatus(SubUi.Status.active);
             OldPlayerStatus = CharacterStatus.CharaStatus.die;
-        }
 
-        if (OldPlayerStatus == CharacterStatus.CharaStatus.die && SceneGlobalVariables.Instance.characterStatus.GetStatus(0) == CharacterStatus.CharaStatus.Live)
+            Cursor.SetCursor(cursor, new Vector2(cursor.width / 2, cursor.height / 2), CursorMode.Auto);
+        }
+        else if (OldPlayerStatus == CharacterStatus.CharaStatus.die && SceneGlobalVariables.Instance.characterStatus.GetStatus(0) == CharacterStatus.CharaStatus.Live)
         {
             SubUi.ChengeStatus(SubUi.Status.notactive);
             OldPlayerStatus = CharacterStatus.CharaStatus.Live;
+
+            Cursor.SetCursor(cursor, new Vector2(cursor.width / 2, cursor.height / 2), CursorMode.ForceSoftware);
+        }
+
+        if (SceneGlobalVariables.Instance.characterStatus.GetStatus(0) == CharacterStatus.CharaStatus.die)
+        {
+            Cursor.SetCursor(cursor, new Vector2(cursor.width / 2, cursor.height / 2), CursorMode.Auto);
         }
     }
 }

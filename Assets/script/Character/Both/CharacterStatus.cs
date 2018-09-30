@@ -69,4 +69,12 @@ public class CharacterStatus : MonoBehaviour
     {
         charaNum[num] = Charanum;
     }
+
+    //playerが誰の攻撃で死んだか
+    private int attackChara;
+    public int AttackChara
+    {
+        get { return attackChara; }
+        set { attackChara = value; }
+    }
 }

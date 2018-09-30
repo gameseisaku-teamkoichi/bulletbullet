@@ -6,8 +6,6 @@ using BulletBullet.SceneGlobalVariables.Stage;
 public class ForceBullet : MonoBehaviour
 {
     [SerializeField]
-    private Texture2D cursor;
-    [SerializeField]
     private GameObject bulletPrefab;
     [SerializeField]
     private Transform muzzle;
@@ -29,8 +27,6 @@ public class ForceBullet : MonoBehaviour
  
     void Start()
     {
-        //カーソル画像の大きさ
-        Cursor.SetCursor(cursor, new Vector2(cursor.width / 2, cursor.height / 2), CursorMode.ForceSoftware);
         bulletPower = SceneGlobalVariables.Instance.gunStatus.GetBulletPower();
 
         GameObject parentObject = transform.root.gameObject;
