@@ -10,6 +10,8 @@ public class Result : MonoBehaviour {
     public ChangeScene SeceChenge { get { return this.chengeSece ?? (this.chengeSece = GetComponent<ChangeScene>()); } }
     ChangeScene chengeSece;
 
+    public GameObject Select;
+
     public Text Retry;
     public Text CharaSelect;
     public Text Exit;
@@ -27,54 +29,61 @@ public class Result : MonoBehaviour {
     private float input;
     private float value = 0.00f;
 
+    void Start()
+    {
+        //Select.SetActive(false);
+    }
+
     void Update()
     {
-
-        input = Input.GetAxis("Horizontal");
-
-        if (input < -value && OldInput == value)
+        if (Select.activeSelf)
         {
-            if (SelectMenu.Retry != Menu)
-                Menu--;
-        }
-        else if (input > value && OldInput == value)
-        {
-            if (SelectMenu.Exit != Menu)
-                Menu++;
-        }
+            input = Input.GetAxis("Horizontal");
 
-        switch (Menu)
-        {
-            case SelectMenu.Retry:
-                Retry.color = new Color(255f / 255f, 0f / 255f, 0f / 255f);
-                CharaSelect.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
-                break;
-            case SelectMenu.CharaSelect:
-                CharaSelect.color = new Color(255f / 255f, 0f / 255f, 0f / 255f);
-                Retry.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
-                Exit.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
-                break;
-            case SelectMenu.Exit:
-                Exit.color = new Color(255f / 255f, 0f / 255f, 0f / 255f);
-                CharaSelect.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
-                break;
-        }
+            if (input < -value && OldInput == value)
+            {
+                if (SelectMenu.Retry != Menu)
+                    Menu--;
+            }
+            else if (input > value && OldInput == value)
+            {
+                if (SelectMenu.Exit != Menu)
+                    Menu++;
+            }
 
-        if (Input.GetButtonDown("SkillB"))
-        {
             switch (Menu)
             {
                 case SelectMenu.Retry:
-                    SeceChenge.Change(ChangeScene.SceneState.Main);
+                    Retry.color = new Color(255f / 255f, 0f / 255f, 0f / 255f);
+                    CharaSelect.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
                     break;
                 case SelectMenu.CharaSelect:
-                    SeceChenge.Change(ChangeScene.SceneState.CharaSelect);
+                    CharaSelect.color = new Color(255f / 255f, 0f / 255f, 0f / 255f);
+                    Retry.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
+                    Exit.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
                     break;
                 case SelectMenu.Exit:
+                    Exit.color = new Color(255f / 255f, 0f / 255f, 0f / 255f);
+                    CharaSelect.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
                     break;
             }
-        }
 
-        OldInput = input;
+            if (Input.GetButtonDown("SkillB"))
+            {
+                switch (Menu)
+                {
+                    case SelectMenu.Retry:
+                        SeceChenge.Change(ChangeScene.SceneState.Main);
+                        break;
+                    case SelectMenu.CharaSelect:
+                        SeceChenge.Change(ChangeScene.SceneState.CharaSelect);
+                        break;
+                    case SelectMenu.Exit:
+                        break;
+                }
+            }
+
+            OldInput = input;
+        }
     }
 }

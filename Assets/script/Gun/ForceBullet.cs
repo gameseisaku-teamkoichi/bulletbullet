@@ -14,7 +14,7 @@ public class ForceBullet : MonoBehaviour
     private float Axis;
     private float OldAxis = 0.0f;
 
-    private bool FireFlag = false;
+    public bool FireFlag = false;
     private bool Reloadflag = false;
 
     private float bulletPower;//弾の速さ
@@ -23,16 +23,17 @@ public class ForceBullet : MonoBehaviour
     private float ReloadTime = 1.0f;
 
     private GameObject root;
-    private int MyNumber=1;
- 
+    private int MyNumber = 1;
+
+    public Quaternion quaternion;
     void Start()
     {
         bulletPower = SceneGlobalVariables.Instance.gunStatus.GetBulletPower();
 
         GameObject parentObject = transform.root.gameObject;
 
-        
-        if(parentObject.name== "Player(Clone)")
+
+        if (parentObject.name == "Player(Clone)")
         {
             PlayerMainProcess playerMainProcess = parentObject.GetComponent<PlayerMainProcess>();
             MyNumber = playerMainProcess.MyNumber;
@@ -51,27 +52,38 @@ public class ForceBullet : MonoBehaviour
             return;
         }
 
-        Cursor.lockState = CursorLockMode.Locked;
+        if (MyNumber == 0)
+        {
+            //rayをカメラの中心からマウスの場所に飛ばす
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            quaternion = Quaternion.LookRotation(ray.direction);
+        }
 
-        //rayをカメラの中心からマウスの場所に飛ばす
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        transform.rotation = Quaternion.LookRotation(ray.direction);
+        transform.rotation = quaternion;
 
         Axis = Input.GetAxis("Fire");
+    
         FireFlag = FireJudge(OldAxis, Axis);
 
         if (FireFlag)
         {
-            if (ActiveBullet == 0 && !Reloadflag)
+            if (MyNumber == 0)
             {
-                Reloadflag = true;
-                StartCoroutine("Reload");
+                if (ActiveBullet == 0 && !Reloadflag)
+                {
+                    Reloadflag = true;
+                    StartCoroutine("Reload");
+                }
+                else if (ActiveBullet > 0)
+                {
+                    Reloadflag = false;
+                    Fire();
+                    SceneGlobalVariables.Instance.gunStatus.SetBulletsNum(1);
+                }
             }
-            else if(ActiveBullet>0)
+            else
             {
-                Reloadflag = false;
                 Fire();
-                SceneGlobalVariables.Instance.gunStatus.SetBulletsNum(1);
             }
         }
         OldAxis = Axis;

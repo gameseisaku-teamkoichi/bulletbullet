@@ -48,6 +48,6 @@ public class FadeOut : MonoBehaviour {
 
     void Update()
     {
-       
+        
     }
 }

@@ -30,6 +30,7 @@ public class MainGameManager : MonoBehaviour
     private const float TimeLimit = 10.0f;//制限時間
     private float NowTime;
 
+    public static int Score;
     // Use this for initialization
     void Start()
     {  
@@ -39,6 +40,8 @@ public class MainGameManager : MonoBehaviour
         NowTime = 0;
         SceneGlobalVariables.Instance.characterSpawn.Initialize();
         OldPlayerStatus = CharacterStatus.CharaStatus.die;
+
+        Score = 0;
     }
 
     // Update is called once per frame
@@ -56,6 +59,8 @@ public class MainGameManager : MonoBehaviour
         {
             return;
         }
+
+        Cursor.lockState = CursorLockMode.Locked;
 
         if (NowTime >= TimeLimit)
         {
@@ -79,9 +84,5 @@ public class MainGameManager : MonoBehaviour
             Cursor.SetCursor(cursor, new Vector2(cursor.width / 2, cursor.height / 2), CursorMode.ForceSoftware);
         }
 
-        if (SceneGlobalVariables.Instance.characterStatus.GetStatus(0) == CharacterStatus.CharaStatus.die)
-        {
-            Cursor.SetCursor(cursor, new Vector2(cursor.width / 2, cursor.height / 2), CursorMode.Auto);
-        }
     }
 }

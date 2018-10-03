@@ -23,6 +23,12 @@ public class BulletProcess : MonoBehaviour {
     void OnCollisionEnter(Collision collision)
     {
         count++;
+
+        if(MyNumber==0)
+        {
+
+        }
+
         if (count > MaxCount)
         {   
             Destroy(gameObject);
