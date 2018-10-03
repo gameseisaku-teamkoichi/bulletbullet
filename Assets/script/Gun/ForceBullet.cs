@@ -11,7 +11,7 @@ public class ForceBullet : MonoBehaviour
     private Transform muzzle;
 
     private const int value = 0;
-    private float Axis;
+    public float Axis;
     private float OldAxis = 0.0f;
 
     public bool FireFlag = false;
@@ -45,41 +45,15 @@ public class ForceBullet : MonoBehaviour
         }
     }
 
-    void Update()
+    public void StartFire()
     {
-        if (Time.timeScale == 0)
-        {
-            return;
-        }
-
-        if (MyNumber == 0)
-        {
-            //rayをカメラの中心からマウスの場所に飛ばす
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            quaternion = Quaternion.LookRotation(ray.direction);
-        }
-
-        transform.rotation = quaternion;
-
-        Axis = Input.GetAxis("Fire");
-    
         FireFlag = FireJudge(OldAxis, Axis);
 
         if (FireFlag)
         {
             if (MyNumber == 0)
             {
-                if (ActiveBullet == 0 && !Reloadflag)
-                {
-                    Reloadflag = true;
-                    StartCoroutine("Reload");
-                }
-                else if (ActiveBullet > 0)
-                {
-                    Reloadflag = false;
-                    Fire();
-                    SceneGlobalVariables.Instance.gunStatus.SetBulletsNum(1);
-                }
+                PlyerShoot();
             }
             else
             {
@@ -108,6 +82,22 @@ public class ForceBullet : MonoBehaviour
         BulletProcess bulletProcess = bulletInstance.GetComponent<BulletProcess>();
         bulletProcess.MyNumber = MyNumber;
         bulletInstance.GetComponent<Rigidbody>().AddForce(bulletInstance.transform.forward * bulletPower);
+    }
+
+    //プレイヤーが球を撃つ処理
+    private void PlyerShoot()
+    {
+        if (ActiveBullet == 0 && !Reloadflag)
+        {
+            Reloadflag = true;
+            StartCoroutine("Reload");
+        }
+        else if (ActiveBullet > 0)
+        {
+            Reloadflag = false;
+            Fire();
+            SceneGlobalVariables.Instance.gunStatus.SetBulletsNum(1);
+        }
     }
 
     private IEnumerator Reload()

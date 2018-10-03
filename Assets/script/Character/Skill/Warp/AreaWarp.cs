@@ -29,20 +29,16 @@ public class AreaWarp : MonoBehaviour
             TargetObje = hit.collider.gameObject;
 
             stageName = (StageName)Enum.Parse(typeof(StageName), TargetObje.name, true);
-        }
-        else
-        {
-            TargetObje = null;
-        }
 
-        //移動先にenemyがいるかどうか
-        WarpFlag = SceneGlobalVariables.Instance.charaNowStage.JudgeWarp(stageName);
+            //移動先にenemyがいるかどうか
+            WarpFlag = SceneGlobalVariables.Instance.charaNowStage.JudgeWarp(stageName);
 
-        if (WarpFlag)
-        {
-            transform.position = SceneGlobalVariables.Instance.charaNowStage.SetPosition(stageName);
-            SceneGlobalVariables.Instance.characterStatus.SetStageName(0, stageName);
+            if (WarpFlag)
+            {
+                transform.position = SceneGlobalVariables.Instance.charaNowStage.SetPosition(stageName);
+                SceneGlobalVariables.Instance.characterStatus.SetStageName(0, stageName);
 
+            }
         }
     }
 }

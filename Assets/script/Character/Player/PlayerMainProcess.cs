@@ -24,12 +24,13 @@ public class PlayerMainProcess : MonoBehaviour
 
     public GameObject Gun;
     public GameObject Targets;
-
+    private ForceBullet forceBullet;
     CharaNum charaNum;
     StageName stageName;
     Ray ray;
+    Ray Gunray;
     public int MyNumber;
-    private int Hit;
+    int Hit;
     // Use this for initialization
     void Awake()
     {
@@ -40,6 +41,8 @@ public class PlayerMainProcess : MonoBehaviour
         transform.position = SceneGlobalVariables.Instance.charaNowStage.SetPosition(stageName);
 
         SceneGlobalVariables.Instance.characterStatus.SetPosition(MyNumber, transform.position);
+
+         forceBullet = gameObject.GetComponentInChildren<ForceBullet>();
     }
 
     // Update is called once per frame
@@ -57,6 +60,12 @@ public class PlayerMainProcess : MonoBehaviour
         {
             CharacterWarp.Warp(ray);
         }
+
+
+        Gunray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        forceBullet.transform.rotation = Quaternion.LookRotation(Gunray.direction);
+        forceBullet.Axis = Input.GetAxis("Fire");
+        forceBullet.StartFire();
     }
 
     private void OnTriggerEnter(Collider collider)
