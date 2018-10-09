@@ -11,7 +11,7 @@ public class ForceBullet : MonoBehaviour
     private Transform muzzle;
 
     private const int value = 0;
-    public float Axis;
+    public float Axis = 0.0f;
     private float OldAxis = 0.0f;
 
     public bool FireFlag = false;
