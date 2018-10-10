@@ -26,6 +26,9 @@ public class EnemyMove : MonoBehaviour
     private CharacterController controller;
     private Vector3 velocity = Vector3.zero;
 
+    private Vector3 TraGetPosition;
+    private RaycastHit hit;
+
     public Vector3 Initialize(int MyNumber)
     {
         stageName = SceneGlobalVariables.Instance.characterStatus.GetStageName(MyNumber);
@@ -36,7 +39,7 @@ public class EnemyMove : MonoBehaviour
     public void Start()
     {
         controller = GetComponent<CharacterController>();
-
+        
         velocity.x = -0.2f;
         timeOut = 1.5f;
         timeCount = 0;
@@ -85,16 +88,23 @@ public class EnemyMove : MonoBehaviour
 
             timeCount = 0;
         }
-    
-        if(controller.isGrounded)
+
+        TraGetPosition = transform.position;
+
+        velocity = velocity.normalized * 4 * Time.deltaTime;
+
+        if (velocity.magnitude > 0.1f)
         {
-            moveDirection = velocity;
-            moveDirection = transform.TransformDirection(moveDirection);
-            moveDirection *= speed;
+            TraGetPosition += transform.rotation * velocity;
         }
 
-        moveDirection.y -= gravity * Time.deltaTime;
-
-        controller.Move(moveDirection * Time.deltaTime);
+        //rayを動いた先の地面の方向に飛ばす
+        Ray ray = new Ray(TraGetPosition + Vector3.up, Vector3.down);
+        //Rayが当たっていれば動ける
+        if (Physics.Raycast(ray, out hit, 1000))
+        {
+            transform.position = TraGetPosition;
+            
+        }
     }
 }

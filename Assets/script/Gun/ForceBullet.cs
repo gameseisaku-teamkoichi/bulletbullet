@@ -8,7 +8,7 @@ public class ForceBullet : MonoBehaviour
     [SerializeField]
     private GameObject bulletPrefab;
     [SerializeField]
-    private Transform muzzle;
+    public Transform muzzle;
 
     private const int value = 0;
     public float Axis;
@@ -57,6 +57,7 @@ public class ForceBullet : MonoBehaviour
             }
             else
             {
+
                 Fire();
             }
         }

@@ -17,6 +17,13 @@ public class EnemyMainProcess : MonoBehaviour
     StageName stageName;
     CharacterStatus.CharaStatus charaStatus;
 
+    public ForceBullet bullet;
+    private bool fireFlag = true;
+    private float interval = 5.0f;
+    private Vector3 keepRotation = new Vector3(0, 0, 0);
+
+    private float baseNumber = 4.0f;
+
     // Use this for initialization
     void Start()
     {
@@ -38,6 +45,9 @@ public class EnemyMainProcess : MonoBehaviour
             }
         }
         SceneGlobalVariables.Instance.characterStatus.SetPosition(MyNumber, transform.position);
+
+        bullet = gameObject.GetComponentInChildren<ForceBullet>();
+        baseNumber += MyNumber;
     }
 
     // Update is called once per frame
@@ -45,7 +55,44 @@ public class EnemyMainProcess : MonoBehaviour
     {
         SceneGlobalVariables.Instance.stopGameTime.StopGame();
         enemyMove.enemyMove();
+
+        if (fireFlag)
+            StartCoroutine("Attack");
+
+        Rotation();
+
         SceneGlobalVariables.Instance.characterStatus.SetPosition(MyNumber, transform.position);
+    }
+
+    void Rotation()
+    {
+        var aim = GameObject.Find("Player(Clone)").transform.position - this.transform.position;
+        var look = Quaternion.LookRotation(aim);
+
+        bullet.muzzle.rotation = look;
+
+        aim.y = 0;
+        look = Quaternion.LookRotation(aim);
+        this.transform.localRotation = look;
+
+        
+    }
+
+    IEnumerator Attack()
+    {
+        if (SceneGlobalVariables.Instance.characterStatus.GetStatus(MyNumber) == CharacterStatus.CharaStatus.Live)
+        {
+            fireFlag = false;
+            yield return new WaitForSeconds(baseNumber);
+           
+
+            bullet.Axis = -1.0f;
+            bullet.StartFire();
+            bullet.Axis = 0;
+            bullet.StartFire();
+
+            fireFlag = true;
+        }
     }
 
     private void OnCollisionEnter()
