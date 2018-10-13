@@ -17,7 +17,8 @@ public class ForceBullet : MonoBehaviour
     public bool FireFlag = false;
     private bool Reloadflag = false;
 
-    private float bulletPower;//弾の速さ
+    private float playerBulletPower;//弾の速さ
+    private float enemyBulletPower;
     private int ActiveBullet;//弾の段数
 
     private float ReloadTime = 1.0f;
@@ -28,7 +29,8 @@ public class ForceBullet : MonoBehaviour
     public Quaternion quaternion;
     void Start()
     {
-        bulletPower = SceneGlobalVariables.Instance.gunStatus.GetBulletPower();
+        playerBulletPower = SceneGlobalVariables.Instance.gunStatus.GetBulletPower();
+        enemyBulletPower = playerBulletPower / 10;
 
         GameObject parentObject = transform.root.gameObject;
 
@@ -82,7 +84,14 @@ public class ForceBullet : MonoBehaviour
         var bulletInstance = GameObject.Instantiate(bulletPrefab, muzzle.position, muzzle.rotation) as GameObject;
         BulletProcess bulletProcess = bulletInstance.GetComponent<BulletProcess>();
         bulletProcess.MyNumber = MyNumber;
-        bulletInstance.GetComponent<Rigidbody>().AddForce(bulletInstance.transform.forward * bulletPower);
+        if (bulletProcess.MyNumber == 0)
+        {
+            bulletInstance.GetComponent<Rigidbody>().AddForce(bulletInstance.transform.forward * playerBulletPower);
+        }
+        else
+        {
+            bulletInstance.GetComponent<Rigidbody>().AddForce(bulletInstance.transform.forward * enemyBulletPower);
+        }
     }
 
     //プレイヤーが球を撃つ処理

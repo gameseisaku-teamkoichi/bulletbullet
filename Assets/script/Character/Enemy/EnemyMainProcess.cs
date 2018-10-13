@@ -10,20 +10,21 @@ public class EnemyMainProcess : MonoBehaviour
 {
     public EnemyMove enemyMove { get { return this.move ?? (this.move = GetComponent<EnemyMove>()); } }
     EnemyMove move;
-
-    private int CharaCount;
-    public int MyNumber;
-
     StageName stageName;
     CharacterStatus.CharaStatus charaStatus;
 
     public ForceBullet bullet;
-    private bool fireFlag = true;
-    private float interval = 5.0f;
+    
     private Vector3 keepRotation = new Vector3(0, 0, 0);
 
-    private float baseNumber = 4.0f;
+    public int MyNumber;
+    private int CharaCount;
 
+    private float interval = 5.0f;
+    private float shotInterval = 4.0f;
+
+    private bool fireFlag = true;
+    
     // Use this for initialization
     void Start()
     {
@@ -47,7 +48,7 @@ public class EnemyMainProcess : MonoBehaviour
         SceneGlobalVariables.Instance.characterStatus.SetPosition(MyNumber, transform.position);
 
         bullet = gameObject.GetComponentInChildren<ForceBullet>();
-        baseNumber += MyNumber;
+        shotInterval += MyNumber;
     }
 
     // Update is called once per frame
@@ -83,9 +84,8 @@ public class EnemyMainProcess : MonoBehaviour
         if (SceneGlobalVariables.Instance.characterStatus.GetStatus(MyNumber) == CharacterStatus.CharaStatus.Live)
         {
             fireFlag = false;
-            yield return new WaitForSeconds(baseNumber);
+            yield return new WaitForSeconds(shotInterval);
            
-
             bullet.Axis = -1.0f;
             bullet.StartFire();
             bullet.Axis = 0;

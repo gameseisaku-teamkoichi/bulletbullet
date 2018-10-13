@@ -1,10 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Bullet.Stage;
 using BulletBullet.SceneGlobalVariables.Stage;
 using Bullet.CharaNum;
-using System;
+using UnityEngine;
 
 public class EnemyMove : MonoBehaviour
 {
@@ -20,6 +19,7 @@ public class EnemyMove : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
 
     private int directCount;
+    private int provisionalValue;
 
     private float timeOut;
     private float timeCount;
@@ -46,9 +46,9 @@ public class EnemyMove : MonoBehaviour
         velocity.x = -0.2f;
         timeOut = 1.5f;
         timeCount = 0;
-        directCount = 0;
+        directCount = Random.Range(0, 10);
 
-        movePower = 0.4f;
+        movePower = 2.0f;
 
         differentMoveFlag = false;
 
@@ -60,9 +60,12 @@ public class EnemyMove : MonoBehaviour
     {
         if (differentMoveFlag)
         {
-            directCount++;
-            if (directCount > 3)
-                directCount = 0;
+            provisionalValue = directCount;
+            do
+            {
+                directCount = Random.Range(0, 10);
+            } while (provisionalValue == directCount);
+
         }
         switch (directCount)
         {
@@ -89,13 +92,46 @@ public class EnemyMove : MonoBehaviour
                 velocity.x = 0f;
                 velocity.z = movePower;
                 break;
+
+            //+x,+z方向へ
+            case 4:
+                velocity.x = -movePower;
+                velocity.z = movePower;
+                break;
+
+            //+x,-z方向へ
+            case 5:
+                velocity.x = movePower;
+                velocity.z = movePower;
+                break;
+
+            //-x,+z方向へ
+            case 6:
+                velocity.x = -movePower;
+                velocity.z = -movePower;
+                break;
+
+            //-x,-z方向へ
+            case 7:
+                velocity.x = movePower;
+                velocity.z = -movePower;
+                break;
+
+            //停止
+            case 8:
+                velocity.x = 0f;
+                velocity.z = 0f;
+                break;
+
+            case 9:
+                goto case 8;
         }
 
         TraGetPosition = transform.position;
 
-        velocity = velocity.normalized * 6 * Time.deltaTime;
+        velocity = (velocity.normalized * 1 * Time.deltaTime);
 
-        if (velocity.magnitude > 0.1f)
+        if (velocity.magnitude > 0.01f)
         {
             TraGetPosition += transform.rotation * velocity;
         }
@@ -111,6 +147,11 @@ public class EnemyMove : MonoBehaviour
         else
         {
             //当たっていなければ向きを変える
+            differentMoveFlag = true;
+        }
+
+        if(directCount==8||directCount==9)
+        {
             differentMoveFlag = true;
         }
     }
