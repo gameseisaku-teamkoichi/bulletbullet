@@ -1,0 +1,196 @@
+fileFormatVersion: 2
+guid: 5a4981f70cfac54469d0f1148cf1fd21
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Head
+    100002: Hips
+    100004: LeftArm
+    100006: LeftFoot
+    100008: LeftForeArm
+    100010: LeftForeArmRoll
+    100012: LeftHand
+    100014: LeftLeg
+    100016: LeftShoulder
+    100018: LeftToeBase
+    100020: LeftUpLeg
+    100022: Neck
+    100024: pPlane1
+    100026: pPlane2
+    100028: pPlane3
+    100030: pSphere11
+    100032: pSphere11_vtx_72_
+    100034: RightArm
+    100036: RightFoot
+    100038: RightForeArm
+    100040: RightForeArmRoll
+    100042: RightHand
+    100044: RightLeg
+    100046: RightShoulder
+    100048: RightToeBase
+    100050: RightUpLeg
+    100052: Spine
+    100054: Spine1
+    100056: Spine2
+    100058: //RootNode
+    100060: transform2
+    400000: Head
+    400002: Hips
+    400004: LeftArm
+    400006: LeftFoot
+    400008: LeftForeArm
+    400010: LeftForeArmRoll
+    400012: LeftHand
+    400014: LeftLeg
+    400016: LeftShoulder
+    400018: LeftToeBase
+    400020: LeftUpLeg
+    400022: Neck
+    400024: pPlane1
+    400026: pPlane2
+    400028: pPlane3
+    400030: pSphere11
+    400032: pSphere11_vtx_72_
+    400034: RightArm
+    400036: RightFoot
+    400038: RightForeArm
+    400040: RightForeArmRoll
+    400042: RightHand
+    400044: RightLeg
+    400046: RightShoulder
+    400048: RightToeBase
+    400050: RightUpLeg
+    400052: Spine
+    400054: Spine1
+    400056: Spine2
+    400058: //RootNode
+    400060: transform2
+    2100000: lambert2
+    2100002: phong1
+    2100004: phongE1
+    2300000: pPlane1
+    2300002: pPlane2
+    2300004: pPlane3
+    2300006: pSphere11_vtx_72_
+    3300000: pPlane1
+    3300002: pPlane2
+    3300004: pPlane3
+    3300006: pSphere11_vtx_72_
+    4300000: pPlane1
+    4300002: pPlane2
+    4300004: pPlane3
+    4300006: pSphere11_vtx_72_
+    9500000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert2
+    second: {fileID: 2100000, guid: b23f4225047fac743b1769c330b30e28, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong1
+    second: {fileID: 2100000, guid: 67bf33a38a8ebef4eb222fb27e1a9b7d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phongE1
+    second: {fileID: 2100000, guid: 2147ca095864dd64298f0e289ce02b6a, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: basemesh
+    second: {fileID: 2800000, guid: 39ff7701f6a5a2a4c8c94b694004217e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: uv
+    second: {fileID: 2800000, guid: 6d1c04c09bb5a5e42bd6b824dbb5b626, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: uv2
+    second: {fileID: 2800000, guid: 249c55817d0b01c4bae3247faf579893, type: 3}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
