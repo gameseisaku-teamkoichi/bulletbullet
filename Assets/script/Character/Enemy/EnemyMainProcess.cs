@@ -10,34 +10,17 @@ public class EnemyMainProcess : MonoBehaviour
 {
     public EnemyMove enemyMove { get { return this.move ?? (this.move = GetComponent<EnemyMove>()); } }
     EnemyMove move;
-    StageName stageName;
-    CharacterStatus.CharaStatus charaStatus;
 
-    public ForceBullet bullet;
-    
-    private Vector3 keepRotation = new Vector3(0, 0, 0);
-
-<<<<<<< HEAD
     private ForceBullet bullet;
 
     private int CharaCount;
-=======
->>>>>>> 58ad0256957b8a490e0b5cd3ee5a5bc66dea152c
     public int MyNumber;
-    private int CharaCount;
 
-<<<<<<< HEAD
     private bool fireFlag = false;
 
     StageName stageName;
     CharacterStatus.CharaStatus charaStatus;
-=======
-    private float interval = 5.0f;
-    private float shotInterval = 4.0f;
->>>>>>> 58ad0256957b8a490e0b5cd3ee5a5bc66dea152c
 
-    private bool fireFlag = true;
-    
     // Use this for initialization
     void Start()
     {
@@ -61,14 +44,8 @@ public class EnemyMainProcess : MonoBehaviour
         }
         
         SceneGlobalVariables.Instance.characterStatus.SetPosition(MyNumber, transform.position);
-<<<<<<< HEAD
         
         bullet = gameObject.GetComponentInChildren<ForceBullet>();
-=======
-
-        bullet = gameObject.GetComponentInChildren<ForceBullet>();
-        shotInterval += MyNumber;
->>>>>>> 58ad0256957b8a490e0b5cd3ee5a5bc66dea152c
     }
 
     // Update is called once per frame
@@ -79,7 +56,6 @@ public class EnemyMainProcess : MonoBehaviour
         Rotation();
         enemyMove.enemyMove();
 
-<<<<<<< HEAD
         if (fireFlag == false)
         {
             bullet.Axis = 0f;
@@ -92,12 +68,6 @@ public class EnemyMainProcess : MonoBehaviour
         }
 
         bullet.StartFire();
-=======
-        if (fireFlag)
-            StartCoroutine("Attack");
-
-        Rotation();
->>>>>>> 58ad0256957b8a490e0b5cd3ee5a5bc66dea152c
 
         SceneGlobalVariables.Instance.characterStatus.SetPosition(MyNumber, transform.position);
     }
@@ -106,39 +76,12 @@ public class EnemyMainProcess : MonoBehaviour
     {
         var aim = GameObject.Find("Player(Clone)").transform.position - this.transform.position;
         var look = Quaternion.LookRotation(aim);
-<<<<<<< HEAD
         this.transform.localRotation = look;
     }
 
     public void Attack()
     {
         
-=======
-
-        bullet.muzzle.rotation = look;
-
-        aim.y = 0;
-        look = Quaternion.LookRotation(aim);
-        this.transform.localRotation = look;
-
-        
-    }
-
-    IEnumerator Attack()
-    {
-        if (SceneGlobalVariables.Instance.characterStatus.GetStatus(MyNumber) == CharacterStatus.CharaStatus.Live)
-        {
-            fireFlag = false;
-            yield return new WaitForSeconds(shotInterval);
-           
-            bullet.Axis = -1.0f;
-            bullet.StartFire();
-            bullet.Axis = 0;
-            bullet.StartFire();
-
-            fireFlag = true;
-        }
->>>>>>> 58ad0256957b8a490e0b5cd3ee5a5bc66dea152c
     }
 
     private void OnCollisionEnter()
