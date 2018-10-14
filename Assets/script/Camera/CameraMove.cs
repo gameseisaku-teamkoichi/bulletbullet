@@ -18,7 +18,7 @@ public class CameraMove : MonoBehaviour
     private Vector3 PlayerPosition;
     private float Distance = 5.0f;//可変の対象とカメラの距離
 
-    private Vector3 value = new Vector3(0.0f, 3.5f, 0.0f);//カメラの位置の微調整
+    private Vector3 value = new Vector3(0.0f, 3.0f, 0.0f);//カメラの位置の微調整
     private Vector3 Position;//カメラの移動適用前のポジション
     private Quaternion Rotation;//カメラの移動適用前のローテーション
 

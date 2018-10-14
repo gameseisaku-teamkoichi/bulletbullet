@@ -23,7 +23,6 @@ public class PlayerMainProcess : MonoBehaviour
     #endregion
 
     public GameObject Gun;
-    public GameObject Targets;
     private ForceBullet forceBullet;
     CharaNum charaNum;
     StageName stageName;

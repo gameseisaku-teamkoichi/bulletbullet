@@ -14,7 +14,7 @@ public class EnemyMainProcess : MonoBehaviour
     CharacterStatus.CharaStatus charaStatus;
 
     public ForceBullet bullet;
-    
+
     private Vector3 keepRotation = new Vector3(0, 0, 0);
 
     public int MyNumber;
@@ -24,7 +24,7 @@ public class EnemyMainProcess : MonoBehaviour
     private float shotInterval = 4.0f;
 
     private bool fireFlag = true;
-    
+
     // Use this for initialization
     void Start()
     {
@@ -55,14 +55,17 @@ public class EnemyMainProcess : MonoBehaviour
     void Update()
     {
         SceneGlobalVariables.Instance.stopGameTime.StopGame();
-        enemyMove.enemyMove();
+        if (SceneGlobalVariables.Instance.characterStatus.GetStatus(MyNumber) == CharacterStatus.CharaStatus.Live)
+        {
+            enemyMove.enemyMove();
 
-        if (fireFlag)
-            StartCoroutine("Attack");
+            if (fireFlag)
+                StartCoroutine("Attack");
 
-        Rotation();
+            Rotation();
 
-        SceneGlobalVariables.Instance.characterStatus.SetPosition(MyNumber, transform.position);
+            SceneGlobalVariables.Instance.characterStatus.SetPosition(MyNumber, transform.position);
+        }
     }
 
     void Rotation()
@@ -76,23 +79,20 @@ public class EnemyMainProcess : MonoBehaviour
         look = Quaternion.LookRotation(aim);
         this.transform.localRotation = look;
 
-        
+
     }
 
     IEnumerator Attack()
     {
-        if (SceneGlobalVariables.Instance.characterStatus.GetStatus(MyNumber) == CharacterStatus.CharaStatus.Live)
-        {
-            fireFlag = false;
-            yield return new WaitForSeconds(shotInterval);
-           
-            bullet.Axis = -1.0f;
-            bullet.StartFire();
-            bullet.Axis = 0;
-            bullet.StartFire();
+        fireFlag = false;
+        yield return new WaitForSeconds(shotInterval);
 
-            fireFlag = true;
-        }
+        bullet.Axis = -1.0f;
+        bullet.StartFire();
+        bullet.Axis = 0;
+        bullet.StartFire();
+
+        fireFlag = true;
     }
 
     private void OnCollisionEnter()

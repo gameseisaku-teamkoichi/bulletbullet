@@ -352,37 +352,37 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: phong3
-    second: {fileID: 2100000, guid: 5814412c20870f04094f3a969e52febd, type: 2}
+    second: {fileID: 2100000, guid: d4cdaca840449ad429551170202192cb, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: phong4
-    second: {fileID: 2100000, guid: de0f3f568a51c194f865277826323230, type: 2}
+    second: {fileID: 2100000, guid: ae3a1bfbcec3c3c46a5d5c51da5bb8c8, type: 2}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Character2_normal
-    second: {fileID: 2800000, guid: 4aea7eb5a59e5554abdcb200f9c07c56, type: 3}
+    second: {fileID: 2800000, guid: d217c653d46ee994e9c7a9efa2649a06, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Character2_specular
-    second: {fileID: 2800000, guid: 1d18254358049a847963104333de7ab3, type: 3}
+    second: {fileID: 2800000, guid: 813b04c453b32134f8baee5a031052c3, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Colar
-    second: {fileID: 2800000, guid: b372458185494e049a15d66eb78461be, type: 3}
+    second: {fileID: 2800000, guid: edb4c43a333ad4245ac13f3240a525b5, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Gun_diffuse
-    second: {fileID: 2800000, guid: a6235b9e1f193a14aba050a7ef02c7cf, type: 3}
+    second: {fileID: 2800000, guid: 84ea438265f0a2248a0bb27a349ceadf, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Gun_specular
-    second: {fileID: 2800000, guid: dedaa14d73ab6b74fbc0126670526332, type: 3}
+    second: {fileID: 2800000, guid: 56806a1e1e4657e42a5938d1ad18ac3a, type: 3}
   materials:
     importMaterials: 1
     materialName: 0
@@ -413,7 +413,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 100
+    globalScale: 5
     meshCompression: 0
     addColliders: 0
     importVisibility: 1

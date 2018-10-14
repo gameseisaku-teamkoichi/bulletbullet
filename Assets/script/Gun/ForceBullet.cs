@@ -26,6 +26,7 @@ public class ForceBullet : MonoBehaviour
     private GameObject root;
     private int MyNumber = 1;
 
+    public Quaternion rotation;
     public Quaternion quaternion;
     void Start()
     {
@@ -59,7 +60,6 @@ public class ForceBullet : MonoBehaviour
             }
             else
             {
-
                 Fire();
             }
         }

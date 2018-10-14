@@ -24,13 +24,13 @@ public class BulletProcess : MonoBehaviour {
     {
         count++;
 
-        if(MyNumber==0)
-        {
-
-        }
-
         if (count > MaxCount)
         {   
+            Destroy(gameObject);
+        }
+
+        if(SceneGlobalVariables.Instance.characterStatus.GetStatus(MyNumber) == CharacterStatus.CharaStatus.Live)
+        {
             Destroy(gameObject);
         }
     }
