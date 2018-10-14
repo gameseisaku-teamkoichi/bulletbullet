@@ -97,9 +97,10 @@ public class EnemyMainProcess : MonoBehaviour
 
     private void OnCollisionEnter()
     {
+        SceneGlobalVariables.Instance.characterStatus.SetStatus(MyNumber, CharacterStatus.CharaStatus.die);
         transform.position = SceneGlobalVariables.Instance.charaNowStage.SetDedPosition();
         SceneGlobalVariables.Instance.characterStatus.SetPosition(MyNumber, transform.position);
-        SceneGlobalVariables.Instance.characterStatus.SetStatus(MyNumber, CharacterStatus.CharaStatus.die);
+
         SceneGlobalVariables.Instance.characterStatus.SetStageName(MyNumber, StageName.Disabled);
 
         StartCoroutine(SceneGlobalVariables.Instance.characterSpawn.Spawn(MyNumber, () =>
