@@ -77,4 +77,5 @@ public class CharacterStatus : MonoBehaviour
         get { return attackChara; }
         set { attackChara = value; }
     }
+    
 }

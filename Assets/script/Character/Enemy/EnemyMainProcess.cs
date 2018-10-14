@@ -97,19 +97,22 @@ public class EnemyMainProcess : MonoBehaviour
 
     private void OnCollisionEnter()
     {
-        SceneGlobalVariables.Instance.characterStatus.SetStatus(MyNumber, CharacterStatus.CharaStatus.die);
-        transform.position = SceneGlobalVariables.Instance.charaNowStage.SetDedPosition();
-        SceneGlobalVariables.Instance.characterStatus.SetPosition(MyNumber, transform.position);
-
-        SceneGlobalVariables.Instance.characterStatus.SetStageName(MyNumber, StageName.Disabled);
-
-        StartCoroutine(SceneGlobalVariables.Instance.characterSpawn.Spawn(MyNumber, () =>
+        if (SceneGlobalVariables.Instance.characterStatus.GetStatus(MyNumber) == CharacterStatus.CharaStatus.Live)
         {
-            stageName = SceneGlobalVariables.Instance.characterStatus.GetStageName(MyNumber);
-            transform.position = SceneGlobalVariables.Instance.charaNowStage.SetPosition(stageName);
-            SceneGlobalVariables.Instance.characterStatus.SetStatus(MyNumber, CharacterStatus.CharaStatus.Live);
+            SceneGlobalVariables.Instance.characterStatus.SetStatus(MyNumber, CharacterStatus.CharaStatus.die);
+            transform.position = SceneGlobalVariables.Instance.charaNowStage.SetDedPosition();
             SceneGlobalVariables.Instance.characterStatus.SetPosition(MyNumber, transform.position);
 
-        }));
+            SceneGlobalVariables.Instance.characterStatus.SetStageName(MyNumber, StageName.Disabled);
+
+            StartCoroutine(SceneGlobalVariables.Instance.characterSpawn.Spawn(MyNumber, () =>
+            {
+                stageName = SceneGlobalVariables.Instance.characterStatus.GetStageName(MyNumber);
+                transform.position = SceneGlobalVariables.Instance.charaNowStage.SetPosition(stageName);
+                SceneGlobalVariables.Instance.characterStatus.SetStatus(MyNumber, CharacterStatus.CharaStatus.Live);
+                SceneGlobalVariables.Instance.characterStatus.SetPosition(MyNumber, transform.position);
+
+            }));
+        }
     }
 }

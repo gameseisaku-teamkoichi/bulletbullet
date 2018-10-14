@@ -29,7 +29,7 @@ public class BulletProcess : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        if(SceneGlobalVariables.Instance.characterStatus.GetStatus(MyNumber) == CharacterStatus.CharaStatus.Live)
+        if(SceneGlobalVariables.Instance.characterStatus.GetStatus(MyNumber) != CharacterStatus.CharaStatus.Live)
         {
             Destroy(gameObject);
         }

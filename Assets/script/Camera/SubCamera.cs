@@ -16,29 +16,32 @@ public class SubCamera : MonoBehaviour
     {
         if (SceneGlobalVariables.Instance.characterStatus.GetStatus(AttackChara) == CharacterStatus.CharaStatus.Live)
         {
-            if (AttackChara != 0)
-            {
-                AttackCharaPos = SceneGlobalVariables.Instance.characterStatus.GetPosition(AttackChara);
-                transform.position = AttackCharaPos + value - transform.rotation * Vector3.forward * Distance;
-            }
-            else
-            {
-
-            }
+            SetPos();
         }
     }
 
     public void Initialize()
     {
-        AttackChara = SceneGlobalVariables.Instance.characterStatus.AttackChara;
+        AttackChara = SceneGlobalVariables.Instance.desInfo.AttackChara;
+
+        if(SceneGlobalVariables.Instance.characterStatus.GetStatus(AttackChara) != CharacterStatus.CharaStatus.Live)
+        {
+            AttackChara = 0;
+        }
+        SetPos();
+    }
+
+    private void SetPos()
+    {
         if (AttackChara != 0)
         {
             AttackCharaPos = SceneGlobalVariables.Instance.characterStatus.GetPosition(AttackChara);
-            transform.position = AttackCharaPos + value - transform.rotation * Vector3.forward * Distance;
         }
         else
         {
-
+            AttackCharaPos = SceneGlobalVariables.Instance.desInfo.DesPosition;
         }
+
+        transform.position = AttackCharaPos + value - transform.rotation * Vector3.forward * Distance;
     }
 }

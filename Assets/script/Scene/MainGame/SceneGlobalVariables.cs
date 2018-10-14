@@ -11,6 +11,7 @@ namespace BulletBullet.SceneGlobalVariables.Stage
         public CharacterStatus characterStatus;
         public CharacterSpawn characterSpawn;
         public GunStatus gunStatus;
+        public DesInfo desInfo;
 
         private static SceneGlobalVariables instance;
         public static SceneGlobalVariables Instance
