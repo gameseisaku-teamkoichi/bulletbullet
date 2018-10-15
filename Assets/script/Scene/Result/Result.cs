@@ -31,6 +31,7 @@ public class Result : MonoBehaviour {
 
     void Start()
     {
+        Cursor.visible = false;
         //Select.SetActive(false);
     }
 
