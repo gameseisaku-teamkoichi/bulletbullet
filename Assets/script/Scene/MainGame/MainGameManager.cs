@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using BulletBullet.SceneGlobalVariables.Stage;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(GameOver))]
 [RequireComponent(typeof(PauseScript))]
@@ -27,10 +28,18 @@ public class MainGameManager : MonoBehaviour
 
     CharacterStatus.CharaStatus OldPlayerStatus;
 
-    private const float TimeLimit = 10.0f;//制限時間
+    [SerializeField]
+    private Text timerText;
+
+    private int minute;
+    private int seconds;
+    private int TimeLimit_minute;
+    private int TimeLimit_seconds;
+    private const float TimeLimit = 119.0f;//制限時間
     private float NowTime;
 
     public static int Score;
+    private bool Endflag;
     // Use this for initialization
     void Start()
     {  
@@ -42,12 +51,15 @@ public class MainGameManager : MonoBehaviour
         OldPlayerStatus = CharacterStatus.CharaStatus.die;
 
         Score = 0;
+        TimeLimit_minute = (int)TimeLimit / 60;
+        TimeLimit_seconds = (int)TimeLimit % 60;
+        Endflag = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //NowTime+=Time.deltaTime;
+        NowTime+=Time.deltaTime;
 
         if (Input.GetButtonDown("Pause"))
         {
@@ -55,7 +67,7 @@ public class MainGameManager : MonoBehaviour
             Cursor.SetCursor(cursor, new Vector2(cursor.width / 2, cursor.height / 2), CursorMode.Auto);
         }
 
-        if (Time.timeScale == 0)
+        if (Time.timeScale == 0 )
         {
             return;
         }
@@ -64,9 +76,10 @@ public class MainGameManager : MonoBehaviour
 
         if (NowTime >= TimeLimit)
         {
-
-            End.IsGameOver();
+            // End.IsGameOver();
         }
+
+        Timer();
 
         if (SceneGlobalVariables.Instance.characterStatus.GetStatus(0) == CharacterStatus.CharaStatus.die)
         {
@@ -84,5 +97,17 @@ public class MainGameManager : MonoBehaviour
             Cursor.SetCursor(cursor, new Vector2(cursor.width / 2, cursor.height / 2), CursorMode.ForceSoftware);
         }
 
+    }
+
+    private void Timer()
+    {
+        minute = (int)NowTime / 60;
+        seconds = (int)NowTime % 60;
+
+        minute = TimeLimit_minute - minute;
+        seconds = TimeLimit_seconds - seconds;
+        
+        
+        timerText.text = minute.ToString("00") + ":" + seconds.ToString("00");
     }
 }
