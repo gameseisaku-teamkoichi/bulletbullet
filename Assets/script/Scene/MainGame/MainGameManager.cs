@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BulletBullet.SceneGlobalVariables.Stage;
 using UnityEngine.UI;
+using DG.Tweening;
 
 [RequireComponent(typeof(GameOver))]
 [RequireComponent(typeof(PauseScript))]
@@ -30,7 +31,11 @@ public class MainGameManager : MonoBehaviour
 
     [SerializeField]
     private Text timerText;
+    [SerializeField]
+    private GameObject countdown;
+    private GameObject CountDouw;
 
+    private Text countdownText;
     private int minute;
     private int seconds;
     private int TimeLimit_minute;
@@ -40,9 +45,13 @@ public class MainGameManager : MonoBehaviour
 
     public static int Score;
     private bool Endflag;
+
+    private float StartCount = 3.0f;
+    private float StartTime;
+    public bool start;
     // Use this for initialization
     void Start()
-    {  
+    {
         //カーソル画像の大きさ
         Cursor.SetCursor(cursor, new Vector2(cursor.width / 2, cursor.height / 2), CursorMode.ForceSoftware);
 
@@ -59,7 +68,6 @@ public class MainGameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        NowTime+=Time.deltaTime;
 
         if (Input.GetButtonDown("Pause"))
         {
@@ -67,11 +75,12 @@ public class MainGameManager : MonoBehaviour
             Cursor.SetCursor(cursor, new Vector2(cursor.width / 2, cursor.height / 2), CursorMode.Auto);
         }
 
-        if (Time.timeScale == 0 )
+        if (Time.timeScale == 0 || start)
         {
             return;
         }
 
+        NowTime += Time.deltaTime;
         Cursor.lockState = CursorLockMode.Locked;
 
         if (NowTime >= TimeLimit)
@@ -106,8 +115,8 @@ public class MainGameManager : MonoBehaviour
 
         minute = TimeLimit_minute - minute;
         seconds = TimeLimit_seconds - seconds;
-        
-        
+
+
         timerText.text = minute.ToString("00") + ":" + seconds.ToString("00");
     }
 }

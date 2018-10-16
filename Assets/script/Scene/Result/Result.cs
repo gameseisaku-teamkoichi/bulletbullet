@@ -74,10 +74,10 @@ public class Result : MonoBehaviour {
                 switch (Menu)
                 {
                     case SelectMenu.Retry:
-                        SeceChenge.Change(ChangeScene.SceneState.Main);
+                        SeceChenge.FadOut(ChangeScene.SceneState.Main);
                         break;
                     case SelectMenu.CharaSelect:
-                        SeceChenge.Change(ChangeScene.SceneState.CharaSelect);
+                        SeceChenge.FadOut(ChangeScene.SceneState.CharaSelect);
                         break;
                     case SelectMenu.Exit:
                         break;

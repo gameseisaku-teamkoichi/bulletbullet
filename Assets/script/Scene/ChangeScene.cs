@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
+using DG.Tweening;
 
 public class ChangeScene : MonoBehaviour {
 
@@ -18,23 +19,21 @@ public class ChangeScene : MonoBehaviour {
         Invalid
     }
 
+    [SerializeField]
+    private CanvasGroup canvasGroup;
+    [SerializeField]
+    private float DurationSeconds;//フェードアウト終了時間
+    public Ease EaseType;
 
-    private Image image;
-
-    private float FadeSpeed = 0.01f;
-
-    private float red;
-    private float green;
-    private float blue;
-    private float alfa;
-
-    private bool flag = false;
+    void start()
+    {
+        canvasGroup = GetComponent<CanvasGroup>();
+    }
 
     public void Change(SceneState sceneState)
     {
         switch (sceneState)
         {
-
             case SceneState.title:
                 SceneManager.LoadScene("title");
                 break;
@@ -61,30 +60,22 @@ public class ChangeScene : MonoBehaviour {
         }
     }
 
-    public void Initialize()
-    {
-        alfa = 0;
-        image = GetComponent<Image>();
-        red = image.color.r;
-        green = image.color.g;
-        blue = image.color.b;
-    }
 
-    public void FadOut()
+
+    public void FadOut(SceneState sceneState)
     {
-        alfa += FadeSpeed;
-        SetAlpha();
+        canvasGroup.alpha = 0;
+        canvasGroup.DOFade(1.0f, DurationSeconds).SetEase(EaseType);
+        DOVirtual.DelayedCall(
+          DurationSeconds+0.5f,   
+         () => {
+             Change(sceneState);
+               });
     }
 
     public void FadeIn()
     {
-        alfa -= FadeSpeed;
-        SetAlpha();
+        canvasGroup.alpha = 1;
+        canvasGroup.DOFade(0.0f, DurationSeconds).SetEase(EaseType);
     }
-
-    private void SetAlpha()
-    {
-        image.color = new Color(red, green, blue, alfa);
-    }
-
 }

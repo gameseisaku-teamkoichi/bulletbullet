@@ -11,6 +11,6 @@ public class GameOver : MonoBehaviour {
 
 	// Update is called once per frame
 	public void IsGameOver() {
-        SeceChenge.Change(ChangeScene.SceneState.Result);
+        SeceChenge.FadOut(ChangeScene.SceneState.Result);
     }
 }

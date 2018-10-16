@@ -65,10 +65,10 @@ public class Title : MonoBehaviour {
             switch(Menu)
             {
                 case SelectMenu.start:
-                    SeceChenge.Change(ChangeScene.SceneState.CharaSelect);
+                    SeceChenge.FadOut(ChangeScene.SceneState.CharaSelect);
                     break;
                 case SelectMenu.Tutorial:
-                    //SeceChenge.Change(ChangeScene.SceneState.Tutorial);
+                    //SeceChenge.FadOut(ChangeScene.SceneState.Tutorial);
                     break;
                 case SelectMenu.Exit:
                     break;

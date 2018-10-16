@@ -5,9 +5,9 @@ using UnityEngine;
 public class StopGameTime : MonoBehaviour {
 
     [SerializeField]
-    private GameObject pauseUIPrefab;
+    private GameObject MaingameManager;
 
-    private GameObject pauseUIInstance;
+    private bool flag;
 
     public void StopGame()
     {
@@ -15,6 +15,5 @@ public class StopGameTime : MonoBehaviour {
         {
             return;
         }
-
     }
 }

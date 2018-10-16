@@ -81,7 +81,7 @@ public class Select : MonoBehaviour
         if (Input.GetButtonDown("SkillB"))
         {
             ChangeScene changeSece = gameObject.GetComponent<ChangeScene>();
-            changeSece.Change(ChangeScene.SceneState.Main);
+            changeSece.FadOut(ChangeScene.SceneState.Main);
             num = (int)character;
         }
 
