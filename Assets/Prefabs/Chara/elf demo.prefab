@@ -2415,7 +2415,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1139486506000728}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 25, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4042439394271878}
@@ -3320,11 +3320,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43ccb0078ef9f345a1ad67f5e31d758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 1283857525467942, guid: 417df37a3f1912e46afbc37e4540b0dd,
+  bulletPrefab: {fileID: 1576080248455372, guid: 7cbb29ee15a7b9242b2e17849d77e984,
     type: 2}
   muzzle: {fileID: 4488899902673974}
   Axis: 0
   FireFlag: 0
+  PFireMosionFlag: 0
+  rotation: {x: 0, y: 0, z: 0, w: 0}
   quaternion: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &114598336256588272
 MonoBehaviour:
@@ -3337,6 +3339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 772ec4e77aae01e4ebcfede3b5c89fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bullet: {fileID: 0}
   MyNumber: 0
 --- !u!114 &114715415291852948
 MonoBehaviour:

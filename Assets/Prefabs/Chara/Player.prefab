@@ -815,6 +815,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4521084564512004}
   - component: {fileID: 95988390978895632}
+  - component: {fileID: 114083602302917078}
   m_Layer: 0
   m_Name: Game_Character
   m_TagString: Untagged
@@ -1788,7 +1789,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1667851242779414}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.1721617, y: 0, z: 0}
+  m_LocalPosition: {x: -0.1721617, y: 0.61, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4541218704729146}
@@ -2385,10 +2386,10 @@ Animator:
   m_GameObject: {fileID: 1667851242779414}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 4e28dd03016a64e4e863b344ba675bd1, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 45763ff81ef80174faa82f2bb09f5dcd, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -2410,7 +2411,20 @@ MonoBehaviour:
   muzzle: {fileID: 4037619647430882}
   Axis: 0
   FireFlag: 0
+  PFireMosionFlag: 0
+  rotation: {x: 0, y: 0, z: 0, w: 0}
   quaternion: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &114083602302917078
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1667851242779414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66d7e01a9fc94cb49831b72903d50395, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114364916145547682
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2425,6 +2439,7 @@ MonoBehaviour:
   Velocity: {x: 0, y: 0, z: 0}
   TraGetPosition: {x: 0, y: 0, z: 0}
   Camera: {fileID: 114654823074000384}
+  isPlayerMove: 0
 --- !u!114 &114563188616344018
 MonoBehaviour:
   m_ObjectHideFlags: 1
