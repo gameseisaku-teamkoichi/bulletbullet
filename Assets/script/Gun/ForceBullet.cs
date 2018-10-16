@@ -16,6 +16,7 @@ public class ForceBullet : MonoBehaviour
 
     public bool FireFlag = false;
     private bool Reloadflag = false;
+    public bool PFireMosionFlag = false;
 
     private float playerBulletPower;//弾の速さ
     private float enemyBulletPower;
@@ -31,7 +32,7 @@ public class ForceBullet : MonoBehaviour
     void Start()
     {
         playerBulletPower = SceneGlobalVariables.Instance.gunStatus.GetBulletPower();
-        enemyBulletPower = playerBulletPower / 10;
+        enemyBulletPower = playerBulletPower / 7;
 
         GameObject parentObject = transform.root.gameObject;
 
@@ -46,6 +47,7 @@ public class ForceBullet : MonoBehaviour
             EnemyMainProcess enemyMainProcess = parentObject.GetComponent<EnemyMainProcess>();
             MyNumber = enemyMainProcess.MyNumber;
         }
+
     }
 
     public void StartFire()
@@ -62,6 +64,10 @@ public class ForceBullet : MonoBehaviour
             {
                 Fire();
             }
+        }
+        else
+        {
+            PFireMosionFlag = false;
         }
         OldAxis = Axis;
     }
@@ -104,6 +110,7 @@ public class ForceBullet : MonoBehaviour
         }
         else if (ActiveBullet > 0)
         {
+            PFireMosionFlag = true;
             Reloadflag = false;
             Fire();
             SceneGlobalVariables.Instance.gunStatus.SetBulletsNum(1);

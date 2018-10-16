@@ -15,11 +15,12 @@ public class Move : MonoBehaviour
 
     public CameraMove Camera;
 
+    public bool isPlayerMove = false;
+
     RaycastHit hit;
     // Use this for initialization
     void Start()
     {
-
     }
 
     // Update is called once per frame
@@ -49,6 +50,12 @@ public class Move : MonoBehaviour
         {
             transform.position = TraGetPosition;
             SceneGlobalVariables.Instance.characterStatus.SetPosition(0, transform.position);
+            isPlayerMove = true;
         }
+        else
+        {
+            isPlayerMove = false;
+        }
+
     }
 }
