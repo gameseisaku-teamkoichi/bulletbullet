@@ -974,8 +974,7 @@ GameObject:
   - component: {fileID: 111916920586499586}
   - component: {fileID: 114598336256588272}
   - component: {fileID: 114715415291852948}
-  - component: {fileID: 54151012139573290}
-  - component: {fileID: 143807165951518306}
+  - component: {fileID: 136962716501681252}
   m_Layer: 8
   m_Name: elf demo
   m_TagString: Untagged
@@ -3280,21 +3279,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1139486506000728}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54151012139573290
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1581730172109968}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!111 &111916920586499586
 Animation:
   m_ObjectHideFlags: 1
@@ -3326,6 +3310,7 @@ MonoBehaviour:
   Axis: 0
   FireFlag: 0
   PFireMosionFlag: 0
+  EFireMosionFlag: 0
   rotation: {x: 0, y: 0, z: 0, w: 0}
   quaternion: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &114598336256588272
@@ -3352,6 +3337,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 289b458fde8bcdb4584a1187e34b6363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  velocity: {x: 0, y: 0, z: 0}
+--- !u!136 &136962716501681252
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1581730172109968}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.5
+  m_Height: 4.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!137 &137124268212846852
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -3780,20 +3779,3 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.6344408, y: -0.0343509, z: -0.002396267}
     m_Extent: {x: 0.8616488, y: 0.18008465, z: 0.063414186}
   m_DirtyAABB: 0
---- !u!143 &143807165951518306
-CharacterController:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1581730172109968}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 4.5
-  m_Radius: 1.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 2.5, z: 0}

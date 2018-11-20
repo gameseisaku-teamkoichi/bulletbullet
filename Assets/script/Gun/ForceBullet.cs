@@ -17,6 +17,7 @@ public class ForceBullet : MonoBehaviour
     public bool FireFlag = false;
     private bool Reloadflag = false;
     public bool PFireMosionFlag = false;
+    public bool EFireMosionFlag = false;
 
     private float playerBulletPower;//弾の速さ
     private float enemyBulletPower;
@@ -32,7 +33,7 @@ public class ForceBullet : MonoBehaviour
     void Start()
     {
         playerBulletPower = SceneGlobalVariables.Instance.gunStatus.GetBulletPower();
-        enemyBulletPower = playerBulletPower / 7;
+        enemyBulletPower = playerBulletPower / 4;
 
         GameObject parentObject = transform.root.gameObject;
 
@@ -62,12 +63,14 @@ public class ForceBullet : MonoBehaviour
             }
             else
             {
+                EFireMosionFlag = true;
                 Fire();
             }
         }
         else
         {
             PFireMosionFlag = false;
+            EFireMosionFlag = false;
         }
         OldAxis = Axis;
     }
