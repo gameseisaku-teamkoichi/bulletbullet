@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using BulletBullet.SceneGlobalVariables.Stage;
 
 public class ForceBullet : MonoBehaviour
 {
@@ -30,9 +29,14 @@ public class ForceBullet : MonoBehaviour
 
     public Quaternion rotation;
     public Quaternion quaternion;
+
+    public float bulletPower;
+
     void Start()
     {
-        playerBulletPower = SceneGlobalVariables.Instance.gunStatus.GetBulletPower();
+        bulletPower = 3000.0f;
+
+        playerBulletPower = bulletPower;
         enemyBulletPower = playerBulletPower / 4;
 
         GameObject parentObject = transform.root.gameObject;
@@ -42,11 +46,6 @@ public class ForceBullet : MonoBehaviour
         {
             PlayerMainProcess playerMainProcess = parentObject.GetComponent<PlayerMainProcess>();
             MyNumber = playerMainProcess.MyNumber;
-        }
-        else
-        {
-            EnemyMainProcess enemyMainProcess = parentObject.GetComponent<EnemyMainProcess>();
-            MyNumber = enemyMainProcess.MyNumber;
         }
 
     }
@@ -79,7 +78,7 @@ public class ForceBullet : MonoBehaviour
     private bool FireJudge(float oldAxis, float axis)
     {
         bool flag = false;
-        ActiveBullet = SceneGlobalVariables.Instance.gunStatus.GetActiveBullet();
+        //ActiveBullet = SceneGlobalVariables.Instance.gunStatus.GetActiveBullet();
         if (oldAxis == value && axis < value)
         {
             flag = true;
@@ -116,13 +115,13 @@ public class ForceBullet : MonoBehaviour
             PFireMosionFlag = true;
             Reloadflag = false;
             Fire();
-            SceneGlobalVariables.Instance.gunStatus.SetBulletsNum(1);
+            //SceneGlobalVariables.Instance.gunStatus.SetBulletsNum(1);
         }
     }
 
     private IEnumerator Reload()
     {
         yield return new WaitForSeconds(ReloadTime);
-        SceneGlobalVariables.Instance.gunStatus.Reloading();
+        //SceneGlobalVariables.Instance.gunStatus.Reloading();
     }
 }

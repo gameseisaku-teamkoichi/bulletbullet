@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using BulletBullet.SceneGlobalVariables.Stage;
+//using BulletBullet.SceneGlobalVariables.Stage;
 
 public class Move : MonoBehaviour
 {
@@ -49,7 +49,8 @@ public class Move : MonoBehaviour
         if (Physics.Raycast(ray, out hit, 1000))
         {
             transform.position = TraGetPosition;
-            SceneGlobalVariables.Instance.characterStatus.SetPosition(0, transform.position);
+            //SceneGlobalVariables.Instance.characterStatus.SetPosition(0, transform.position);
+            //SceneGlobalVariables.Instance.characterStatus.SetPosition(0, transform.position);
             isPlayerMove = true;
         }
         else

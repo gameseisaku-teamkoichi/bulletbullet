@@ -56,7 +56,7 @@ public class MainGameManager : MonoBehaviour
         Cursor.SetCursor(cursor, new Vector2(cursor.width / 2, cursor.height / 2), CursorMode.ForceSoftware);
 
         NowTime = 0;
-        SceneGlobalVariables.Instance.characterSpawn.Initialize();
+
         OldPlayerStatus = CharacterStatus.CharaStatus.die;
 
         Score = 0;
@@ -89,22 +89,6 @@ public class MainGameManager : MonoBehaviour
         }
 
         Timer();
-
-        if (SceneGlobalVariables.Instance.characterStatus.GetStatus(0) == CharacterStatus.CharaStatus.die)
-        {
-            subCamera.Initialize();
-            SubUi.ChengeStatus(SubUi.Status.active);
-            OldPlayerStatus = CharacterStatus.CharaStatus.die;
-
-            Cursor.SetCursor(cursor, new Vector2(cursor.width / 2, cursor.height / 2), CursorMode.Auto);
-        }
-        else if (OldPlayerStatus == CharacterStatus.CharaStatus.die && SceneGlobalVariables.Instance.characterStatus.GetStatus(0) == CharacterStatus.CharaStatus.Live)
-        {
-            SubUi.ChengeStatus(SubUi.Status.notactive);
-            OldPlayerStatus = CharacterStatus.CharaStatus.Live;
-
-            Cursor.SetCursor(cursor, new Vector2(cursor.width / 2, cursor.height / 2), CursorMode.ForceSoftware);
-        }
 
     }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Bullet.CharaNum;
 using Bullet.Stage;
-using BulletBullet.SceneGlobalVariables.Stage;
+//using BulletBullet.SceneGlobalVariables.Stage;
 
 [RequireComponent(typeof(Move))]
 [RequireComponent(typeof(AreaWarp))]
@@ -34,12 +34,12 @@ public class PlayerMainProcess : MonoBehaviour
     void Awake()
     {
         MyNumber = 0;
-        SceneGlobalVariables.Instance.characterStatus.SetStatus(MyNumber, CharacterStatus.CharaStatus.Live);
+        //SceneGlobalVariables.Instance.characterStatus.SetStatus(MyNumber, CharacterStatus.CharaStatus.Live);
 
-        stageName = SceneGlobalVariables.Instance.characterStatus.GetStageName(MyNumber);
-        transform.position = SceneGlobalVariables.Instance.charaNowStage.SetPosition(stageName);
+        //stageName = SceneGlobalVariables.Instance.characterStatus.GetStageName(MyNumber);
+        //transform.position = SceneGlobalVariables.Instance.charaNowStage.SetPosition(stageName);
 
-        SceneGlobalVariables.Instance.characterStatus.SetPosition(MyNumber, transform.position);
+        //SceneGlobalVariables.Instance.characterStatus.SetPosition(MyNumber, transform.position);
 
         forceBullet = gameObject.GetComponentInChildren<ForceBullet>();
     }
@@ -48,7 +48,7 @@ public class PlayerMainProcess : MonoBehaviour
     void Update()
     {
 
-        SceneGlobalVariables.Instance.stopGameTime.StopGame();
+        //SceneGlobalVariables.Instance.stopGameTime.StopGame();
 
         //rayを銃口の向いてるほうに銃口からまっすぐ飛ばす
         ray = new Ray(Gun.transform.position, Gun.transform.forward);
@@ -69,27 +69,27 @@ public class PlayerMainProcess : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (SceneGlobalVariables.Instance.characterStatus.GetStatus(MyNumber) == CharacterStatus.CharaStatus.Live)
-        {
-            Hit = collider.gameObject.GetComponent<BulletProcess>().MyNumber;
-            SceneGlobalVariables.Instance.desInfo.AttackChara = Hit;
-            SceneGlobalVariables.Instance.desInfo.DesPosition = transform.position;
+    //    if (SceneGlobalVariables.Instance.characterStatus.GetStatus(MyNumber) == CharacterStatus.CharaStatus.Live)
+    //    {
+    //        Hit = collider.gameObject.GetComponent<BulletProcess>().MyNumber;
+    //        SceneGlobalVariables.Instance.desInfo.AttackChara = Hit;
+    //        SceneGlobalVariables.Instance.desInfo.DesPosition = transform.position;
 
-            SceneGlobalVariables.Instance.characterStatus.SetStatus(0, CharacterStatus.CharaStatus.die);
-            transform.position = SceneGlobalVariables.Instance.charaNowStage.SetDedPosition();
-            SceneGlobalVariables.Instance.characterStatus.SetPosition(MyNumber, transform.position);
-            SceneGlobalVariables.Instance.characterStatus.SetStageName(0, StageName.Disabled);
+    //        SceneGlobalVariables.Instance.characterStatus.SetStatus(0, CharacterStatus.CharaStatus.die);
+    //        transform.position = SceneGlobalVariables.Instance.charaNowStage.SetDedPosition();
+    //        SceneGlobalVariables.Instance.characterStatus.SetPosition(MyNumber, transform.position);
+    //        SceneGlobalVariables.Instance.characterStatus.SetStageName(0, StageName.Disabled);
 
 
-            StartCoroutine(SceneGlobalVariables.Instance.characterSpawn.Spawn(MyNumber, () =>
-           {
-               stageName = SceneGlobalVariables.Instance.characterStatus.GetStageName(MyNumber);
-               transform.position = SceneGlobalVariables.Instance.charaNowStage.SetPosition(stageName);
-               SceneGlobalVariables.Instance.characterStatus.SetStatus(MyNumber, CharacterStatus.CharaStatus.Live);
-               SceneGlobalVariables.Instance.characterStatus.SetPosition(MyNumber, transform.position);
-               SceneGlobalVariables.Instance.gunStatus.ResetBulletsNum();
-           }));
-        }
+    //        StartCoroutine(SceneGlobalVariables.Instance.characterSpawn.Spawn(MyNumber, () =>
+    //       {
+    //           stageName = SceneGlobalVariables.Instance.characterStatus.GetStageName(MyNumber);
+    //           transform.position = SceneGlobalVariables.Instance.charaNowStage.SetPosition(stageName);
+    //           SceneGlobalVariables.Instance.characterStatus.SetStatus(MyNumber, CharacterStatus.CharaStatus.Live);
+    //           SceneGlobalVariables.Instance.characterStatus.SetPosition(MyNumber, transform.position);
+    //           SceneGlobalVariables.Instance.gunStatus.ResetBulletsNum();
+    //       }));
+    //    }
     }
 }
 

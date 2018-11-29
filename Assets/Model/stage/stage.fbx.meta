@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 851948a9a5b1d864bb939b3e52822ad4
+guid: 4cd26b09506d2554b926f161f591a027
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: phong1
+    2100000: phong2
     2300000: //RootNode
     3300000: //RootNode
     4300000: pCube3
@@ -13,13 +13,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: phong1
-    second: {fileID: 2100000, guid: 4b9d0001dbb70f6428a21f8556537d78, type: 2}
+      name: phong2
+    second: {fileID: 2100000, guid: bc4055b2e2fc8c54abc31cb579f36cc4, type: 2}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
-      name: gawa
-    second: {fileID: 2800000, guid: aecc30901f178de49bb5d3923e1842b1, type: 3}
+      name: Stage_Box
+    second: {fileID: 2800000, guid: f439c36baa12c824f990db5152f7f92c, type: 3}
   materials:
     importMaterials: 1
     materialName: 0
@@ -50,7 +50,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 500
+    globalScale: 50
     meshCompression: 0
     addColliders: 0
     importVisibility: 1

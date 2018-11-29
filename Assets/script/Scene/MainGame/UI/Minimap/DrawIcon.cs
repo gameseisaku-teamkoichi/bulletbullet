@@ -26,25 +26,26 @@ public class DrawIcon : MonoBehaviour {
     private Vector3 YUp = new Vector3(0, 50, 0);
     private int CharaCount;
 
+    private PlayerMainProcess player;
+
     // Use this for initialization
     void Start () {
-        CharaCount = SceneGlobalVariables.Instance.characterStatus.GetCharaCount();
+        CharaCount = 0;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        SceneGlobalVariables.Instance.stopGameTime.StopGame();
         GetPos();
         Draw();
     }
 
     private void GetPos()
     {
-        PlayerPos = SceneGlobalVariables.Instance.characterStatus.GetPosition(0);
-        FastEnemyPos = SceneGlobalVariables.Instance.characterStatus.GetPosition(1);
-        SecondEnemyPos = SceneGlobalVariables.Instance.characterStatus.GetPosition(2);
-        ThirdEnemyPos = SceneGlobalVariables.Instance.characterStatus.GetPosition(3);
-        FourthEnemyPos = SceneGlobalVariables.Instance.characterStatus.GetPosition(4);
+        PlayerPos = player.CharacterMove.transform.position;
+        //FastEnemyPos = SceneGlobalVariables.Instance.characterStatus.GetPosition(1);
+        //SecondEnemyPos = SceneGlobalVariables.Instance.characterStatus.GetPosition(2);
+        //ThirdEnemyPos = SceneGlobalVariables.Instance.characterStatus.GetPosition(3);
+        //FourthEnemyPos = SceneGlobalVariables.Instance.characterStatus.GetPosition(4);
     }
 
     private void Draw()
