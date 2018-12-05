@@ -6,9 +6,15 @@ public class LaserPoint : MonoBehaviour
 {
     public LayerMask mask;
 
+    public GameObject muzzle;
+
+    private LineRenderer laser;
+
     private void Start()
     {
-        mask = -1;   
+        mask = -1;
+
+        laser = GetComponent<LineRenderer>();
     }
 
     public void Point(Ray ray)
@@ -17,7 +23,9 @@ public class LaserPoint : MonoBehaviour
         RaycastHit hit;
 
         //物理コリジョン判定をさせるためにレイをレイキャストしてあたったかどうか返す
-        bool isHit = Physics.Raycast(ray, out hit, 1000.0f, mask);
+        bool isHit = Physics.Raycast(ray, out hit,100000000000.0f,mask);
+
+        laser.SetPosition(0, muzzle.transform.position);
 
         //あたっているなら
         if (isHit)
@@ -55,17 +63,19 @@ public class LaserPoint : MonoBehaviour
             //}
 
             //（デバッグ用）新しい反射用レイを作成する
-            Ray reflect_ray = new Ray(position, reflect_direction);
+            //Ray reflect_ray = new Ray(position, reflect_direction);
 
             //（デバッグ用）レイを画面に表示する
-            Debug.DrawLine(reflect_ray.origin, reflect_ray.origin + reflect_ray.direction *hit.distance, Color.blue, 0);
+            //Debug.DrawLine(reflect_ray.origin, reflect_ray.origin + reflect_ray.direction *hit.distance, Color.blue, 0);
+
+            laser.SetPosition(1, position);
 
         }
 
         ////////////// デバッグ用 ////////////////
 
         //（デバッグ用）発射レイを表示
-        Debug.DrawLine(ray.origin, ray.origin + ray.direction * hit.distance, Color.red, 0);
+        //Debug.DrawLine(ray.origin, ray.origin + ray.direction * hit.distance, Color.red, 0);
 
     }
 }

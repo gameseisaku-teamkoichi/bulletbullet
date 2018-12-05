@@ -52,4 +52,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enemy: {fileID: 1038171924660840, guid: 0a596958eaba2f64fb6dff96c27fbcbb, type: 2}
-  Player: {fileID: 1272296243525154, guid: a2f16d1c4e959874ab656383e7ef3c6d, type: 2}
+  Player: {fileID: 1550344550245026, guid: a2f16d1c4e959874ab656383e7ef3c6d, type: 2}

@@ -41,22 +41,29 @@ public class Move : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, TraGetRotation, Time.deltaTime * RotationSpeed);
 
             TraGetPosition += Camera.StickMove.hRotation * Velocity;
-        }
-
-        //rayを動いた先の地面の方向に飛ばす
-        Ray ray = new Ray(TraGetPosition + Vector3.up, Vector3.down);
-        //Rayが当たっていれば動ける
-        if (Physics.Raycast(ray, out hit, 1000))
-        {
             transform.position = TraGetPosition;
-            //SceneGlobalVariables.Instance.characterStatus.SetPosition(0, transform.position);
-            //SceneGlobalVariables.Instance.characterStatus.SetPosition(0, transform.position);
+
             isPlayerMove = true;
         }
         else
         {
             isPlayerMove = false;
         }
+
+        ////rayを動いた先の地面の方向に飛ばす
+        //Ray ray = new Ray(TraGetPosition + Vector3.up, Vector3.down);
+        ////Rayが当たっていれば動ける
+        //if (Physics.Raycast(ray, out hit, 1000))
+        //{
+        //    transform.position = TraGetPosition;
+        //    //SceneGlobalVariables.Instance.characterStatus.SetPosition(0, transform.position);
+        //    //SceneGlobalVariables.Instance.characterStatus.SetPosition(0, transform.position);
+        //    isPlayerMove = true;
+        //}
+        //else
+        //{
+        //    isPlayerMove = false;
+        //}
 
     }
 }
