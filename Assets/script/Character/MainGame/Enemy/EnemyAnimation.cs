@@ -7,10 +7,10 @@ public class EnemyAnimation : MonoBehaviour
 
     private Animator anim;
 
-    public EnemyMove move { get { return this.defaltMove ?? (this.defaltMove = gameObject.GetComponentInParent<EnemyMove>()); } }
-    EnemyMove defaltMove;
-    public EnemyMainProcess eMain { get { return this.enemyMain ?? (this.enemyMain = gameObject.GetComponentInParent<EnemyMainProcess>()); } }
-    EnemyMainProcess enemyMain;
+    public E_Move move { get { return this.defaltMove ?? (this.defaltMove = gameObject.GetComponent<E_Move>()); } }
+    E_Move defaltMove;
+    //public EnemyMainProcess eMain { get { return this.enemyMain ?? (this.enemyMain = gameObject.GetComponentInParent<EnemyMainProcess>()); } }
+    //EnemyMainProcess enemyMain;
 
     // Use this for initialization
     void Start()
@@ -22,7 +22,7 @@ public class EnemyAnimation : MonoBehaviour
     void Update()
     {
         
-        if (move.differentMoveFlag == true)
+        if (move.isMove == true)
         {
             anim.SetBool("Walk", true);
         }
@@ -31,14 +31,14 @@ public class EnemyAnimation : MonoBehaviour
             anim.SetBool("Walk", false);
         }
 
-        if (eMain.fireFlag == false)
-        {
-            anim.SetBool("Shoot", true);
-        }
-        else
-        {
-            anim.SetBool("Shoot", false);
-        }
+        //if (eMain.fireFlag == false)
+        //{
+        //    anim.SetBool("Shoot", true);
+        //}
+        //else
+        //{
+        //    anim.SetBool("Shoot", false);
+        //}
 
     }
 }

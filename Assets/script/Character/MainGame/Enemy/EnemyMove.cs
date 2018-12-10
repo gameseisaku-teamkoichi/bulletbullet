@@ -50,7 +50,7 @@ public class EnemyMove : MonoBehaviour
 
     public void Start()
     {
-        controller = GetComponent<CharacterController>();
+        //controller = GetComponent<CharacterController>();
 
         timeOut = 1.5f;
         timeCount = 0;
