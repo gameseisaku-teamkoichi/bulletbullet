@@ -22,7 +22,7 @@ public class EnemyAnimation : MonoBehaviour
     void Update()
     {
         
-        if (move.differentMoveFlag == false)
+        if (move.differentMoveFlag == true)
         {
             anim.SetBool("Walk", true);
         }

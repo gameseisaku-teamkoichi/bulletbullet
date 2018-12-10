@@ -20,7 +20,7 @@ public class BulletProcess : MonoBehaviour {
 
     void Start()
     {
-        MaxCount = SceneGlobalVariables.Instance.gunStatus.GetBulletCount();
+        //MaxCount = SceneGlobalVariables.Instance.gunStatus.GetBulletCount();
         // countを目的の値に徐々に変える
         DOTween.To(
             () => Timecount,         // 対象の値
@@ -44,9 +44,9 @@ public class BulletProcess : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        if(SceneGlobalVariables.Instance.characterStatus.GetStatus(MyNumber) != CharacterStatus.CharaStatus.Live)
-        {
-            Destroy(gameObject);
-        }
+        //if(SceneGlobalVariables.Instance.characterStatus.GetStatus(MyNumber) != CharacterStatus.CharaStatus.Live)
+        //{
+        //    Destroy(gameObject);
+        //}
     }
 }

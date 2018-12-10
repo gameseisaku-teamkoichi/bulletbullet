@@ -7,6 +7,15 @@ using UnityEngine;
 
 public class EnemyMove : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject enemy_1;
+
+    [SerializeField]
+    private GameObject enemy_2;
+
+    [SerializeField]
+    private GameObject enemy_3;
+
 
     CharaNum charaNum;
     StageName stageName;
@@ -43,12 +52,25 @@ public class EnemyMove : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
 
-        velocity.x = -0.2f;
         timeOut = 1.5f;
         timeCount = 0;
-        directCount = Random.Range(0, 10);
 
-        movePower = 2.0f;
+        if(this.gameObject==enemy_1)
+        {
+            directCount = 0;
+        }
+        
+        else if(this.gameObject==enemy_2)
+        {
+
+        }
+
+        else if(this.gameObject==enemy_3)
+        {
+
+        }
+
+        movePower = 10.0f;
 
         differentMoveFlag = false;
 
@@ -58,15 +80,15 @@ public class EnemyMove : MonoBehaviour
 
     public void enemyMove()
     {
-        if (differentMoveFlag)
-        {
-            provisionalValue = directCount;
-            do
-            {
-                directCount = Random.Range(0, 10);
-            } while (provisionalValue == directCount);
+        //if (differentMoveFlag)
+        //{
+        //    provisionalValue = directCount;
+        //    do
+        //    {
+        //        directCount = Random.Range(0, 10);
+        //    } while (provisionalValue == directCount);
 
-        }
+        //}
         switch (directCount)
         {
             //+z方向へ
@@ -136,23 +158,46 @@ public class EnemyMove : MonoBehaviour
             TraGetPosition += transform.rotation * velocity;
         }
 
-        //rayを動いた先の地面の方向に飛ばす
-        Ray ray = new Ray(TraGetPosition + Vector3.up, Vector3.down);
-        //Rayが当たっていれば動ける
-        if (Physics.Raycast(ray, out hit, 1000))
+        transform.position = TraGetPosition;
+        if(directCount!=8)
         {
-            transform.position = TraGetPosition;
-            differentMoveFlag = false;
+            differentMoveFlag = true;              //falseの時はwaitのモーション
         }
         else
         {
-            //当たっていなければ向きを変える
-            differentMoveFlag = true;
+            differentMoveFlag = false;               //trueの時はwalkのモーション
         }
 
-        if(directCount==8||directCount==9)
+        if(directCount==8)
         {
-            differentMoveFlag = true;
+            for(int i=270;i<=90;i-=5)
+            {
+                enemy_1.transform.rotation = Quaternion.Euler(0, i, 0);
+            }
         }
+
+
+        if(transform.position.x<=-385&&transform.position.z<=-152)
+        {
+            directCount = 8;
+        }
+
+        
+
+
+        //rayを動いた先の地面の方向に飛ばす
+        //Ray ray = new Ray(TraGetPosition + Vector3.up, Vector3.down);
+        ////Rayが当たっていれば動ける
+        //if (Physics.Raycast(ray, out hit, 1000))
+        //{
+        //    transform.position = TraGetPosition;
+        //    differentMoveFlag = false;
+        //}
+        //else
+        //{
+        //    //当たっていなければ向きを変える
+        //    differentMoveFlag = true;
+        //}
+
     }
 }
