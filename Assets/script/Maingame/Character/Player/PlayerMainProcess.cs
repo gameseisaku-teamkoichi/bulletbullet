@@ -23,6 +23,15 @@ public class PlayerMainProcess : MonoBehaviour
     LaserPoint laserPoint;
     #endregion
 
+    public enum Status
+    {
+        active,
+        notactive
+    }
+    public GameObject SubCamera;
+    public GameObject canvas;
+    public GameObject Minimap;
+
     public GameObject Gun;
     private ForceBullet forceBullet;
     CharaNum charaNum;
@@ -34,8 +43,8 @@ public class PlayerMainProcess : MonoBehaviour
 
     float SpawnTime = 5.0f;
     string currentScene;
+    Vector3 HitEnemyPos;
     // Use this for initialization
-
     void Start()
     {
         currentScene = SceneManager.GetActiveScene().name;
@@ -107,7 +116,7 @@ public class PlayerMainProcess : MonoBehaviour
                }));
             }
         }
-        else
+        else if(collider.gameObject.tag!="goal")
         {
             StartCoroutine("Die");
         }
@@ -115,14 +124,35 @@ public class PlayerMainProcess : MonoBehaviour
 
     private IEnumerator Die()
     {
+        UIStatus(Status.active);
         SceneGlobalVariables.Instance.characterStatus.SetStatus(0, CharacterStatus.CharaStatus.die);
         transform.position = SceneGlobalVariables.Instance.charaNowStage.SetDedPosition();
 
         yield return new WaitForSeconds(SpawnTime);
 
+        UIStatus(Status.notactive);
         SceneGlobalVariables.Instance.characterStatus.SetStatus(0, CharacterStatus.CharaStatus.Live);
         transform.position = SceneGlobalVariables.Instance.charaNowStage.SetSpawnPosition();
         SceneGlobalVariables.Instance.gunStatus.Reloading();
+    }
+
+
+    public void UIStatus(Status UIstatus)
+    {
+        switch (UIstatus)
+        {
+            case Status.active:
+                SubCamera.transform.position = transform.position;
+                SubCamera.SetActive(true);
+                canvas.SetActive(false);
+                Minimap.SetActive(false);
+                break;
+            case Status.notactive:
+                SubCamera.SetActive(false);
+                canvas.SetActive(true);
+                Minimap.SetActive(true);
+                break;
+        }
     }
 }
 
