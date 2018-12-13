@@ -4,9 +4,24 @@ using UnityEngine;
 
 public class Goal : MonoBehaviour {
 
-    private void OnTriggerEnter(Collider collider)
+    public bool isGoal;
+
+	// Use this for initialization
+	void Awake () {
+
+        isGoal = false;
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+
+    private void OnCollisionEnter(Collision collision)
     {
-        GameOver End = GetComponent<GameOver>();
-        End.IsGameOver();
+        if(collision.gameObject.tag=="Player")
+        {
+            isGoal = true;
+        }
     }
 }
