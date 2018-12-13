@@ -27,15 +27,6 @@ public class PlayerMainProcess : MonoBehaviour
     GameOver gameEnd;
     #endregion
 
-    public enum Status
-    {
-        active,
-        notactive
-    }
-    public GameObject SubCamera;
-    public GameObject canvas;
-    public GameObject Minimap;
-
     public GameObject Gun;
     private ForceBullet forceBullet;
     private EnemyFind eFind;
@@ -50,8 +41,8 @@ public class PlayerMainProcess : MonoBehaviour
 
     float SpawnTime = 5.0f;
     string currentScene;
-    Vector3 HitEnemyPos;
     // Use this for initialization
+
     void Start()
     {
         currentScene = SceneManager.GetActiveScene().name;
@@ -143,55 +134,21 @@ public class PlayerMainProcess : MonoBehaviour
                }));
             }
         }
-<<<<<<< HEAD
-        else if(collider.gameObject.tag!="goal")
-        {
-            StartCoroutine("Die");
-        }
-=======
         
->>>>>>> develop_2
     }
 
     private IEnumerator Die()
     {
-<<<<<<< HEAD
-        UIStatus(Status.active);
-        SceneGlobalVariables.Instance.characterStatus.SetStatus(0, CharacterStatus.CharaStatus.die);
-        transform.position = SceneGlobalVariables.Instance.charaNowStage.SetDedPosition();
-
-=======
->>>>>>> develop_2
         yield return new WaitForSeconds(SpawnTime);
         SceneGlobalVariables.Instance.characterStatus.SetStatus(0, CharacterStatus.CharaStatus.die);
         //transform.position = SceneGlobalVariables.Instance.charaNowStage.SetDedPosition();
         
 
-        UIStatus(Status.notactive);
         SceneGlobalVariables.Instance.characterStatus.SetStatus(0, CharacterStatus.CharaStatus.Live);
         transform.position = SceneGlobalVariables.Instance.charaNowStage.SetSpawnPosition();
         SceneGlobalVariables.Instance.gunStatus.Reloading();
 
         eFind.isPlayerDie = false;
-    }
-
-
-    public void UIStatus(Status UIstatus)
-    {
-        switch (UIstatus)
-        {
-            case Status.active:
-                SubCamera.transform.position = transform.position;
-                SubCamera.SetActive(true);
-                canvas.SetActive(false);
-                Minimap.SetActive(false);
-                break;
-            case Status.notactive:
-                SubCamera.SetActive(false);
-                canvas.SetActive(true);
-                Minimap.SetActive(true);
-                break;
-        }
     }
 }
 

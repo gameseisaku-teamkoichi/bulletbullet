@@ -34,11 +34,7 @@ public class MainGame2Manager : MonoBehaviour {
     private int seconds;
     private int TimeLimit_minute;
     private int TimeLimit_seconds;
-<<<<<<< HEAD
-    private const float TimeLimit = 119.0f;//制限時間
-=======
     private const float TimeLimit = 120.0f;//制限時間
->>>>>>> develop_2
     private float NowTime;
 
     public static int Score;
