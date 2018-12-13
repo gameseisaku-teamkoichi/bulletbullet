@@ -24,16 +24,17 @@ public class MainGame2Manager : MonoBehaviour {
     #endregion
 
     public SubCamera subCamera;
+    public Goal goal;
 
     [SerializeField]
-    private Text timerText;
+    private Text timerText; 
 
     private Text countdownText;
     private int minute;
     private int seconds;
     private int TimeLimit_minute;
     private int TimeLimit_seconds;
-    private const float TimeLimit = 2.0f;//制限時間
+    private const float TimeLimit = 120.0f;//制限時間
     private float NowTime;
 
     public static int Score;
@@ -45,6 +46,8 @@ public class MainGame2Manager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+
+        goal = GameObject.Find("Goal").GetComponent<Goal>();
 
         NowTime = 0;
 
@@ -68,17 +71,29 @@ public class MainGame2Manager : MonoBehaviour {
             End.IsGameOver();
         }
 
-        Timer();
+        if(goal.isGoal)
+        {
+            End.IsGameOver();
+        }
+        
+
+            Timer();
     }
     private void Timer()
     {
         minute = (int)NowTime / 60;
         seconds = (int)NowTime % 60;
 
+        if(TimeLimit_minute>0&&TimeLimit_seconds==0)
+        {
+            TimeLimit_seconds = 59;
+            TimeLimit_minute -= 1;
+        }
+
         minute = TimeLimit_minute - minute;
         seconds = TimeLimit_seconds - seconds;
 
-        if(seconds>=0)
-        timerText.text = minute.ToString("00") + ":" + seconds.ToString("00");
+        if (seconds >= 0 && minute > 0)
+            timerText.text = minute.ToString("00") + ":" + seconds.ToString("00");
     }
 }
