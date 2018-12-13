@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Move))]
 [RequireComponent(typeof(AreaWarp))]
 [RequireComponent(typeof(LaserPoint))]
+[RequireComponent(typeof(GameOver))]
 
 public class PlayerMainProcess : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class PlayerMainProcess : MonoBehaviour
 
     public LaserPoint CharactePoint { get { return this.laserPoint ?? (this.laserPoint = GetComponent<LaserPoint>()); } }
     LaserPoint laserPoint;
+
+    public GameOver End { get { return this.gameEnd ?? (this.gameEnd = GetComponent<GameOver>()); } }
+    GameOver gameEnd;
     #endregion
 
     public enum Status
@@ -34,12 +38,15 @@ public class PlayerMainProcess : MonoBehaviour
 
     public GameObject Gun;
     private ForceBullet forceBullet;
+    private EnemyFind eFind;
     CharaNum charaNum;
     StageName stageName;
     Ray ray;
     Ray Gunray;
     public int MyNumber;
     int Hit;
+
+    private float oldFire;
 
     float SpawnTime = 5.0f;
     string currentScene;
@@ -61,33 +68,53 @@ public class PlayerMainProcess : MonoBehaviour
         SceneGlobalVariables.Instance.characterStatus.SetPosition(MyNumber, transform.position);
 
         forceBullet = gameObject.GetComponentInChildren<ForceBullet>();
+        eFind = GameObject.Find("FindArea").GetComponent<EnemyFind>();
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        //SceneGlobalVariables.Instance.stopGameTime.StopGame();
-
-        //rayを銃口の向いてるほうに銃口からまっすぐ飛ばす
-        ray = new Ray(Gun.transform.position, Gun.transform.forward);
-        CharactePoint.Point(ray);
-
-        if (SceneGlobalVariables.Instance.characterStatus.GetStatus(MyNumber) == CharacterStatus.CharaStatus.Live)
+        if (eFind.isPlayerDie)      //敵に見つかったとき
         {
-            CharacterMove.CharaMove();
+            transform.position = new Vector3(-256, 41.38f, -1.0f);
+            StartCoroutine("Die");
         }
-
-        if (Input.GetButton("SkillB") && currentScene == "MainGame")
+        else
         {
-            CharacterWarp.Warp(ray);
+            //SceneGlobalVariables.Instance.stopGameTime.StopGame();
+
+            //rayを銃口の向いてるほうに銃口からまっすぐ飛ばす
+            ray = new Ray(Gun.transform.position, Gun.transform.forward);
+            CharactePoint.Point(ray);
+
+            if (SceneGlobalVariables.Instance.characterStatus.GetStatus(MyNumber) == CharacterStatus.CharaStatus.Live)
+            {
+                CharacterMove.CharaMove();
+            }
+
+            if (Input.GetButton("SkillB") && currentScene == "MainGame")
+            {
+                CharacterWarp.Warp(ray);
+            }
+
+
+            Gunray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            forceBullet.transform.rotation = Quaternion.LookRotation(Gunray.direction);
+            oldFire = forceBullet.Axis;
+            forceBullet.Axis = Input.GetAxis("Fire");
+
+            if (oldFire != forceBullet.Axis)
+            {
+                forceBullet.StartFire();
+            }
+
+            if (transform.position.x > -15.0f && transform.position.x < 0.66f && transform.position.z > 0.32f && transform.position.z < 16.31f)
+            {
+                End.IsGameOver();
+            }
         }
-
-
-        Gunray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        forceBullet.transform.rotation = Quaternion.LookRotation(Gunray.direction);
-        forceBullet.Axis = Input.GetAxis("Fire");
-        forceBullet.StartFire();
+        
     }
 
     private void OnTriggerEnter(Collider collider)
@@ -116,24 +143,36 @@ public class PlayerMainProcess : MonoBehaviour
                }));
             }
         }
+<<<<<<< HEAD
         else if(collider.gameObject.tag!="goal")
         {
             StartCoroutine("Die");
         }
+=======
+        
+>>>>>>> develop_2
     }
 
     private IEnumerator Die()
     {
+<<<<<<< HEAD
         UIStatus(Status.active);
         SceneGlobalVariables.Instance.characterStatus.SetStatus(0, CharacterStatus.CharaStatus.die);
         transform.position = SceneGlobalVariables.Instance.charaNowStage.SetDedPosition();
 
+=======
+>>>>>>> develop_2
         yield return new WaitForSeconds(SpawnTime);
+        SceneGlobalVariables.Instance.characterStatus.SetStatus(0, CharacterStatus.CharaStatus.die);
+        //transform.position = SceneGlobalVariables.Instance.charaNowStage.SetDedPosition();
+        
 
         UIStatus(Status.notactive);
         SceneGlobalVariables.Instance.characterStatus.SetStatus(0, CharacterStatus.CharaStatus.Live);
         transform.position = SceneGlobalVariables.Instance.charaNowStage.SetSpawnPosition();
         SceneGlobalVariables.Instance.gunStatus.Reloading();
+
+        eFind.isPlayerDie = false;
     }
 
 
