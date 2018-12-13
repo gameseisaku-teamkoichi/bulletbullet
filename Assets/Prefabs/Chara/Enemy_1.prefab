@@ -896,11 +896,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4898866364484394}
   - component: {fileID: 95183394082377468}
-  - component: {fileID: 114449014856373132}
-  - component: {fileID: 114827602791077800}
+  - component: {fileID: 65860811800084842}
+  - component: {fileID: 114053953727835172}
+  - component: {fileID: 114017831948712126}
+  - component: {fileID: 114925846129155756}
   m_Layer: 0
   m_Name: Enemy_1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2841,8 +2843,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1564252348691522}
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: -332.2, y: 40.98, z: -43.7}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
+  m_LocalPosition: {x: -293.8, y: 40.98, z: 2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4071705987518070}
@@ -3033,6 +3035,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1431839691568468}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &65860811800084842
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1564252348691522}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5, y: 10.353313, z: 8.343868}
+  m_Center: {x: -2.3324958e-16, y: 4.6766567, z: 0.14141345}
 --- !u!95 &95183394082377468
 Animator:
   serializedVersion: 3
@@ -3042,7 +3056,7 @@ Animator:
   m_GameObject: {fileID: 1564252348691522}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 5f24c24b1995f824c8cab92751c12869, type: 3}
-  m_Controller: {fileID: 9100000, guid: f41c63db80e922c4cbfefb2c1dbcf530, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3639b871362d77d4ab353782fb4ddc69, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -3051,7 +3065,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114449014856373132
+--- !u!114 &114017831948712126
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3059,9 +3073,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 1564252348691522}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 389caa52abb12504aa2596fa00a3d717, type: 3}
+  m_Script: {fileID: 11500000, guid: 772ec4e77aae01e4ebcfede3b5c89fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bullet: {fileID: 0}
+  MyNumber: 0
+--- !u!114 &114053953727835172
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1564252348691522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51fdf5eba0385c24489d4b57c8a6a1f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy1: {fileID: 1564252348691522}
+  enemy2: {fileID: 0}
+  player: {fileID: 0}
+  limitMaxPosition:
+  - {x: -311, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  limitMinPosition:
+  - {x: -255, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  isMove: 0
 --- !u!114 &114679271606273172
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3079,22 +3118,19 @@ MonoBehaviour:
   Axis: 0
   FireFlag: 0
   PFireMosionFlag: 0
-  EFireMosionFlag: 0
   rotation: {x: 0, y: 0, z: 0, w: 0}
   quaternion: {x: 0, y: 0, z: 0, w: 0}
-  bulletPower: 0
---- !u!114 &114827602791077800
+--- !u!114 &114925846129155756
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1564252348691522}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02fb34c57481cb34c98811e8f2275d9b, type: 3}
+  m_Script: {fileID: 11500000, guid: 289b458fde8bcdb4584a1187e34b6363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMove: 0
 --- !u!137 &137184440687223496
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

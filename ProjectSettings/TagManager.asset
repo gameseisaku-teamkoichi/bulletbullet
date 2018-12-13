@@ -4,8 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Shootable
-  - goal
+  - Enemy
+  - Enemy2
   layers:
   - Default
   - TransparentFX
