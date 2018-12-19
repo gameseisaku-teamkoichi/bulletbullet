@@ -10,14 +10,12 @@ public class Move : MonoBehaviour
     public Vector3 TraGetPosition;//この数値だけ変更して動いた先に地面があるか判定するのに使用
     private Quaternion TraGetRotation;
 
-    private  float MoveSpeed = 20.0f;//キャラの移動速度
+    private  float MoveSpeed = 25.0f;//キャラの移動速度
     private const float RotationSpeed = 7.0f;//キャラの速度
 
     public CameraMove Camera;
 
     public bool isPlayerMove = false;
-
-    float Axis;
     RaycastHit hit;
     // Use this for initialization
     void Start()
@@ -29,16 +27,7 @@ public class Move : MonoBehaviour
     {
 
         TraGetPosition = transform.position;
-        Axis =  Input.GetAxis("Fire");
-        if (Axis>0)
-        {
-            MoveSpeed = 35.0f;
-        }
-        else
-        {
-            MoveSpeed = 18.0f;
-        }
-
+        
         Velocity = Vector3.zero;
         Velocity.z += Input.GetAxis("Vertical");
         Velocity.x += Input.GetAxis("Horizontal");

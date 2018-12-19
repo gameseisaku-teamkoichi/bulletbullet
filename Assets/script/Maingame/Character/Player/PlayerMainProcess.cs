@@ -44,6 +44,7 @@ public class PlayerMainProcess : MonoBehaviour
     float SpawnTime = 5.0f;
     string currentScene;
     Vector3 HitEnemyPos;
+    float Axis;
     // Use this for initialization
     void Start()
     {
@@ -71,7 +72,12 @@ public class PlayerMainProcess : MonoBehaviour
 
         //rayを銃口の向いてるほうに銃口からまっすぐ飛ばす
         ray = new Ray(Gun.transform.position, Gun.transform.forward);
-        CharactePoint.Point(ray);
+
+        if (Input.GetButton("Fire3"))
+        {
+            CharactePoint.Point(ray);
+            forceBullet.Axis = Input.GetAxis("Fire");
+        }
 
         if (SceneGlobalVariables.Instance.characterStatus.GetStatus(MyNumber) == CharacterStatus.CharaStatus.Live)
         {
@@ -86,7 +92,6 @@ public class PlayerMainProcess : MonoBehaviour
 
         Gunray = Camera.main.ScreenPointToRay(Input.mousePosition);
         forceBullet.transform.rotation = Quaternion.LookRotation(Gunray.direction);
-        forceBullet.Axis = Input.GetAxis("Fire");
         forceBullet.StartFire();
     }
 
