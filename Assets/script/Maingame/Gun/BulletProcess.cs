@@ -48,12 +48,5 @@ public class BulletProcess : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-
-        if(collision.gameObject.tag=="Enemy")
-        {
-            Destroy(collision.gameObject);
-            Destroy(GameObject.Find("FindArea"));
-        }
-        
     }
 }

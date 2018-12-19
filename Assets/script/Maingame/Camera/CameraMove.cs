@@ -15,22 +15,16 @@ public class CameraMove : MonoBehaviour
     CheckObstacles checkObstacles;
 
     public Transform Player;//注視する対象
-    public Transform Enemy;//見つかったときに中止する対象
     private Vector3 PlayerPosition;
     private float Distance = 8.0f;//可変の対象とカメラの距離
 
-    private Vector3 value = new Vector3(0.0f, 10.0f, 0.0f);//カメラの位置の微調整
-
-    private Vector3 dieValue = new Vector3(0.0f, 10.0f, 10.0f);
+    private Vector3 value = new Vector3(0.0f, 8.0f, 0.0f);//カメラの位置の微調整
     private Vector3 Position;//カメラの移動適用前のポジション
     private Quaternion Rotation;//カメラの移動適用前のローテーション
-
-    private EnemyFind eFind;
 
     // Use this for initialization
     void Start()
     {
-        eFind = GameObject.Find("FindArea").GetComponent<EnemyFind>();
     }
 
     // Update is called once per frame
@@ -42,44 +36,20 @@ public class CameraMove : MonoBehaviour
             return;
         }
 
-        if (eFind.isFind)
+        //かめらを初期値に戻す
+        if (Input.GetButton("Reset"))
         {
-            StartCoroutine(deadCamera());
-        }
-        else
-        {
-            //かめらを初期値に戻す
-            if (Input.GetButton("Reset"))
-            {
-                StickMove.CameraPosReset();
-            }
-
-
-            //スティックでカメラの移動
-            StickMove.StickMove();
-
-            Position = Player.position + value - transform.rotation * Vector3.forward * Distance;
-
-            //カメラが壁に当たっているかどうか
-            //CheckObj.Check(Position, Player.position);
-
-            transform.position = Position;
+            StickMove.CameraPosReset();
         }
 
 
-    }
-    IEnumerator deadCamera()
-    {
-        transform.position = Player.position + dieValue - transform.rotation * Vector3.forward * Distance;
-        var aim = Enemy.position - transform.position;
-        var look = Quaternion.LookRotation(aim, Vector3.up);
-        transform.localRotation = look;
+        //スティックでカメラの移動
+        StickMove.StickMove();
 
-        for (int i = 0; i < 120; i++)
-        {
-            transform.position += transform.forward * 0.1f;
-        }
-        yield return new WaitForSeconds(5.0f);
-        eFind.isFind = false;
+        Position = Player.position + value - transform.rotation * Vector3.forward * Distance;
+
+        //カメラが壁に当たっているかどうか
+        CheckObj.Check(Position, Player.position);
+
     }
 }
