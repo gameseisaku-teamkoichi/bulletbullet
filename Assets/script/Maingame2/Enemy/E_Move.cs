@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BulletBullet.SceneGlobalVariables.Stage;
 
 public class E_Move : MonoBehaviour
 {
@@ -142,6 +143,8 @@ public class E_Move : MonoBehaviour
                 isMove = true;
             }
         }
+
+        SceneGlobalVariables.Instance.characterStatus.SetPosition(enemyNumber, transform.position);
     }
 
     void Rotation(int num)
