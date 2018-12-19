@@ -45,9 +45,12 @@ public class PlayerMainProcess : MonoBehaviour
     string currentScene;
     Vector3 HitEnemyPos;
     float Axis;
+
+    private LineRenderer la;
     // Use this for initialization
     void Start()
     {
+        la = GetComponent<LineRenderer>();
         currentScene = SceneManager.GetActiveScene().name;
         MyNumber = 0;
 
@@ -78,7 +81,13 @@ public class PlayerMainProcess : MonoBehaviour
             CharactePoint.Point(ray);
             forceBullet.Axis = Input.GetAxis("Fire");
         }
+        else
+        {
+            la.SetPosition(0, new Vector3(0, -1000 ,0));
+            la.SetPosition(0, new Vector3(0, -1000, 0));
+            la.SetPosition(0, new Vector3(0, -1000, 0));
 
+        }
         if (SceneGlobalVariables.Instance.characterStatus.GetStatus(MyNumber) == CharacterStatus.CharaStatus.Live)
         {
             CharacterMove.CharaMove();
