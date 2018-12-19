@@ -144,7 +144,7 @@ public class E_Move : MonoBehaviour
             }
         }
 
-        SceneGlobalVariables.Instance.characterStatus.SetPosition(enemyNumber, transform.position);
+        SceneGlobalVariables.Instance.characterStatus.SetPosition(1, transform.position);
     }
 
     void Rotation(int num)
