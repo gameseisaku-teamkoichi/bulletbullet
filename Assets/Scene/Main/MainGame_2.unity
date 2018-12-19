@@ -217,6 +217,11 @@ Prefab:
       propertyPath: Minimap
       value: 
       objectReference: {fileID: 409306453}
+    - target: {fileID: 54915284464021256, guid: a2f16d1c4e959874ab656383e7ef3c6d,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 116
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 136540771000115222, guid: a2f16d1c4e959874ab656383e7ef3c6d, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: a2f16d1c4e959874ab656383e7ef3c6d, type: 2}
@@ -1462,7 +1467,7 @@ BoxCollider:
   m_GameObject: {fileID: 537437495}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 10.353313, z: 8.343868}
   m_Center: {x: -2.3324958e-16, y: 4.6766567, z: 0.14141345}
@@ -1979,6 +1984,11 @@ Prefab:
     - target: {fileID: 4898866364484394, guid: ee07476f63a2efa49b669ebfd6f75d98, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 65860811800084842, guid: ee07476f63a2efa49b669ebfd6f75d98,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114827602791077800, guid: ee07476f63a2efa49b669ebfd6f75d98, type: 2}
@@ -3987,7 +3997,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8c14c5e65ab46a43a226529619cbd9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGoal: 0
 --- !u!114 &1754407059
 MonoBehaviour:
   m_ObjectHideFlags: 0
