@@ -83,9 +83,9 @@ public class PlayerMainProcess : MonoBehaviour
         }
         else
         {
-            la.SetPosition(0, new Vector3(0, -1000 ,0));
-            la.SetPosition(0, new Vector3(0, -1000, 0));
-            la.SetPosition(0, new Vector3(0, -1000, 0));
+            la.SetPosition(0, new Vector3(1000, 1000 ,1000));
+            la.SetPosition(1, new Vector3(1000, 1000, 1000));
+            la.SetPosition(2, new Vector3(1000, 1000, 1000));
 
         }
         if (SceneGlobalVariables.Instance.characterStatus.GetStatus(MyNumber) == CharacterStatus.CharaStatus.Live)
@@ -126,7 +126,6 @@ public class PlayerMainProcess : MonoBehaviour
                    transform.position = SceneGlobalVariables.Instance.charaNowStage.SetPosition(stageName);
                    SceneGlobalVariables.Instance.characterStatus.SetStatus(MyNumber, CharacterStatus.CharaStatus.Live);
                    SceneGlobalVariables.Instance.characterStatus.SetPosition(MyNumber, transform.position);
-                   SceneGlobalVariables.Instance.gunStatus.ResetBulletsNum();
                }));
             }
         }
@@ -147,7 +146,6 @@ public class PlayerMainProcess : MonoBehaviour
         UIStatus(Status.notactive);
         SceneGlobalVariables.Instance.characterStatus.SetStatus(0, CharacterStatus.CharaStatus.Live);
         transform.position = SceneGlobalVariables.Instance.charaNowStage.SetSpawnPosition();
-        SceneGlobalVariables.Instance.gunStatus.Reloading();
     }
 
 

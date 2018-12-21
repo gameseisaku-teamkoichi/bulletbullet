@@ -4,8 +4,13 @@ using UnityEngine;
 using BulletBullet.SceneGlobalVariables.Stage;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(GunStatus))]
+
 public class ForceBullet : MonoBehaviour
 {
+    public GunStatus gunStatus { get { return this.Status ?? (this.Status = GetComponent<GunStatus>()); } }
+    GunStatus Status;
+
     [SerializeField]
     private GameObject bulletPrefab;
     [SerializeField]
@@ -34,8 +39,10 @@ public class ForceBullet : MonoBehaviour
     string currentScene;
     void Start()
     {
-        playerBulletPower = SceneGlobalVariables.Instance.gunStatus.GetBulletPower();
+        playerBulletPower = SceneGlobalVariables.Instance.gun.GetBulletPower();
         currentScene = SceneManager.GetActiveScene().name;
+
+        
         if (currentScene == "MainGame")
         {
             enemyBulletPower = playerBulletPower / 7;
@@ -81,7 +88,7 @@ public class ForceBullet : MonoBehaviour
     private bool FireJudge(float oldAxis, float axis)
     {
         bool flag = false;
-        ActiveBullet = SceneGlobalVariables.Instance.gunStatus.GetActiveBullet();
+        ActiveBullet = gunStatus.GetActiveBullet();
         if (oldAxis == value && axis < value)
         {
             flag = true;
@@ -118,13 +125,13 @@ public class ForceBullet : MonoBehaviour
             PFireMosionFlag = true;
             Reloadflag = false;
             Fire();
-            SceneGlobalVariables.Instance.gunStatus.SetBulletsNum(1);
+            gunStatus.SetBulletsNum(1);
         }
     }
 
     private IEnumerator Reload()
     {
         yield return new WaitForSeconds(ReloadTime);
-        SceneGlobalVariables.Instance.gunStatus.Reloading();
+        gunStatus.Reloading();
     }
 }

@@ -20,14 +20,14 @@ public class BulletProcess : MonoBehaviour {
 
     void Start()
     {
-        MaxCount = SceneGlobalVariables.Instance.gunStatus.GetBulletCount();
-        // countを目的の値に徐々に変える
-        DOTween.To(
-            () => Timecount,         // 対象の値
-            num => Timecount = num,  // 値の更新
-            DestroyTime,            // 最終的な値
-            20.0f                 // アニメーション時間
-        );
+        //MaxCount = SceneGlobalVariables.Instance.gunStatus.GetBulletCount();
+        //// countを目的の値に徐々に変える
+        //DOTween.To(
+        //    () => Timecount,         // 対象の値
+        //    num => Timecount = num,  // 値の更新
+        //    DestroyTime,            // 最終的な値
+        //    20.0f                 // アニメーション時間
+        //);
     }
 
     void OnCollisionEnter(Collision collision)

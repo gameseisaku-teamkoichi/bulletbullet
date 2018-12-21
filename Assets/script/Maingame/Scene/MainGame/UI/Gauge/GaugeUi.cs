@@ -14,13 +14,13 @@ public class GaugeUi : MonoBehaviour {
     private int MaxBullet;
 
     void Start () {
-        MaxBullet = SceneGlobalVariables.Instance.gunStatus.GetMaxBullet();
-        ActiveBullet = SceneGlobalVariables.Instance.gunStatus.GetActiveBullet();
+        MaxBullet = SceneGlobalVariables.Instance.gun.GetMaxBullet();
+        ActiveBullet = SceneGlobalVariables.Instance.gun.GetActiveBullet();
     }
 	
 	// Update is called once per frame
 	void Update () {
-        ActiveBullet = SceneGlobalVariables.Instance.gunStatus.GetActiveBullet();
+        ActiveBullet = SceneGlobalVariables.Instance.gun.GetActiveBullet();
         BulletText.text = ActiveBullet.ToString()+ "/"+MaxBullet.ToString();
     }
 }
