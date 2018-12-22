@@ -1265,7 +1265,6 @@ MonoBehaviour:
   subCamera: {fileID: 1275323730}
   cursor: {fileID: 2800000, guid: 7a589934f22b98848b2140d33334bb8a, type: 3}
   timerText: {fileID: 952121916}
-  countdown: {fileID: 1203476002756642, guid: 391e979bb265b0947a5fbf1e4c9f9973, type: 2}
   start: 0
 --- !u!114 &524038090
 MonoBehaviour:
@@ -1570,8 +1569,9 @@ MonoBehaviour:
   stopGameTime: {fileID: 1788739425}
   characterStatus: {fileID: 2068072641}
   characterSpawn: {fileID: 430421870}
-  gunStatus: {fileID: 1659775629}
   desInfo: {fileID: 452926958}
+  scene: {fileID: 0}
+  gun: {fileID: 1659775629}
 --- !u!4 &703156501
 Transform:
   m_ObjectHideFlags: 0
@@ -3801,7 +3801,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1659775628}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3990314a8fbe78f478aa2184d307f82f, type: 3}
+  m_Script: {fileID: 11500000, guid: 73bbcca2c87f11641a7bb34b625d6b16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1673471496

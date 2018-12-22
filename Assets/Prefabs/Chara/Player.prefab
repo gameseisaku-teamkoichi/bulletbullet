@@ -1023,6 +1023,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4070131336745110}
   - component: {fileID: 114301243112896866}
+  - component: {fileID: 114594715141325614}
   m_Layer: 8
   m_Name: Gun
   m_TagString: Untagged
@@ -2362,7 +2363,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1524508811760958}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 412da6444beb0af4e9b72fdddbd47579, type: 3}
   m_Name: 
@@ -2414,6 +2415,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vRotation: {x: 0, y: 0, z: 0, w: 0}
   hRotation: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &114594715141325614
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1885426003624610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3990314a8fbe78f478aa2184d307f82f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114602226115178522
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2441,7 +2453,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 4196472572861232}
-  Enemy: {fileID: 0}
 --- !u!114 &114646579877454714
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2464,6 +2475,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1386a31405cd49b4f9182a6e32ebbd83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SubCamera: {fileID: 0}
+  canvas: {fileID: 0}
+  Minimap: {fileID: 0}
   Gun: {fileID: 1885426003624610}
   MyNumber: 0
 --- !u!114 &114831903795867600

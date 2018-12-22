@@ -34,6 +34,7 @@ public class PlayerMainProcess : MonoBehaviour
 
     public GameObject Gun;
     private ForceBullet forceBullet;
+    private GunStatus gunStatus;
     CharaNum charaNum;
     StageName stageName;
     Ray ray;
@@ -53,7 +54,7 @@ public class PlayerMainProcess : MonoBehaviour
         la = GetComponent<LineRenderer>();
         currentScene = SceneManager.GetActiveScene().name;
         MyNumber = 0;
-
+        
         SceneGlobalVariables.Instance.characterStatus.SetStatus(MyNumber, CharacterStatus.CharaStatus.Live);
 
         if (currentScene == "MainGame")
@@ -65,6 +66,7 @@ public class PlayerMainProcess : MonoBehaviour
         SceneGlobalVariables.Instance.characterStatus.SetPosition(MyNumber, transform.position);
 
         forceBullet = gameObject.GetComponentInChildren<ForceBullet>();
+        gunStatus = GetComponentInChildren<GunStatus>();
     }
 
     // Update is called once per frame
@@ -126,6 +128,7 @@ public class PlayerMainProcess : MonoBehaviour
                    transform.position = SceneGlobalVariables.Instance.charaNowStage.SetPosition(stageName);
                    SceneGlobalVariables.Instance.characterStatus.SetStatus(MyNumber, CharacterStatus.CharaStatus.Live);
                    SceneGlobalVariables.Instance.characterStatus.SetPosition(MyNumber, transform.position);
+                   gunStatus.Reloading();
                }));
             }
         }
@@ -142,7 +145,7 @@ public class PlayerMainProcess : MonoBehaviour
         transform.position = SceneGlobalVariables.Instance.charaNowStage.SetDedPosition();
 
         yield return new WaitForSeconds(SpawnTime);
-
+        gunStatus.Reloading();
         UIStatus(Status.notactive);
         SceneGlobalVariables.Instance.characterStatus.SetStatus(0, CharacterStatus.CharaStatus.Live);
         transform.position = SceneGlobalVariables.Instance.charaNowStage.SetSpawnPosition();

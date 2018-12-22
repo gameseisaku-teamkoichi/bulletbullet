@@ -33,5 +33,6 @@ public class GunStatus : MonoBehaviour
     public void Reloading()
     {
         BulletsNum = 0;
+        SceneGlobalVariables.Instance.gun.SetActiveBullet(MaxBullet - BulletsNum);
     }
 }

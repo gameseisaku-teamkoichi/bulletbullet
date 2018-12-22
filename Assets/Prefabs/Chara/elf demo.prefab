@@ -339,6 +339,7 @@ GameObject:
   - component: {fileID: 33471377765923752}
   - component: {fileID: 23645711902900582}
   - component: {fileID: 114562680992547072}
+  - component: {fileID: 114687898553693952}
   m_Layer: 8
   m_Name: Gun
   m_TagString: Untagged
@@ -3310,7 +3311,6 @@ MonoBehaviour:
   Axis: 0
   FireFlag: 0
   PFireMosionFlag: 0
-  EFireMosionFlag: 0
   rotation: {x: 0, y: 0, z: 0, w: 0}
   quaternion: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &114598336256588272
@@ -3324,8 +3324,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 772ec4e77aae01e4ebcfede3b5c89fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy1: {fileID: 0}
   bullet: {fileID: 0}
   MyNumber: 0
+--- !u!114 &114687898553693952
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1183174039979306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3990314a8fbe78f478aa2184d307f82f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114715415291852948
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3337,7 +3349,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 289b458fde8bcdb4584a1187e34b6363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0, z: 0}
 --- !u!136 &136962716501681252
 CapsuleCollider:
   m_ObjectHideFlags: 1
