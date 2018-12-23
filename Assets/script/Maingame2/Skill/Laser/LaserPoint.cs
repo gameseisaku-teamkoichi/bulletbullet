@@ -15,17 +15,17 @@ public class LaserPoint : MonoBehaviour
 
     private void Start()
     {
-        mask = -1;
+        mask = 1;
 
         laser = GetComponent<LineRenderer>();
     }
 
     public void Point(Ray ray)
     {
-        
+
         laser.SetPosition(0, muzzle.transform.position);
 
-        for(int i=0;i<2;i++)
+        for (int i = 0; i < 2; i++)
         {
             //あたったものの情報が入るRaycastHitを準備
             RaycastHit hit;
@@ -71,7 +71,7 @@ public class LaserPoint : MonoBehaviour
                 //（デバッグ用）新しい反射用レイを作成する
 
 
-                
+
 
                 if (i == 0)
                 {
@@ -82,29 +82,29 @@ public class LaserPoint : MonoBehaviour
                     //（デバッグ用）発射レイを表示
                     //Debug.DrawLine(ray.origin, ray.origin + ray.direction * hit.distance, Color.red, 0);
                     //（デバッグ用）レイを画面に表示する
-                   // Debug.DrawLine(reflect_ray.origin, reflect_ray.origin + reflect_ray.direction * hit.distance, Color.blue, 0);
+                    // Debug.DrawLine(reflect_ray.origin, reflect_ray.origin + reflect_ray.direction * hit.distance, Color.blue, 0);
                     oldHit = hit;
                     oldRay = ray;
                     ray = reflect_ray;
                 }
 
-                if(i==1)
+                if (i == 1)
                 {
                     //Debug.DrawLine(oldRay.origin, oldRay.origin + oldRay.direction * oldHit.distance, Color.red, 0);
-                   // Debug.DrawLine(ray.origin, ray.origin + ray.direction * hit.distance, Color.blue, 0);
+                    // Debug.DrawLine(ray.origin, ray.origin + ray.direction * hit.distance, Color.blue, 0);
 
                     laser.SetPosition(2, position);
                 }
-                
 
 
-                
+
+
             }
         }
 
         ////////////// デバッグ用 ////////////////
 
-        
+
 
     }
 }
