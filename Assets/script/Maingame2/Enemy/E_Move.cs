@@ -20,10 +20,10 @@ public class E_Move : MonoBehaviour
     private float regularVec;
 
     //最初に向いている向き
-    public float defalutAngle;
+    private float defalutAngle;
 
     //defalutと180度回転した角度
-    public float anotherAngle;
+    private float anotherAngle;
 
     private bool isRotation;    //キャラクターが方向転換するときに使う　デフォルトでfalse
     public bool isFowardRotation;
@@ -46,6 +46,9 @@ public class E_Move : MonoBehaviour
         count = 0;
 
         regularVec = 0.05f;
+
+        defalutAngle = transform.eulerAngles.y;
+        anotherAngle = defalutAngle + 180;
 
         isRotation = false;
         isFowardRotation = false;
@@ -152,7 +155,7 @@ public class E_Move : MonoBehaviour
     {
         if (collision.gameObject.tag == "Invisibles")
         {
-            if (rotationInterval > 180)
+            if (rotationInterval > 120)
             {
                 Debug.Log("true");
                 isRotation = true;

@@ -478,8 +478,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1399466964280626}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: -287.37, y: 46.12, z: 3.6}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -103.3, y: -3.2, z: 58.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4867693352910586}
@@ -487,7 +487,7 @@ Transform:
   - {fileID: 4769201204668644}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4108192223309078
 Transform:
   m_ObjectHideFlags: 1
@@ -1021,8 +1021,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
-  defalutAngle: 270
-  anotherAngle: 90
+  defalutAngle: 0
+  anotherAngle: 180
+  isFowardRotation: 0
   isMove: 0
   isFire: 0
   isAddVelocityX: 0
