@@ -2945,6 +2945,28 @@ Prefab:
       propertyPath: Minimap
       value: 
       objectReference: {fileID: 409306453}
+    - target: {fileID: 1524508811760958, guid: a2f16d1c4e959874ab656383e7ef3c6d, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114662048187238586, guid: a2f16d1c4e959874ab656383e7ef3c6d,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1885426003624610, guid: a2f16d1c4e959874ab656383e7ef3c6d, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1743484559952778, guid: a2f16d1c4e959874ab656383e7ef3c6d, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114138749808463642, guid: a2f16d1c4e959874ab656383e7ef3c6d,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2f16d1c4e959874ab656383e7ef3c6d, type: 2}
   m_IsPrefabAsset: 0
@@ -8973,7 +8995,6 @@ GameObject:
   - component: {fileID: 1754407056}
   - component: {fileID: 1754407055}
   - component: {fileID: 1754407060}
-  - component: {fileID: 1754407058}
   - component: {fileID: 1754407059}
   m_Layer: 11
   m_Name: Goal
@@ -9049,17 +9070,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1754407053}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1754407058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1754407053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8c14c5e65ab46a43a226529619cbd9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1754407059
 MonoBehaviour:
   m_ObjectHideFlags: 0
