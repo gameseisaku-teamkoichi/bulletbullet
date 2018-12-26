@@ -36,7 +36,7 @@ public class Gun : MonoBehaviour {
         {
             BulletCount = 5;
             BulletsNum = BulletCount;
-            MaxBullet = 5;
+            MaxBullet = 10;
             BulletPower = 5000f;
         }
     }
