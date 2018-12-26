@@ -5,47 +5,90 @@ using BulletBullet.SceneGlobalVariables.Stage;
 
 public class E_Move : MonoBehaviour
 {
-
-    private bool eFind;
+    //共通
     public Transform player;
+    public Vector3 velocity;
 
-    private LayerMask mask;
+    //敵の行動する種類
+    private int type;
 
+    //スピード
+    private float regularVec;
+
+    //プレイヤーを見つけたかどうか
+    private bool eFind;
+
+    public bool isMove;
+    public bool isFire;
+
+
+    //Woman用
     private Vector3 oldRotation;
 
     private int rotationInterval;
     private int count;
 
-    public Vector3 velocity;
-    private float regularVec;
-
     //最初に向いている向き
     private float defalutAngle;
-
     //defalutと180度回転した角度
     private float anotherAngle;
 
-    private bool isRotation;    //キャラクターが方向転換するときに使う　デフォルトでfalse
+    //キャラクターが方向転換するときに使う　デフォルトでfalse
+    private bool isRotation;
     public bool isFowardRotation;
-    public bool isMove;
-    public bool isFire;
-
     public bool isAddVelocityX;
 
-    enum Aspect
+
+    //Drone用
+    //最初の位置をここで決める
+    private Vector3 defalutPos;
+
+    private float hightRange;
+
+    private bool isUp;
+
+
+    enum AIType
     {
-        forward, back
+        Robot,
+        Woman,
+        Drone
     }
 
     // Use this for initialization
     void Start()
     {
-        eFind = false;
-
-        rotationInterval = 0;
-        count = 0;
+        //共通
+        velocity = new Vector3(0, 0, 0);
 
         regularVec = 0.05f;
+
+        eFind = false;
+        isMove = false;
+        isFire = false;
+
+        if (this.gameObject.tag == "Enemy")
+        {
+            type = (int)AIType.Robot;
+        }
+        else if (this.gameObject.tag == "Enemy2")
+        {
+            type = (int)AIType.Woman;
+        }
+        else if (this.gameObject.tag == "Enemy3")
+        {
+            type = (int)AIType.Drone;
+
+            //y座標を0で設定
+            defalutPos = transform.localPosition;
+            defalutPos.y = 0.0f;
+            transform.localPosition = defalutPos;
+        }
+
+
+        //Woman用
+        rotationInterval = 0;
+        count = 0;
 
         defalutAngle = transform.eulerAngles.y;
         anotherAngle = defalutAngle + 180;
@@ -53,8 +96,12 @@ public class E_Move : MonoBehaviour
         isRotation = false;
         isFowardRotation = false;
 
-        isMove = false;
-        isFire = false;
+
+        //Drone用
+
+        hightRange = defalutPos.y + 5.0f;
+
+        isUp = true;
 
     }
 
@@ -65,31 +112,23 @@ public class E_Move : MonoBehaviour
         {
             case false:
 
-                //回転するとき
-                if (isRotation)
+                switch (type)
                 {
-                    velocity = new Vector3(0, 0, 0);
-                    Rotation();
+                    case (int)AIType.Woman:
+
+                        WomanAI();
+                        break;
+
+                    case (int)AIType.Drone:
+
+                        DroneAI();
+                        break;
+
+                    case (int)AIType.Robot:
+
+                        break;
                 }
 
-                //していないとき
-                else
-                {
-                    //Xに進むとき
-                    if (isAddVelocityX)
-                    {
-                        velocity.x = regularVec;
-                        velocity.z = 0.0f;
-                    }
-
-                    //Zに進むとき
-                    else
-                    {
-                        velocity.x = 0.0f;
-                        velocity.z = regularVec;
-                    }
-
-                }
                 break;
 
             case true:
@@ -97,9 +136,7 @@ public class E_Move : MonoBehaviour
                 isMove = false;
                 isFire = true;
 
-                var aim = this.player.position - this.transform.position;
-                var look = Quaternion.LookRotation(aim);
-                transform.localRotation = look;
+                lookRotation();
                 break;
         }
 
@@ -115,11 +152,73 @@ public class E_Move : MonoBehaviour
         rotationInterval++;
     }
 
+    void WomanAI()
+    {
+        //回転するとき
+        if (isRotation)
+        {
+            velocity = new Vector3(0, 0, 0);
+            Rotation();
+        }
+
+        //していないとき
+        else
+        {
+            //Xに進むとき
+            if (isAddVelocityX)
+            {
+                velocity.x = regularVec;
+                velocity.z = 0.0f;
+            }
+
+            //Zに進むとき
+            else
+            {
+                velocity.x = 0.0f;
+                velocity.z = regularVec;
+            }
+
+        }
+    }
+
+    void DroneAI()
+    {
+        if (isUp)
+        {
+            velocity.y = regularVec;
+
+            if (transform.localPosition.y > hightRange)
+            {
+                isUp = false;
+            }
+        }
+        else
+        {
+            velocity.y = -regularVec;
+
+            if (transform.localPosition.y < -hightRange)
+            {
+                isUp = true;
+            }
+        }
+
+        lookRotation();
+
+    }
+
+    //playerの方向を見る
+    void lookRotation()
+    {
+        var aim = this.player.position - this.transform.position;
+        var look = Quaternion.LookRotation(aim, Vector3.up);
+        transform.localRotation = look;
+    }
+
     void Rotation()
     {
         float angle;
         oldRotation = transform.eulerAngles;
-        
+
 
         if (isFowardRotation)
         {
@@ -157,7 +256,6 @@ public class E_Move : MonoBehaviour
         {
             if (rotationInterval > 120)
             {
-                Debug.Log("true");
                 isRotation = true;
                 rotationInterval = 0;
 
@@ -165,7 +263,7 @@ public class E_Move : MonoBehaviour
                 {
                     isFowardRotation = true;
                 }
-               
+
             }
         }
     }
