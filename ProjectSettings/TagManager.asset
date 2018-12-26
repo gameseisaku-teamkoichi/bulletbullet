@@ -9,6 +9,8 @@ TagManager:
   - goal
   - Invisibles
   - Enemy3
+  - Fire
+  - Ground
   layers:
   - Default
   - TransparentFX

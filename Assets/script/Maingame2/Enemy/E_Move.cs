@@ -40,8 +40,9 @@ public class E_Move : MonoBehaviour
 
 
     //Drone用
-    //最初の位置をここで決める
-    private Vector3 defalutPos;
+    //上がり始める位置をここで記録する
+    private Vector3 underPos;
+    private Vector3 overPos;
 
     private float hightRange;
 
@@ -78,11 +79,6 @@ public class E_Move : MonoBehaviour
         else if (this.gameObject.tag == "Enemy3")
         {
             type = (int)AIType.Drone;
-
-            //y座標を0で設定
-            defalutPos = transform.localPosition;
-            defalutPos.y = 0.0f;
-            transform.localPosition = defalutPos;
         }
 
 
@@ -99,9 +95,9 @@ public class E_Move : MonoBehaviour
 
         //Drone用
 
-        hightRange = defalutPos.y + 5.0f;
+        hightRange = 10.0f;
 
-        isUp = true;
+        isUp = false;
 
     }
 
@@ -126,6 +122,7 @@ public class E_Move : MonoBehaviour
 
                     case (int)AIType.Robot:
 
+                        Robot();
                         break;
                 }
 
@@ -187,7 +184,7 @@ public class E_Move : MonoBehaviour
         {
             velocity.y = regularVec;
 
-            if (transform.localPosition.y > hightRange)
+            if (transform.localPosition.y > overPos.y)
             {
                 isUp = false;
             }
@@ -195,15 +192,39 @@ public class E_Move : MonoBehaviour
         else
         {
             velocity.y = -regularVec;
-
-            if (transform.localPosition.y < -hightRange)
-            {
-                isUp = true;
-            }
         }
 
         lookRotation();
 
+    }
+
+    void Robot()
+    {
+        //回転するとき
+        if (isRotation)
+        {
+            velocity = new Vector3(0, 0, 0);
+            Rotation();
+        }
+
+        //していないとき
+        else
+        {
+            //Xに進むとき
+            if (isAddVelocityX)
+            {
+                velocity.x = regularVec;
+                velocity.z = 0.0f;
+            }
+
+            //Zに進むとき
+            else
+            {
+                velocity.x = 0.0f;
+                velocity.z = regularVec;
+            }
+
+        }
     }
 
     //playerの方向を見る
@@ -265,6 +286,13 @@ public class E_Move : MonoBehaviour
                 }
 
             }
+        }
+
+        if(collision.gameObject.tag=="Ground")
+        {
+            isUp = true;
+            underPos = transform.localPosition;
+            overPos = underPos + new Vector3(0, hightRange, 0);
         }
     }
 }
