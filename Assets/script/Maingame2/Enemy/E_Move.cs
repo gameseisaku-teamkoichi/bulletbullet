@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using BulletBullet.SceneGlobalVariables.Stage;
+using UnityEngine.SceneManagement;
 
 public class E_Move : MonoBehaviour
 {
     //共通
+    private string currentScene;
+
     public Transform player;
     public Vector3 velocity;
 
@@ -72,6 +75,8 @@ public class E_Move : MonoBehaviour
     void Start()
     {
         //共通
+        currentScene = SceneManager.GetActiveScene().name;
+
         velocity = new Vector3(0, 0, 0);
 
         regularVec = 0.05f;
@@ -112,15 +117,18 @@ public class E_Move : MonoBehaviour
 
 
         //Robot用
-        area1 = GameObject.Find("FindArea1");
-        area2 = GameObject.Find("FindArea2");
+        if (currentScene == "MainGame_2_Next")
+        {
+            area1 = GameObject.Find("FindArea1");
+            area2 = GameObject.Find("FindArea2");
 
-        find1 = area1.GetComponent<EnemyFind>();
-        find2 = area2.GetComponent<EnemyFind>();
+            find1 = area1.GetComponent<EnemyFind>();
+            find2 = area2.GetComponent<EnemyFind>();
 
-        
-        oldFlag1 = false;
-        oldFlag2 = false;
+
+            oldFlag1 = false;
+            oldFlag2 = false;
+        }
 
     }
 
@@ -144,10 +152,14 @@ public class E_Move : MonoBehaviour
                 DroneAI();
                 break;
 
+                
             case (int)AIType.Robot:
-
-                Robot();
+                if (currentScene == "MainGame_2_Next")
+                {
+                    Robot();
+                }
                 break;
+        
         }
 
 

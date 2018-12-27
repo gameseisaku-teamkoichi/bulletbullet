@@ -86,19 +86,22 @@ public class PlayerMainProcess : MonoBehaviour
         forceBullet = gameObject.GetComponentInChildren<ForceBullet>();
         gunStatus = GetComponentInChildren<GunStatus>();
 
-        Area1 = GameObject.Find("FindArea1");
-        Area2 = GameObject.Find("FindArea2");
-        find1 = Area1.GetComponent<EnemyFind>();
-        find2 = Area2.GetComponent<EnemyFind>();
+        if (currentScene == "MainGame_2_Next")
+        {
+            Area1 = GameObject.Find("FindArea1");
+            Area2 = GameObject.Find("FindArea2");
+            find1 = Area1.GetComponent<EnemyFind>();
+            find2 = Area2.GetComponent<EnemyFind>();
 
-        isStart = false;
+            isStart = false;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (find1.isFind||find2.isFind)
+        if (currentScene == "MainGame_2_Next" && (find1.isFind || find2.isFind))
         {
             if (isStart == false)
             {
@@ -197,7 +200,7 @@ public class PlayerMainProcess : MonoBehaviour
         transform.position = SceneGlobalVariables.Instance.charaNowStage.SetSpawnPosition();
         find1.isFind = false;
         isStart = false;
-        
+
     }
 
 

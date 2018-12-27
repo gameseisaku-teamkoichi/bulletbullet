@@ -17,7 +17,7 @@ public class Title : MonoBehaviour {
     private enum SelectMenu
     {
         start,
-        Tutorial,
+        //Tutorial,
         Exit
     }
 
@@ -48,13 +48,15 @@ public class Title : MonoBehaviour {
             case SelectMenu.start:
                 start.color = new Color(255f / 255f, 0f / 255f, 0f / 255f);
                 Tutorial.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
-                break;
-            case SelectMenu.Tutorial:
-                Tutorial.color = new Color(255f / 255f, 0f / 255f, 0f / 255f);
-                start.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
                 Exit.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
                 break;
+            //case SelectMenu.Tutorial:
+            //    Tutorial.color = new Color(255f / 255f, 0f / 255f, 0f / 255f);
+            //    start.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
+            //    Exit.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
+            //    break;
             case SelectMenu.Exit:
+                start.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
                 Exit.color = new Color(255f / 255f, 0f / 255f, 0f / 255f);
                 Tutorial.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
                 break;
@@ -67,9 +69,9 @@ public class Title : MonoBehaviour {
                 case SelectMenu.start:
                     SeceChenge.FadOut(ChangeScene.SceneState.Main2);
                     break;
-                case SelectMenu.Tutorial:
-                    //SeceChenge.FadOut(ChangeScene.SceneState.Tutorial);
-                    break;
+                //case SelectMenu.Tutorial:
+                //    //SeceChenge.FadOut(ChangeScene.SceneState.Tutorial);
+                //    break;
                 case SelectMenu.Exit:
                     break;
             }
