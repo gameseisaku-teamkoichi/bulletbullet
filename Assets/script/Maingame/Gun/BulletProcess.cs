@@ -18,6 +18,9 @@ public class BulletProcess : MonoBehaviour {
         set { myNumber = value; }
     }
 
+    public GameObject exploadObject;
+    private GameObject obj;
+
     void Start()
     {
         MaxCount = SceneGlobalVariables.Instance.gun.GetBulletCount();
@@ -52,7 +55,19 @@ public class BulletProcess : MonoBehaviour {
         if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Enemy2" || collision.gameObject.tag == "Enemy3")
         {
             Destroy(collision.gameObject);
-            Destroy(gameObject);
+            this.transform.position = new Vector3(10000, 10000, 10000);
+            StartCoroutine(Explosion(collision));
+
         }
+    }
+
+    private IEnumerator Explosion(Collision collision)
+    {
+        obj = Instantiate(exploadObject, collision.transform.position, Quaternion.identity) as GameObject;
+        
+        yield return new WaitForSeconds(2.0f);
+        
+        Destroy(obj);
+        Destroy(gameObject);
     }
 }
