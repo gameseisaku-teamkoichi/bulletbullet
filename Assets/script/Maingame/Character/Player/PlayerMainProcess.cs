@@ -136,7 +136,7 @@ public class PlayerMainProcess : MonoBehaviour
         }
         else
         {
-            if (collision.gameObject.tag == "Enemy")
+            if (collision.gameObject.tag == "Enemy"&& collision.gameObject.tag == "Enemy2"&& collision.gameObject.tag == "Enemy3")
             {
                 StartCoroutine("Die");
             }
