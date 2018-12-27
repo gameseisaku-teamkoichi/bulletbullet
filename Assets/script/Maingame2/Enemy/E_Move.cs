@@ -104,6 +104,10 @@ public class E_Move : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Time.timeScale==0)
+        {
+            return;
+        }
         switch (eFind)
         {
             case false:
