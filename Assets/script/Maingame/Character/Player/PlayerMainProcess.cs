@@ -6,6 +6,7 @@ using Bullet.Stage;
 using BulletBullet.SceneGlobalVariables.Stage;
 using UnityEngine.SceneManagement;
 
+
 [RequireComponent(typeof(Move))]
 [RequireComponent(typeof(AreaWarp))]
 [RequireComponent(typeof(LaserPoint))]
@@ -54,7 +55,7 @@ public class PlayerMainProcess : MonoBehaviour
         la = GetComponent<LineRenderer>();
         currentScene = SceneManager.GetActiveScene().name;
         MyNumber = 0;
-        
+
         SceneGlobalVariables.Instance.characterStatus.SetStatus(MyNumber, CharacterStatus.CharaStatus.Live);
 
         if (currentScene == "MainGame")
@@ -85,7 +86,7 @@ public class PlayerMainProcess : MonoBehaviour
         }
         else
         {
-            la.SetPosition(0, new Vector3(1000, 1000 ,1000));
+            la.SetPosition(0, new Vector3(1000, 1000, 1000));
             la.SetPosition(1, new Vector3(1000, 1000, 1000));
             la.SetPosition(2, new Vector3(1000, 1000, 1000));
 
@@ -132,9 +133,12 @@ public class PlayerMainProcess : MonoBehaviour
                }));
             }
         }
-        else if(collider.gameObject.tag!="goal")
+        else
         {
-            StartCoroutine("Die");
+            if (collider.gameObject.tag != "goal")
+            {
+                StartCoroutine("Die");
+            }
         }
     }
 

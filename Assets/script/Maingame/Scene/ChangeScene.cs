@@ -16,6 +16,7 @@ public class ChangeScene : MonoBehaviour {
         NextTutorial,
         Main,
         Main2,
+        Main2Next,
         Result,
         Invalid
     }
@@ -55,9 +56,15 @@ public class ChangeScene : MonoBehaviour {
             case SceneState.Main:
                 SceneManager.LoadScene("MainGame");
                 break;
+
             case SceneState.Main2:
                 SceneManager.LoadScene("MainGame_2");
                 break;
+
+            case SceneState.Main2Next:
+                SceneManager.LoadScene("MainGame_2_Next");
+                break;
+
             case SceneState.Result:
                 SceneManager.LoadScene("Result");
                 break;
@@ -68,8 +75,11 @@ public class ChangeScene : MonoBehaviour {
 
     public void FadOut(SceneState sceneState)
     {
-        canvasGroup.alpha = 0;
-        canvasGroup.DOFade(1.0f, DurationSeconds).SetEase(EaseType);
+        if (SceneManager.GetActiveScene().name != "Result")
+        {
+            canvasGroup.alpha = 0;
+            canvasGroup.DOFade(1.0f, DurationSeconds).SetEase(EaseType);
+        }
         DOVirtual.DelayedCall(
           DurationSeconds+0.5f,   
          () => {
