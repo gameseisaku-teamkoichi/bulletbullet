@@ -883,7 +883,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4742390349104218}
-  - component: {fileID: 33595546213906498}
   m_Layer: 12
   m_Name: Muzzle
   m_TagString: Untagged
@@ -1046,7 +1045,7 @@ GameObject:
   - component: {fileID: 114487684252549556}
   - component: {fileID: 114646579877454714}
   m_Layer: 12
-  m_Name: Main Camera
+  m_Name: MainCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2037,7 +2036,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1743484559952778}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.724, y: 0, z: 18.4}
+  m_LocalPosition: {x: 16.7, y: 0, z: 31.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4070131336745110}
@@ -2275,13 +2274,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!33 &33595546213906498
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1743484559952778}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!54 &54915284464021256
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -2340,7 +2332,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1524508811760958}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 412da6444beb0af4e9b72fdddbd47579, type: 3}
   m_Name: 
@@ -2457,6 +2449,7 @@ MonoBehaviour:
   Minimap: {fileID: 0}
   Gun: {fileID: 1885426003624610}
   MyNumber: 0
+  ExploadObject: {fileID: 100010, guid: 031d08f52af1daa4f929b85221519426, type: 2}
 --- !u!114 &114831903795867600
 MonoBehaviour:
   m_ObjectHideFlags: 1

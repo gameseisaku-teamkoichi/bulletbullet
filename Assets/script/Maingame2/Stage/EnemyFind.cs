@@ -5,28 +5,47 @@ using UnityEngine;
 public class EnemyFind : MonoBehaviour {
 
     public bool isFind;
-    public bool isPlayerDie;
+    public bool isEnemyLife1;
+    public bool isEnemyLife2;
+    public GameObject enemy;
+    
 
-	// Use this for initialization
-	void Start () {
-
+    private void Awake()
+    {
         isFind = false;
-        isPlayerDie = false;
+        isEnemyLife1 = true;
+        isEnemyLife2 = true;
+    }
+
+    // Use this for initialization
+    void Start () {
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
+    
+        if(isEnemyLife1==false)
+        {
+            Destroy(gameObject);
+        }
 
-        //isFind = false;
-        //isPlayerDie = false;
+        if(isEnemyLife2==false)
+        {
+            Destroy(gameObject);
+        }
+       
 	}
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag==("Player"))
+        if (other.gameObject.tag == ("Player"))
         {
             isFind = true;
-            isPlayerDie = true;
         }
     }
+
+    
+
+
 }

@@ -11,6 +11,7 @@ TagManager:
   - Enemy3
   - Fire
   - Ground
+  - Find
   layers:
   - Default
   - TransparentFX

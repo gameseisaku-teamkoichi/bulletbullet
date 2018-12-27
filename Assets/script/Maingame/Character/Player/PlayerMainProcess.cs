@@ -43,13 +43,29 @@ public class PlayerMainProcess : MonoBehaviour
     public int MyNumber;
     int Hit;
 
-    float SpawnTime = 5.0f;
+    float DeathTime = 4.0f;
+    float SpawnTime = 1.0f;
     string currentScene;
     Vector3 HitEnemyPos;
     float Axis;
 
     Vector3 pos;
     private LineRenderer la;
+
+    private GameObject Area1;
+    private GameObject Area2;
+    private EnemyFind find1;
+    private EnemyFind find2;
+
+    private bool isStart;
+
+    //エフェクト用
+    public GameObject ExploadObject;
+
+    private GameObject obj;
+    private Vector3 oldPos;
+
+
     // Use this for initialization
     void Start()
     {
@@ -69,43 +85,62 @@ public class PlayerMainProcess : MonoBehaviour
 
         forceBullet = gameObject.GetComponentInChildren<ForceBullet>();
         gunStatus = GetComponentInChildren<GunStatus>();
+
+        Area1 = GameObject.Find("FindArea1");
+        Area2 = GameObject.Find("FindArea2");
+        find1 = Area1.GetComponent<EnemyFind>();
+        find2 = Area2.GetComponent<EnemyFind>();
+
+        isStart = false;
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        //SceneGlobalVariables.Instance.stopGameTime.StopGame();
-
-        //rayを銃口の向いてるほうに銃口からまっすぐ飛ばす
-        ray = new Ray(Gun.transform.position, Gun.transform.forward);
-
-        if (Input.GetButton("Fire3"))
+        if (find1.isFind||find2.isFind)
         {
-            CharactePoint.Point(ray);
-            forceBullet.Axis = Input.GetAxis("Fire");
+            if (isStart == false)
+            {
+                StartCoroutine(Die());
+                isStart = true;
+            }
         }
+
         else
         {
-            la.SetPosition(0, new Vector3(1000, 1000, 1000));
-            la.SetPosition(1, new Vector3(1000, 1000, 1000));
-            la.SetPosition(2, new Vector3(1000, 1000, 1000));
+            //SceneGlobalVariables.Instance.stopGameTime.StopGame();
 
+            //rayを銃口の向いてるほうに銃口からまっすぐ飛ばす
+            ray = new Ray(Gun.transform.position, Gun.transform.forward);
+
+            if (Input.GetButton("Fire3"))
+            {
+                CharactePoint.Point(ray);
+                forceBullet.Axis = Input.GetAxis("Fire");
+            }
+            else
+            {
+                la.SetPosition(0, new Vector3(1000, 1000, 1000));
+                la.SetPosition(1, new Vector3(1000, 1000, 1000));
+                la.SetPosition(2, new Vector3(1000, 1000, 1000));
+
+            }
+            if (SceneGlobalVariables.Instance.characterStatus.GetStatus(MyNumber) == CharacterStatus.CharaStatus.Live)
+            {
+                CharacterMove.CharaMove();
+            }
+
+            if (Input.GetButton("SkillB") && currentScene == "MainGame")
+            {
+                CharacterWarp.Warp(ray);
+            }
+
+
+            Gunray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            forceBullet.transform.rotation = Quaternion.LookRotation(Gunray.direction);
+            forceBullet.StartFire();
         }
-        if (SceneGlobalVariables.Instance.characterStatus.GetStatus(MyNumber) == CharacterStatus.CharaStatus.Live)
-        {
-            CharacterMove.CharaMove();
-        }
-
-        if (Input.GetButton("SkillB") && currentScene == "MainGame")
-        {
-            CharacterWarp.Warp(ray);
-        }
-
-
-        Gunray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        forceBullet.transform.rotation = Quaternion.LookRotation(Gunray.direction);
-        forceBullet.StartFire();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -136,7 +171,7 @@ public class PlayerMainProcess : MonoBehaviour
         }
         else
         {
-            if (collision.gameObject.tag == "Enemy"&& collision.gameObject.tag == "Enemy2"&& collision.gameObject.tag == "Enemy3")
+            if (collision.gameObject.tag == "Enemy2")
             {
                 StartCoroutine("Die");
             }
@@ -145,15 +180,24 @@ public class PlayerMainProcess : MonoBehaviour
 
     private IEnumerator Die()
     {
-        UIStatus(Status.active);
+        //UIStatus(Status.active);
         SceneGlobalVariables.Instance.characterStatus.SetStatus(0, CharacterStatus.CharaStatus.die);
-        transform.position = SceneGlobalVariables.Instance.charaNowStage.SetDedPosition();
+        //transform.position = SceneGlobalVariables.Instance.charaNowStage.SetDedPosition();
+
+        yield return new WaitForSeconds(DeathTime);
+        oldPos = transform.position;
+        obj = Instantiate(ExploadObject, oldPos, Quaternion.identity);
+        transform.position = new Vector3(100000, 100000, 100000);
 
         yield return new WaitForSeconds(SpawnTime);
+        Destroy(obj);
         gunStatus.Reloading();
         UIStatus(Status.notactive);
         SceneGlobalVariables.Instance.characterStatus.SetStatus(0, CharacterStatus.CharaStatus.Live);
         transform.position = SceneGlobalVariables.Instance.charaNowStage.SetSpawnPosition();
+        find1.isFind = false;
+        isStart = false;
+        
     }
 
 

@@ -16,7 +16,10 @@ public class E_Move : MonoBehaviour
     private float regularVec;
 
     //プレイヤーを見つけたかどうか
-    private bool eFind;
+    private GameObject area1;
+    private GameObject area2;
+    private EnemyFind find1;
+    private EnemyFind find2;
 
     public bool isMove;
     public bool isFire;
@@ -49,6 +52,15 @@ public class E_Move : MonoBehaviour
     private bool isUp;
 
 
+    //Robot用
+    private bool oldFlag1;
+    private bool oldFlag2;
+
+    private Transform aimR;
+    private Transform lookR;
+
+
+
     enum AIType
     {
         Robot,
@@ -64,7 +76,6 @@ public class E_Move : MonoBehaviour
 
         regularVec = 0.05f;
 
-        eFind = false;
         isMove = false;
         isFire = false;
 
@@ -99,47 +110,47 @@ public class E_Move : MonoBehaviour
 
         isUp = false;
 
+
+        //Robot用
+        area1 = GameObject.Find("FindArea1");
+        area2 = GameObject.Find("FindArea2");
+
+        find1 = area1.GetComponent<EnemyFind>();
+        find2 = area2.GetComponent<EnemyFind>();
+
+        
+        oldFlag1 = false;
+        oldFlag2 = false;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Time.timeScale==0)
+        if (Time.timeScale == 0)
         {
             return;
         }
-        switch (eFind)
+
+        switch (type)
         {
-            case false:
+            case (int)AIType.Woman:
 
-                switch (type)
-                {
-                    case (int)AIType.Woman:
-
-                        WomanAI();
-                        break;
-
-                    case (int)AIType.Drone:
-
-                        DroneAI();
-                        break;
-
-                    case (int)AIType.Robot:
-
-                        Robot();
-                        break;
-                }
-
+                WomanAI();
                 break;
 
-            case true:
+            case (int)AIType.Drone:
 
-                isMove = false;
-                isFire = true;
+                DroneAI();
+                break;
 
-                lookRotation();
+            case (int)AIType.Robot:
+
+                Robot();
                 break;
         }
+
+
 
         if (velocity.magnitude > 0.01f)
         {
@@ -198,45 +209,83 @@ public class E_Move : MonoBehaviour
             velocity.y = -regularVec;
         }
 
-        lookRotation();
+        lookPlayer();
 
     }
 
     void Robot()
     {
-        //回転するとき
-        if (isRotation)
+
+        if (find1.isFind||find2.isFind)
         {
+            isMove = false;
+            isFire = true;
+
             velocity = new Vector3(0, 0, 0);
+            lookPlayer();
+        }
+
+        else if (oldFlag1 == true && find1.isFind == false)
+        {
+            isMove = true;
+            isFire = false;
             Rotation();
         }
 
-        //していないとき
+        else if(oldFlag2==true&&find2.isFind==false)
+        {
+            isMove = true;
+            isFire = false;
+            Rotation();
+        }
+
         else
         {
-            //Xに進むとき
-            if (isAddVelocityX)
+            //回転するとき
+            if (isRotation)
             {
-                velocity.x = regularVec;
-                velocity.z = 0.0f;
+                velocity = new Vector3(0, 0, 0);
+                Rotation();
             }
 
-            //Zに進むとき
+            //していないとき
             else
             {
-                velocity.x = 0.0f;
-                velocity.z = regularVec;
-            }
+                //Xに進むとき
+                if (isAddVelocityX)
+                {
+                    velocity.x = regularVec;
+                    velocity.z = 0.0f;
+                }
 
+                //Zに進むとき
+                else
+                {
+                    velocity.x = 0.0f;
+                    velocity.z = regularVec;
+                }
+
+            }
         }
+
+        oldFlag1 = find1.isFind;
+        oldFlag2 = find2.isFind;
+
     }
 
     //playerの方向を見る
-    void lookRotation()
+    void lookPlayer()
     {
         var aim = this.player.position - this.transform.position;
         var look = Quaternion.LookRotation(aim, Vector3.up);
         transform.localRotation = look;
+    }
+
+    void lookPlayerForRobot()
+    {
+        aimR.position = this.player.position - this.transform.position;
+        lookR.rotation = Quaternion.LookRotation(aimR.position, Vector3.up);
+        transform.localRotation = lookR.rotation;
     }
 
     void Rotation()
@@ -292,7 +341,7 @@ public class E_Move : MonoBehaviour
             }
         }
 
-        if(collision.gameObject.tag=="Ground")
+        if (collision.gameObject.tag == "Ground")
         {
             isUp = true;
             underPos = transform.localPosition;

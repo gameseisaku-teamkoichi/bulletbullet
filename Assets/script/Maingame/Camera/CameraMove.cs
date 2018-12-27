@@ -25,16 +25,19 @@ public class CameraMove : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
+
         //ここで呼ばないとバグる
         if (Time.timeScale == 0)
         {
             return;
         }
+
 
         //かめらを初期値に戻す
         if (Input.GetButton("Reset"))
