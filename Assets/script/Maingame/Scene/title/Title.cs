@@ -78,5 +78,11 @@ public class Title : MonoBehaviour {
         }
 
         OldInput = input;
+
+        //終了する
+        if(Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 }

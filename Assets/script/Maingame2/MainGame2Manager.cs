@@ -69,6 +69,12 @@ public class MainGame2Manager : MonoBehaviour {
         }
 
         Timer();
+
+        //終了する
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
     private void Timer()
     {
