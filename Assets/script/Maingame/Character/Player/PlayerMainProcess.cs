@@ -48,6 +48,7 @@ public class PlayerMainProcess : MonoBehaviour
     Vector3 HitEnemyPos;
     float Axis;
 
+    Vector3 pos;
     private LineRenderer la;
     // Use this for initialization
     void Start()
@@ -107,13 +108,13 @@ public class PlayerMainProcess : MonoBehaviour
         forceBullet.StartFire();
     }
 
-    private void OnTriggerEnter(Collider collider)
+    private void OnCollisionEnter(Collision collision)
     {
         if (currentScene == "MainGame")
         {
             if (SceneGlobalVariables.Instance.characterStatus.GetStatus(MyNumber) == CharacterStatus.CharaStatus.Live)
             {
-                Hit = collider.gameObject.GetComponent<BulletProcess>().MyNumber;
+                Hit = GetComponent<Collider>().gameObject.GetComponent<BulletProcess>().MyNumber;
                 SceneGlobalVariables.Instance.desInfo.AttackChara = Hit;
                 SceneGlobalVariables.Instance.desInfo.DesPosition = transform.position;
 
@@ -135,7 +136,7 @@ public class PlayerMainProcess : MonoBehaviour
         }
         else
         {
-            if (collider.gameObject.tag != "goal")
+            if (collision.gameObject.tag == "Enemy")
             {
                 StartCoroutine("Die");
             }
@@ -161,7 +162,9 @@ public class PlayerMainProcess : MonoBehaviour
         switch (UIstatus)
         {
             case Status.active:
-                SubCamera.transform.position = transform.position;
+                pos = transform.position;
+                pos.y = 70;
+                SubCamera.transform.position = pos;
                 SubCamera.SetActive(true);
                 canvas.SetActive(false);
                 Minimap.SetActive(false);
