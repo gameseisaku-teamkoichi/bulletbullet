@@ -17,8 +17,6 @@ public class GunStatus : MonoBehaviour
     private void Start()
     {
         //ゼロが代入されている
-        //MaxBullet = SceneGlobalVariables.Instance.gun.GetMaxBullet();
-
         MaxBullet = 10;
         BulletsNum = 0;
     }

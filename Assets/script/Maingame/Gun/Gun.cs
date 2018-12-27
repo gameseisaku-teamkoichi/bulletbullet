@@ -37,9 +37,10 @@ public class Gun : MonoBehaviour {
             BulletCount = 5;
             BulletsNum = BulletCount;
             MaxBullet = 10;
-            BulletPower = 5000f;
+            BulletPower = 3000f;
         }
     }
+
     private void Initialize()
     {
         switch (Name)
