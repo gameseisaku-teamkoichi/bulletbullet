@@ -49,9 +49,10 @@ public class BulletProcess : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        if(collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Enemy2" || collision.gameObject.tag == "Enemy3")
         {
             Destroy(collision.gameObject);
+            Destroy(gameObject);
         }
     }
 }
