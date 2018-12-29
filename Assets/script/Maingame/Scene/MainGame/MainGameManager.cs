@@ -86,7 +86,7 @@ public class MainGameManager : MonoBehaviour
 
         if (NowTime >= TimeLimit)
         {
-            End.IsGameOver();
+            End.IsGameOver(true);
         }
 
         Timer();
