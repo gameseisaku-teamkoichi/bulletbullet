@@ -152,14 +152,14 @@ public class E_Move : MonoBehaviour
                 DroneAI();
                 break;
 
-                
+
             case (int)AIType.Robot:
                 if (currentScene == "MainGame_2_Next")
                 {
                     Robot();
                 }
                 break;
-        
+
         }
 
 
@@ -228,7 +228,7 @@ public class E_Move : MonoBehaviour
     void Robot()
     {
 
-        if (find1.isFind||find2.isFind)
+        if (find1.isFind || find2.isFind)
         {
             isMove = false;
             isFire = true;
@@ -244,7 +244,7 @@ public class E_Move : MonoBehaviour
             Rotation();
         }
 
-        else if(oldFlag2==true&&find2.isFind==false)
+        else if (oldFlag2 == true && find2.isFind == false)
         {
             isMove = true;
             isFire = false;

@@ -198,9 +198,15 @@ public class PlayerMainProcess : MonoBehaviour
         UIStatus(Status.notactive);
         SceneGlobalVariables.Instance.characterStatus.SetStatus(0, CharacterStatus.CharaStatus.Live);
         transform.position = SceneGlobalVariables.Instance.charaNowStage.SetSpawnPosition();
-        find1.isFind = false;
-        isStart = false;
 
+        Reset();
+    }
+
+    private void Reset()
+    {
+        find1.isFind = false;
+        find2.isFind = false;
+        isStart = false;
     }
 
 
