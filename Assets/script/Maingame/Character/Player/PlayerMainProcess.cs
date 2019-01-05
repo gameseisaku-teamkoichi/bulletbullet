@@ -105,7 +105,7 @@ public class PlayerMainProcess : MonoBehaviour
         {
             if (isStart == false)
             {
-                StartCoroutine(Die());
+                StartCoroutine(Die(1));
                 isStart = true;
             }
         }
@@ -176,21 +176,31 @@ public class PlayerMainProcess : MonoBehaviour
         {
             if (collision.gameObject.tag == "Enemy2")
             {
-                StartCoroutine("Die");
+                if (isStart == false)
+                {
+                    StartCoroutine("Die",0);
+                    isStart = true;
+                }
             }
         }
     }
 
-    private IEnumerator Die()
+    private IEnumerator Die(int judge)
     {
         //UIStatus(Status.active);
         SceneGlobalVariables.Instance.characterStatus.SetStatus(0, CharacterStatus.CharaStatus.die);
         //transform.position = SceneGlobalVariables.Instance.charaNowStage.SetDedPosition();
 
-        yield return new WaitForSeconds(DeathTime);
+        if (judge == 1)                                    //ロボットに殺されたときに中身が”1”になる
+        {
+            yield return new WaitForSeconds(DeathTime);
+        }
+
         oldPos = transform.position;
         obj = Instantiate(ExploadObject, oldPos, Quaternion.identity);
-        transform.position = new Vector3(100000, 100000, 100000);
+
+        if (judge == 1)
+            transform.position = new Vector3(100000, 100000, 100000);
 
         yield return new WaitForSeconds(SpawnTime);
         Destroy(obj);
@@ -204,8 +214,11 @@ public class PlayerMainProcess : MonoBehaviour
 
     private void Reset()
     {
-        find1.isFind = false;
-        find2.isFind = false;
+        if (currentScene == "MainGame_2_Next")
+        {
+            find1.isFind = false;
+            find2.isFind = false;
+        }
         isStart = false;
     }
 
