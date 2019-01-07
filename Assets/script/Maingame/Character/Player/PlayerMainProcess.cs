@@ -100,6 +100,17 @@ public class PlayerMainProcess : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //詰み防止用自爆
+        if (Input.GetButton("Suicide"))
+        {
+            if (isStart == false)
+            {
+                StartCoroutine("Die", 0);
+                isStart = true;
+            }
+
+        }
+
 
         if (currentScene == "MainGame_2_Next" && (find1.isFind || find2.isFind))
         {
@@ -178,7 +189,7 @@ public class PlayerMainProcess : MonoBehaviour
             {
                 if (isStart == false)
                 {
-                    StartCoroutine("Die",0);
+                    StartCoroutine("Die", 0);
                     isStart = true;
                 }
             }
