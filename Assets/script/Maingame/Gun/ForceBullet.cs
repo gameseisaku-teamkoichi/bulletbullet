@@ -36,6 +36,9 @@ public class ForceBullet : MonoBehaviour
     public Quaternion rotation;
     public Quaternion quaternion;
 
+    //発射音
+    private AudioSource gunSound1;
+
     string currentScene;
     void Start()
     {
@@ -59,6 +62,8 @@ public class ForceBullet : MonoBehaviour
                 MyNumber = enemyMainProcess.MyNumber;
             }
         }
+
+        gunSound1 = GetComponent<AudioSource>();
     }
 
     public void StartFire()
@@ -105,6 +110,7 @@ public class ForceBullet : MonoBehaviour
         if (bulletProcess.MyNumber == 0)
         {
             bulletInstance.GetComponent<Rigidbody>().AddForce(bulletInstance.transform.forward * playerBulletPower);
+            //gunSound1.PlayOneShot(gunSound1.clip);
         }
         else
         {

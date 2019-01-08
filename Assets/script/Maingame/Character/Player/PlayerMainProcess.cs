@@ -100,6 +100,7 @@ public class PlayerMainProcess : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         //詰み防止用自爆
         if (Input.GetButton("Suicide"))
         {
