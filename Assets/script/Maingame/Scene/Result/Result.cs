@@ -12,14 +12,10 @@ public class Result : MonoBehaviour {
 
     public GameObject Select;
 
-    public Text Retry;
-    public Text CharaSelect;
-    public Text Exit;
-
     private enum SelectMenu
     { 
         Retry,
-        title,
+        //title,
         Exit
     }
 
@@ -29,6 +25,8 @@ public class Result : MonoBehaviour {
     private float input;
     private float value = 0.00f;
 
+    public GameObject Retry;
+    public GameObject Exit;
     void Start()
     {
         Cursor.visible = false;
@@ -55,17 +53,17 @@ public class Result : MonoBehaviour {
             switch (Menu)
             {
                 case SelectMenu.Retry:
-                    Retry.color = new Color(255f / 255f, 0f / 255f, 0f / 255f);
-                    CharaSelect.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
+                    Retry.SetActive(true);
+                    Exit.SetActive(false);
                     break;
-                case SelectMenu.title:
-                    CharaSelect.color = new Color(255f / 255f, 0f / 255f, 0f / 255f);
-                    Retry.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
-                    Exit.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
-                    break;
+                //case SelectMenu.title:
+                //    CharaSelect.color = new Color(255f / 255f, 0f / 255f, 0f / 255f);
+                //    Retry.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
+                //    Exit.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
+                //    break;
                 case SelectMenu.Exit:
-                    Exit.color = new Color(255f / 255f, 0f / 255f, 0f / 255f);
-                    CharaSelect.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
+                    Retry.SetActive(false);
+                    Exit.SetActive(true);
                     break;
             }
 
@@ -76,21 +74,16 @@ public class Result : MonoBehaviour {
                     case SelectMenu.Retry:
                         SeceChenge.FadOut(ChangeScene.SceneState.Main2);
                         break;
-                    case SelectMenu.title:
-                        SeceChenge.FadOut(ChangeScene.SceneState.title);
-                        break;
+                    //case SelectMenu.title:
+                    //    SeceChenge.FadOut(ChangeScene.SceneState.title);
+                    //    break;
                     case SelectMenu.Exit:
+                        Application.Quit();
                         break;
                 }
             }
 
             OldInput = input;
-        }
-
-        //終了する
-        if (Input.GetKey(KeyCode.Escape))
-        {
-            Application.Quit();
         }
     }
 }

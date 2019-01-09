@@ -10,9 +10,10 @@ public class Title : MonoBehaviour {
     public ChangeScene SeceChenge { get { return this.chengeSece ?? (this.chengeSece = GetComponent<ChangeScene>()); } }
     ChangeScene chengeSece;
 
-    public Text start;
-    public Text Tutorial;
-    public Text Exit;
+    public GameObject start;
+    
+    public GameObject Exit;
+
 
     private enum SelectMenu
     {
@@ -46,9 +47,8 @@ public class Title : MonoBehaviour {
         switch (Menu)
         {
             case SelectMenu.start:
-                start.color = new Color(255f / 255f, 0f / 255f, 0f / 255f);
-                Tutorial.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
-                Exit.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
+                start.SetActive(true);
+                Exit.SetActive(false);
                 break;
             //case SelectMenu.Tutorial:
             //    Tutorial.color = new Color(255f / 255f, 0f / 255f, 0f / 255f);
@@ -56,9 +56,8 @@ public class Title : MonoBehaviour {
             //    Exit.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
             //    break;
             case SelectMenu.Exit:
-                start.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
-                Exit.color = new Color(255f / 255f, 0f / 255f, 0f / 255f);
-                Tutorial.color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
+                start.SetActive(false);
+                Exit.SetActive(true);
                 break;
         }
 
@@ -70,19 +69,14 @@ public class Title : MonoBehaviour {
                     SeceChenge.FadOut(ChangeScene.SceneState.Main2);
                     break;
                 //case SelectMenu.Tutorial:
-                //    //SeceChenge.FadOut(ChangeScene.SceneState.Tutorial);
-                //    break;
+                    //SeceChenge.FadOut(ChangeScene.SceneState.Tutorial);
+                   // break;
                 case SelectMenu.Exit:
+                    Application.Quit();
                     break;
             }
         }
 
         OldInput = input;
-
-        //終了する
-        if(Input.GetKey(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
     }
 }
